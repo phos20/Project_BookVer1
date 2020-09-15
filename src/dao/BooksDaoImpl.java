@@ -12,6 +12,28 @@ import util.DbUtil;
 
 public class BooksDaoImpl implements BooksDao {
 	
-	
+	/** 책번호로 검색 */
+	@Override
+	public BookDto booksSelectBybooksId(String booksId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		BookDto books = null;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where books_id=?");
+			ps.setString(1, booksId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+							 	 	rs.getInt(5), rs.getInt(6));
+
+			}
+		} finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return books;
+	}
 
 }

@@ -93,5 +93,39 @@ public class MenuView {
 		}
 	}
 
+// case : 3 - 매출관리
+	private static void SalesManagement(String userId) {
+		System.out.println("---- 매출관리 메뉴 ----");
+		System.out.println(" | 1.오늘의 매출 | 2.기간별 매출 | 3.총 매출   | 4.뒤로가기 ");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			AdminController.todaySales();
+			break;
+		case 2:
+			periodSales();
+			break;
+		case 3:
+			AdminController.totalSales();
+			break;
+		case 4:
+			printAdminMenu(userId);
+			break;
+		default:
+			System.out.println("번호에 맞게 선택해주세요");
+			break;
+		}	
+	}
+	
+// case : 3-2 -	기간별 매출
+	private static void periodSales() {
+		System.out.println("언제부터 ? ");
+		String startdate = sc.nextLine();
+		System.out.println("언제까지 ? ");
+		String enddate = sc.nextLine();
+
+		AdminController.periodSales(startdate, enddate);
+
+	}
 
 }
