@@ -3,7 +3,10 @@ package view;
 import java.util.Scanner;
 
 import controller.AdminController;
+import controller.BooksController;
 import controller.OrderController;
+import controller.RegBookController;
+import dto.BookDto;
 import dto.OrderLine;
 import dto.Orders;
 import user.UserSet;
@@ -80,6 +83,7 @@ public class MenuView {
 			case 1:
 				return;
 			case 2:
+				manageBook();
 				break;
 			case 3:
 				break;
@@ -92,6 +96,69 @@ public class MenuView {
 			}
 		}
 	}
+	
+	public static void manageBook() {
+		System.out.println("1. 도서목록 보기 2. 희망도서목록 보기 3. 도서 등록 4. 도서 삭제 5. 나가기");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		switch(num) {
+			case 1 : // 도서목록
+				BooksController.selectBook(); 
+				return;	
+			case 2 : // 희망도서목록 
+				RegBookController.selectRegBook();
+				break;
+			case 3: // 도서등록 
+				printInsertBook();
+				break;
+			case 4: // 도서삭제
+				printDeleteBook();
+				break;
+			case 5:
+				System.exit(0);
+		
+		}
+	}
+	
+	
+	/**
+	 * 도서 등록 
+	 */
+	public static void printInsertBook() {
+		
+		System.out.println("등록도서 코드: ");
+		String booksId = sc.nextLine();
+		System.out.println("등록도서 제목 : ");
+		String booksName = sc.nextLine();
+		System.out.println("등록도서 저자 : ");
+		String booksWriter = sc.nextLine();
+		System.out.println("등록도서 출판사 : ");
+		String booksPublisher = sc.nextLine();
+		System.out.println("등록도서 출판일 : ");
+		String booksPubDate = sc.nextLine();
+		System.out.println("등록도서 장르 : ");
+		String booksGenre = sc.nextLine();
+		System.out.println("등록도서 가격 : ");
+		int booksPrice = Integer.parseInt(sc.nextLine());
+		System.out.println("등록도서 개수 : ");
+		int bookStock = Integer.parseInt(sc.nextLine());
+		
+		BookDto bookDto = new BookDto(booksId, booksName, booksWriter, booksPublisher, booksPubDate, booksGenre, booksPrice, bookStock, null); // book 객체 생성 
+		
+		BooksController.insertBook(bookDto); 
+	}
+	
+	
+	/**
+	 * 도서 삭제
+	 */
+	public static void printDeleteBook() {
+		System.out.println("삭제도서 코드: ");
+		String bookId = sc.nextLine();
+		
+		BooksController.deleteBook(bookId);
+	}
+
 
 
 }
