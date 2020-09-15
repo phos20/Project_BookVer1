@@ -6,7 +6,6 @@ import java.util.List;
 import dto.Orders;
 
 
-
 public class OrderDAOImpl implements OrderDAO {
 
 	BooksDao booksDao = new BooksDaoImpl();
@@ -22,5 +21,4 @@ public class OrderDAOImpl implements OrderDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

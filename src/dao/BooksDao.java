@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.BookDto;
 
+
 public interface BooksDao {
 	/**
 	    * 책 제목으로 검색
@@ -32,5 +33,6 @@ public interface BooksDao {
 	    * 신규 도서 삭제
 	    */
 	   int deleteBook(String bookId) throws SQLException;
+
 
 }

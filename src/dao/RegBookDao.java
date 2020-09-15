@@ -16,4 +16,5 @@ public interface RegBookDao {
 	   */
 	   int insertRegbook(RegBookDto wish)throws Exception; 
 
+
 }

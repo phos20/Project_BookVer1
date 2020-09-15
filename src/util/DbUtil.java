@@ -16,7 +16,7 @@ public class DbUtil {
 	 */
 	static {
 		try {
-			//외부 properties파일 로딩하기
+			//외부 properteis파일 로딩하기
 			proFile.load(new FileInputStream("dbInfo.properties"));
 			//proFile.load(new FileInputStream("board.properties"));
 			

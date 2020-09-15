@@ -18,5 +18,4 @@ public class RegBookDaoImpl implements RegBookDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }
