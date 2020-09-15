@@ -1,4 +1,4 @@
-package dto;
+package dto; 
 
 public class RegBookDto {
 	private int regNo;
