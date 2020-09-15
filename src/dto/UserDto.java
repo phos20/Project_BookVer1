@@ -7,12 +7,14 @@ public class UserDto {
 	private String userPhone;
 	private int userPoint;
 	private String regDate;
+	private int userTotal;
 	private String grade;
 	  
 	public UserDto() {}
-	
-	public UserDto(String userId, String userPwd, String userName, String userPhone,
-					int userPoint, String regDate, String grade) {
+
+
+	public UserDto(String userId, String userPwd, String userName, String userPhone, int userPoint, String regDate,
+			int userTotal, String grade) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -20,9 +22,67 @@ public class UserDto {
 		this.userPhone = userPhone;
 		this.userPoint = userPoint;
 		this.regDate = regDate;
+		this.userTotal = userTotal;
 		this.grade = grade;
 	}
 
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public int getUserPoint() {
+		return userPoint;
+	}
+
+	public void setUserPoint(int userPoint) {
+		this.userPoint = userPoint;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+	public int getUserTotal() {
+		return userTotal;
+	}
+
+	public void setUserTotal(int userTotal) {
+		this.userTotal = userTotal;
+	}
 
 	public String getGrade() {
 		return grade;
@@ -32,39 +92,10 @@ public class UserDto {
 		this.grade = grade;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getUserPwd() {
-		return userPwd;
-	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
 
 	@Override
 	public String toString() {
-		return userId +" | " + userPwd +" | " + userName +" | " + regDate+" | "+ grade ;   
+		return userId +" | " + userPwd +" | " + userName +" | " + userPhone + " | " + userPoint 
+				+ " | " + regDate + " | " + userTotal + " | " + grade ;   
 	}
-	  
-	
-	  
 }
-
-
-

@@ -2,47 +2,75 @@ package dto;
 
 public class RegBookDto {
 	private int regNo;
-	private String bookName;
-	private String bookWriter;
+	private String regName;
+	private String regWriter;
+	private String regPublisher;
+	private String userId;
 	private String regDate;
 
-	public RegBookDto() {
-	}
+	public RegBookDto() {}
 
-	public RegBookDto(String bookName, String bookWriter) {
-		super();
-		this.bookName = bookName;
-		this.bookWriter = bookWriter;
-
-	}
-
-	public RegBookDto(int regNo, String bookName, String bookWriter, String regDate) {
+	public RegBookDto(int regNo, String regName, String regWriter, String regPublisher, String userId, String regDate) {
 		super();
 		this.regNo = regNo;
-		this.bookName = bookName;
-		this.bookWriter = bookWriter;
+		this.regName = regName;
+		this.regWriter = regWriter;
+		this.regPublisher = regPublisher;
+		this.userId = userId;
 		this.regDate = regDate;
 	}
 
-	public String getBookName() {
-		return bookName;
+	
+	public int getRegNo() {
+		return regNo;
 	}
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setRegNo(int regNo) {
+		this.regNo = regNo;
 	}
 
-	public String getBookWriter() {
-		return bookWriter;
+	public String getRegName() {
+		return regName;
 	}
 
-	public void setBookWriter(String bookWriter) {
-		this.bookWriter = bookWriter;
+	public void setRegName(String regName) {
+		this.regName = regName;
+	}
+
+	public String getRegWriter() {
+		return regWriter;
+	}
+
+	public void setRegWriter(String regWriter) {
+		this.regWriter = regWriter;
+	}
+
+	public String getRegPublisher() {
+		return regPublisher;
+	}
+
+	public void setRegPublisher(String regPublisher) {
+		this.regPublisher = regPublisher;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	@Override
 	public String toString() {
-		return bookName + " | " + bookWriter;
+		return regNo + " | " + regName + " | " + regWriter + " | " + regPublisher + " | " + userId + " | " + regDate;
 	}
-
 }

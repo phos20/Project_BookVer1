@@ -4,22 +4,30 @@ public class BookDto {
 	private String booksId;
 	private String booksName;
 	private String booksWriter;
+	private String booksPublisher;
+	private String booksPubDate;
 	private String booksGenre;
 	private int booksPrice;
 	private int stock;
+	private String regDate;
 
 	public BookDto() {
 	}
 
-	public BookDto(String booksId, String booksName, String booksWrite, String booksGenre, int booksPrice, int stock) {
+	public BookDto(String booksId, String booksName, String booksWriter, String booksPublisher, String booksPubDate,
+			String booksGenre, int booksPrice, int stock, String regDate) {
 		super();
 		this.booksId = booksId;
 		this.booksName = booksName;
-		this.booksWriter = booksWrite;
+		this.booksWriter = booksWriter;
+		this.booksPublisher = booksPublisher;
+		this.booksPubDate = booksPubDate;
 		this.booksGenre = booksGenre;
 		this.booksPrice = booksPrice;
 		this.stock = stock;
+		this.regDate = regDate;
 	}
+	
 
 	public String getBooksId() {
 		return booksId;
@@ -35,6 +43,38 @@ public class BookDto {
 
 	public void setBooksName(String booksName) {
 		this.booksName = booksName;
+	}
+
+	public String getBooksWriter() {
+		return booksWriter;
+	}
+
+	public void setBooksWriter(String booksWriter) {
+		this.booksWriter = booksWriter;
+	}
+
+	public String getBooksPublisher() {
+		return booksPublisher;
+	}
+
+	public void setBooksPublisher(String booksPublisher) {
+		this.booksPublisher = booksPublisher;
+	}
+
+	public String getBooksPubDate() {
+		return booksPubDate;
+	}
+
+	public void setBooksPubDate(String booksPubDate) {
+		this.booksPubDate = booksPubDate;
+	}
+
+	public String getBooksGenre() {
+		return booksGenre;
+	}
+
+	public void setBooksGenre(String booksGenre) {
+		this.booksGenre = booksGenre;
 	}
 
 	public int getBooksPrice() {
@@ -53,26 +93,20 @@ public class BookDto {
 		this.stock = stock;
 	}
 
-	public String getBooksWriter() {
-		return booksWriter;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setBooksWrite(String booksWrite) {
-		this.booksWriter = booksWriter;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
-	public String getBooksGenre() {
-		return booksGenre;
-	}
-
-	public void setBookGenre(String booksGenre) {
-		this.booksGenre = booksGenre;
-	}
+	
 
 	@Override
 	public String toString() {
-		return booksId + " | " + booksName + " | " + booksWriter + " | " + booksGenre + " | " + booksPrice + " | "
-				+ stock;
+		return booksId +" | " + booksName +" | " + booksWriter +" | " + booksPublisher + " | " + booksPubDate 
+				+ " | " + booksGenre + " | " + booksPrice + " | " + stock + " | " + regDate ; 
 	}
 
 	@Override

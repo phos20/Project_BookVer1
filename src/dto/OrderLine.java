@@ -1,14 +1,15 @@
 package dto;
 
 public class OrderLine {
-  private int orderLineId;
-  private int orderId;
-  private String booksId;
-  private int unitPrice;
-  private int qty;
-  private int amount;
+	private int orderLineId;
+	private int orderId;
+	private String booksId;
+	private int unitPrice;
+	private int qty;
+	private int amount;
   
-  public OrderLine() {}
+	public OrderLine() {}
+  
 	public OrderLine(int orderLineId, int orderId, String booksId, int unitPrice, int qty, int amount) {
 		super();
 		this.orderLineId = orderLineId;
@@ -18,6 +19,7 @@ public class OrderLine {
 		this.qty = qty;
 		this.amount = amount;
 	}
+	
 	public int getOrderLineId() {
 		return orderLineId;
 	}
@@ -54,14 +56,11 @@ public class OrderLine {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	
 	@Override
 	public String toString() {
 		return  orderLineId +" | "+ orderId +" | "+ booksId +" | "+ unitPrice +" | "+ qty +" | "+ amount ;
 	}
-	
-	
-  
-  
 }
 
 

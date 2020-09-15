@@ -4,20 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Orders {
-  private int orderId; 
-  private String orderDate;
-  private String userId;
-  private String address;
-  private int totalAmount;
+	private int orderId; 
+	private String orderDate;
+	private String userId;
+	private String grade;
+	private String address;
+	private int totalAmount;
   
-  private List<OrderLine> orderLineList = new ArrayList<OrderLine>();
+	private List<OrderLine> orderLineList = new ArrayList<OrderLine>();
   
     public Orders() {}
-	public Orders(int orderId, String orderDate, String userId, String address, int totalAmount) {
+	public Orders(int orderId, String orderDate, String userId, String grade, String address, int totalAmount) {
 	super();
 	this.orderId = orderId;
 	this.orderDate = orderDate;
 	this.userId = userId;
+	this.grade = grade;
 	this.address = address;
 	this.totalAmount = totalAmount;
 }
@@ -47,6 +49,14 @@ public class Orders {
 		this.userId = userId;
 	}
 	
+	public String getGrade() {
+		return grade;
+	}
+	
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -73,10 +83,7 @@ public class Orders {
   
    @Override
 	public String toString() {
-		return orderId +" | "+ orderDate +" | "+ userId +" | "+ address +" | "+ totalAmount;
+		return orderId +" | "+ orderDate +" | "+ userId +" | " + grade + " | " + address +" | "+ totalAmount;
 				
 	}
-  
 }
-
-
