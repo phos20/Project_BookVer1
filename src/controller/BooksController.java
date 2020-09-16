@@ -3,7 +3,6 @@ package controller;
 import java.util.List;
 
 import dto.BookDto;
-import dto.RegBookDto;
 import service.BooksService;
 import view.EndView;
 import view.FailView;
@@ -48,6 +47,16 @@ public class BooksController {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+		
+	}
+
+	public static void selectByName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void selectByGenre() {
+		// TODO Auto-generated method stub
 		
 	}
 

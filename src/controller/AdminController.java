@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import dto.Orders;
+import dto.UserDto;
 import service.AdminService;
 import view.AdminEndView;
 import view.FailView;
@@ -40,5 +41,27 @@ public class AdminController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	/**회원 목록 보기*/
+	public static void selectUserList() {
+		try {
+			List<UserDto> list = adminService.selectUserList();
+			AdminEndView.selectUserList(list);
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
+	/**회원 등업*/
+	public static void updateUserGrade(String grade,String userId) {
+		try {
+			int result = adminService.updateUserGrade(grade,userId);
+			AdminEndView.printMessage("등업이 처리 완료되었습니다.");
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
+
 
 }// class

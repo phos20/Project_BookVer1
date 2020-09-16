@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 
 import dto.Orders;
+import dto.UserDto;
 
 public class AdminEndView {
 	/** 메세지 */
@@ -34,6 +35,14 @@ public class AdminEndView {
 	public static void periodSales(String startdate, String enddate, int result) {
 		System.out.println(startdate + "~" + enddate + " 까지 총매출 =" + result);
 
+	}
+	/**회원 목록 보기*/
+	public static void selectUserList(List<UserDto> list) {
+		System.out.println("---------회원 목록 보기-------------");
+		for(UserDto userDto : list) {
+			System.out.println(list);
+		}
+		
 	}
 
 }

@@ -9,6 +9,20 @@ public class UserController {
 	
 	static UserService userService = new UserService();
 
+
+
+	/**
+	 * 회원 가입
+	 */
+	public static void signUp(UserDto userDto) {
+		try {
+			userService.signup(userDto);
+			EndView.messagePrint("회원 가입을 축하드립니다");
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 	// 회원정보수정
 	public static void updateUserInfo(UserDto userDto) {
 		try {
@@ -29,6 +43,7 @@ public class UserController {
 		}
 	}
 
+
 	/**로그인*/
 	public static void Login(String userId, String userPwd) {
 		try {
@@ -46,7 +61,6 @@ public class UserController {
 			EndView.printMessage("포인트 적립 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 		
 	}
