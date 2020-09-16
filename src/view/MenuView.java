@@ -16,7 +16,6 @@ import dto.UserDto;
 import user.UserSet;
 
 
-
 public class MenuView {
 
 	private static Scanner sc = new Scanner(System.in);
@@ -28,6 +27,7 @@ public class MenuView {
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
+			Login();
 			break;
 		case 2:
 			MenuView.nonmember();
