@@ -18,7 +18,7 @@ public interface UserDao {
 	/**
 	 * 포인트 충전
 	 */
-	int userPoint(int point) throws SQLException;
+	int userPoint(String userId, int point) throws SQLException;
 
 	/**
 	 * 회원정보수정
