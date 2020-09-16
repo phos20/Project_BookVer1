@@ -28,6 +28,6 @@ public interface UserDao {
 	   /**
 	    * È¸¿øÁ¤º¸Å»Åð
 	    */
-	   int deleteUserInfo(String userId, String UserPwd) throws SQLException;
+	   int deleteUserInfo(UserDto userDto) throws SQLException;
 
 }

@@ -13,13 +13,18 @@ public class UserDto {
 	public UserDto() {}
 
 
-	public UserDto(String userId, String userPwd, String userName, String userPhone, int userPoint, String regDate,
-			int userTotal, String grade) {
+	public UserDto(String userId, String userPwd, String userName, String userPhone) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.userPhone = userPhone;
+	}
+
+
+	public UserDto(String userId, String userPwd, String userName, String userPhone, int userPoint, String regDate,
+			int userTotal, String grade) {
+		this(userId, userPwd, userName, userPhone);
 		this.userPoint = userPoint;
 		this.regDate = regDate;
 		this.userTotal = userTotal;

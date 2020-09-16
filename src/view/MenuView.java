@@ -4,8 +4,12 @@ import java.util.Scanner;
 
 import controller.AdminController;
 import controller.OrderController;
+import controller.RegBookController;
+import controller.UserController;
 import dto.OrderLine;
 import dto.Orders;
+import dto.RegBookDto;
+import dto.UserDto;
 import user.UserSet;
 
 public class MenuView {
@@ -19,6 +23,9 @@ public class MenuView {
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
+			//wishBook("L2");
+			//updateUserInfo("L2");
+			 deleteUserInfo("L2");
 			break;
 		case 2:
 			break;
@@ -28,6 +35,7 @@ public class MenuView {
 		}
 
 	}
+
 
 	/** 유저 메뉴 */
 	public static void printUserMenu(String userId) {
@@ -55,7 +63,7 @@ public class MenuView {
 				break;
 			case 6:
 				break;
-			case 7:
+			case 7: 
 				break;
 			case 8:
 				break;
@@ -65,6 +73,7 @@ public class MenuView {
 			}
 		}
 	}
+
 
 	// case : 2 -주문
 	public static void printInputOrder(String userId) {
@@ -146,5 +155,74 @@ public class MenuView {
 		AdminController.periodSales(startdate, enddate);
 
 	}
-
+	// case : 4 희망도서등록&조회
+	public static void wishBook(String userId) {
+		while (true) {
+			UserSet userset = UserSet.getInstance();
+			System.out.println(userset.getSet());
+			System.out.println("-----------------  User Menu -------------------");
+			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
+			System.out.println("| 1. 희망도서등록        | 2.희망도서목록조회    ");
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:  
+				insertRegBook(userId); //등록
+				break;
+			case 2:
+				RegBookController.selectRegBook(); //조회
+				break;
+			default:
+				System.out.println(userId + "님 올바른 번호를 선택해 주세요");
+				break;
+			}
+		}
+		
+	}
+	
+	// case : 4 희망도서등록
+	public static void insertRegBook(String userId) {
+		
+		System.out.println("희망도서 제목: ");
+		String regName = sc.nextLine();
+		System.out.println("희망도서 저자: ");
+		String regWriter = sc.nextLine();
+		System.out.println("희망도서 출판사: ");
+		String regPublisher = sc.nextLine();
+		
+		
+		RegBookDto wish = new RegBookDto(0, regName, regWriter, regPublisher,userId,null);
+		RegBookController.insertRegBook(wish);
+		
+		
+	}
+	/**
+	 * case: 7-1 마이페이지(회원수정)
+	 * */ 
+	private static void updateUserInfo(String userId) {
+		System.out.println("회원 비밀번호: ");
+		String userPwd = sc.nextLine();
+		System.out.println("회원 이름: ");
+		String userName = sc.nextLine();
+		System.out.println("회원 휴대폰번호: ");
+		String userPhone = sc.nextLine();
+		
+		UserDto userDto= new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
+		UserController.updateUserInfo(userDto);
+	}
+	/**
+	 *  case : 7-2 마이페이지(회원탈퇴)
+	 * */
+	private static void deleteUserInfo(String userId) {
+		System.out.println("회원 비밀번호: ");
+		String userPwd = sc.nextLine();
+		System.out.println("회원 이름: ");
+		String userName = sc.nextLine();
+		System.out.println("회원 휴대폰번호: ");
+		String userPhone = sc.nextLine();
+		
+		UserDto userDto= new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserController.deleteUserInfo(userDto);
+	}
+		
+	
 }
