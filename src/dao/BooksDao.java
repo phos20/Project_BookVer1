@@ -20,7 +20,7 @@ public interface BooksDao {
 	   BookDto booksSelectBybooksId(String booksId) throws SQLException;
 
 	   /**
-	    * 전첸 검색
+	    * 전체 검색
 	    */
 	   List<BookDto> selectBook() throws SQLException;
 
@@ -33,6 +33,7 @@ public interface BooksDao {
 	    * 신규 도서 삭제
 	    */
 	   int deleteBook(String bookId) throws SQLException;
+
 
 
 }

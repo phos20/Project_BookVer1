@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 
+import dto.BookDto;
 import dto.OrderLine;
 import dto.Orders;
 
@@ -18,6 +19,21 @@ public class EndView {
 			System.out.println();
 		}
 
+	}
+	
+	/** 전체 리스트 검색*/
+	public static void printBooksList(List<BookDto>list) {
+		System.out.println("-----책 "+ list.size() +"개 -------------");
+		for(BookDto books : list) {
+			System.out.println(books);
+		}
+		System.out.println();
+	}
+	
+	/**메세지*/
+	public static void messagePrint(String message) {
+		System.out.println(message);
+		
 	}
 
 }

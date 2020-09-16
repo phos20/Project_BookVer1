@@ -1,4 +1,4 @@
-package view;
+1package view;
 
 public class startView {
 
