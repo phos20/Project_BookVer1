@@ -104,4 +104,15 @@ public class EndView {
 		System.out.println();
 	}
 
+	public static void printBookNameList(BookDto books) {
+		System.out.println(books);
+		
+		
+	}
+
+	public static void printBookGenreList(BookDto books) {
+		System.out.println(books);
+		
+	}
+
 }

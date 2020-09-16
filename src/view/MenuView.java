@@ -141,17 +141,34 @@ public class MenuView {
 				BooksController.selectBook();
 				break;
 			case 2:
-				BooksController.selectByName();
+				searchName();
 				break;
 			case 3:
-				BooksController.selectByGenre();
+				searchGenre();
 				break;
 			default:
 				System.out.println("올바른 번호를 선택해 주세요");
 				break;
 			}
 		}
-	
+
+		//case : 1-2 -제목 검색-
+	private static void searchName() {
+		System.out.print("검색할 책 제목 : ");
+		String booksName = sc.nextLine();
+			
+		BooksController.selectByName(booksName);
+		
+		}
+		//case : 1-3 -장르 검색-
+	private static void searchGenre() {
+		System.out.print("검색할 책 장르 : ");
+		String booksGenre = sc.nextLine();
+		
+		BooksController.selectByGenre(booksGenre);
+		
+	}
+
 
 	// case : 2 -주문
 	
