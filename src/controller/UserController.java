@@ -8,6 +8,18 @@ import view.FailView;
 public class UserController {
 	
 	static UserService userService = new UserService();
+	/**
+	 * 회원 가입
+	 */
+	public static void signUp(UserDto userDto) {
+		try {
+			userService.signup(userDto);
+			EndView.messagePrint("회원 가입을 축하드립니다");
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 	// 회원정보수정
 	public static void updateUserInfo(UserDto userDto) {
 		try {
@@ -25,6 +37,9 @@ public class UserController {
 			EndView.messagePrint("탈퇴되었습니다.");
 		}catch(Exception e) {
 			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 	/**로그인*/
 	public static void Login(String userId, String userPwd) {
 		try {

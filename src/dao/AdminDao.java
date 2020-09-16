@@ -21,12 +21,14 @@ public interface AdminDao {
 	 * 회원 관리 - 회원 목록 보기
 	 */
 
-	List<UserDto> selectUserList(String userId) throws SQLException;
+	List<UserDto> selectUserList() throws SQLException;
 
 	/**
 	 * 회원 관리 - 회원 등업
 	 */
 
-	int updateUserGrade(String userId) throws SQLException;
+	int updateUserGrade(String grade,String userId) throws SQLException;
+
+
 
 }

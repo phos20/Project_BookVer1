@@ -6,6 +6,7 @@ import java.util.List;
 import dao.AdminDao;
 import dao.AdminDaoImpl;
 import dto.Orders;
+import dto.UserDto;
 
 public class AdminService {
 	AdminDao adminDao = new AdminDaoImpl();
@@ -33,5 +34,22 @@ public class AdminService {
 			throw new SQLException("기간동안 매출이 없습니다");
 		return result;
 	}
+
+	/**회원 목록 보기*/
+	public List<UserDto> selectUserList() throws Exception{
+		List<UserDto> list = adminDao.selectUserList();
+		if(list.size() == 0)
+			throw new SQLException("회원 목록이 없습니다");
+		return list;
+	}
+
+	/**회원 등업*/
+	public int updateUserGrade(String grade,String userId) throws Exception{
+		int result = adminDao.updateUserGrade(grade,userId);
+		if(result == 0)
+			throw new SQLException("등업 실패 하였습니다.");
+		return result;
+	}
+
 
 }

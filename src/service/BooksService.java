@@ -6,7 +6,6 @@ import java.util.List;
 import dao.BooksDao;
 import dao.BooksDaoImpl;
 import dto.BookDto;
-import dto.RegBookDto;
 
 public class BooksService {
 	BooksDao booksDao = new BooksDaoImpl();
