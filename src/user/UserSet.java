@@ -29,16 +29,16 @@ public class UserSet {
 	}
 	
 	//세션 객체들 반환
-		public Set<User> getSet(){
-			return set;
-		}
+	public Set<User> getSet(){
+		return set;
+	}
 	
-		/**
-		 * 로그인 된 사용자 추가
-		 * */
-		public void add(User session) {
-			set.add(session);
-		}
+	/**
+	 * 로그인 된 사용자 추가
+	 **/
+	public void add(User session) {
+		set.add(session);
+	}
 		
 	/**
 	 * 사용자 제거 - 로그아웃
