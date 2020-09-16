@@ -4,12 +4,11 @@ import dto.UserDto;
 import service.UserService;
 import view.EndView;
 import view.FailView;
+import view.MenuView;
 
 public class UserController {
-	
+
 	static UserService userService = new UserService();
-
-
 
 	/**
 	 * 회원 가입
@@ -18,43 +17,46 @@ public class UserController {
 		try {
 			userService.signup(userDto);
 			EndView.messagePrint("회원 가입을 축하드립니다");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-	
+
 	// 회원정보수정
 	public static void updateUserInfo(UserDto userDto) {
 		try {
-			int result =userService.updateUserInfo(userDto);
+			int result = userService.updateUserInfo(userDto);
 			EndView.messagePrint("수정되었습니다.");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
-		
+
 	}
-	//회원탈퇴
+
+	// 회원탈퇴
 	public static void deleteUserInfo(UserDto userDto) {
 		try {
 			int result = userService.deleteUserInfo(userDto);
 			EndView.messagePrint("탈퇴되었습니다.");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
 
 
-	/**로그인*/
+
+
+	/** 로그인 */
+
 	public static void Login(String userId, String userPwd) {
 		try {
-		UserDto userDto =userService.Login(userId,userPwd);
-		EndView.messagePrint(userDto.getUserId()+"님 로그인 성공");
-		}catch (Exception e) {
+			UserDto userDto = userService.Login(userId, userPwd);
+			MenuView.printUserMenu(userId);
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-		
-	
+
 	public static void userPoint(String userId, int point) {
 		try {
 			int result = userService.userPoint(userId, point);
@@ -62,7 +64,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
