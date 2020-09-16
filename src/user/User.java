@@ -3,8 +3,6 @@ package user;
 import java.util.HashMap;
 import java.util.Map;
 
-
-	
 	public class User {
 		private String userId;
 		private Map<String,Object> attributes; //장바구니

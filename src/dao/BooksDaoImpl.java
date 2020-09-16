@@ -29,7 +29,6 @@ public class BooksDaoImpl implements BooksDao {
 			if (rs.next()) {
 				books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
 						rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
-
 			}
 		} finally {
 			DbUtil.close(con, ps, rs);
@@ -49,47 +48,119 @@ public class BooksDaoImpl implements BooksDao {
 		return null;
 	}
 	
-	/**전체 책 목록 검색*/
+	/**
+	 * 도서목록 검색
+	 */
 	@Override
 	public List<BookDto> selectBook() throws SQLException {
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<BookDto> list = new ArrayList<>();
-		BookDto books = null;
+		String sql = "select * from books";
+		List<BookDto> list =  new ArrayList<>();
 		
 		try {
-			
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from books orderby books_id ");
+			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+				BookDto bookDto = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
 						rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
-				list.add(books);
-						
+				list.add(bookDto);
 			}
-			
-		}finally {
-			
+		} finally {
 			DbUtil.close(con, ps, rs);
 		}
 		
 		return list;
 	}
 
+	/**
+	 * 신규도서 등록
+	 */
 	@Override
 	public int insertBook(BookDto bookDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "insert into books values(?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, bookDto.getBooksId());
+			ps.setString(2, bookDto.getBooksName());
+			ps.setString(3, bookDto.getBooksWriter());
+			ps.setString(4, bookDto.getBooksPublisher());
+			ps.setString(5, bookDto.getBooksPubDate());
+			ps.setString(6, bookDto.getBooksGenre());
+			ps.setInt(7, bookDto.getBooksPrice());
+			ps.setInt(8, bookDto.getStock());
+			
+			result = ps.executeUpdate();
+			
+			if(result == 0) {
+				con.rollback();
+				throw new SQLException("도서 등록 실패");
+			} else {
+				int re = booksDelete(con, bookDto.getBooksName());
+	            if (re == 0)
+	               throw new SQLException("등록 할수없습니다");
+			}
+			
+		} finally {
+			DbUtil.close(con, ps, null);
+		}
+		return result;
 	}
 
+	/**
+	 * 도서 삭제
+	 */
 	@Override
 	public int deleteBook(String bookId) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "delete from books where books_Id = ?";
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, bookId);
+			
+			result = ps.executeUpdate();
+			
+		} finally {
+			DbUtil.close(con, ps, null);
+		}
+		return result;
 	}
+	
+	/**
+	 * 희망도서 입고시 희망도서 삭제
+	 */
+	private int booksDelete(Connection con, String booksName) throws SQLException {
+	      PreparedStatement ps = null;
+	      int result = 0;
+
+	      try {
+	         ps = con.prepareStatement("delete regbook where reg_name =?");
+	         ps.setString(1, booksName);
+
+	         result = ps.executeUpdate();
+
+	      } finally {
+	         DbUtil.close(null, ps, null);
+	      }
+	      return result;
+	   }
 }
 
 
