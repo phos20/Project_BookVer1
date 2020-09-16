@@ -19,5 +19,9 @@ public class EndView {
 		}
 
 	}
+	/**¸Ş¼¼Áö*/
+	public static void messagePrint(String message) {
+		System.out.println(message);		
+	}
 
 }

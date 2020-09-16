@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.AdminController;
 import controller.OrderController;
+import controller.UserController;
 import dto.OrderLine;
 import dto.Orders;
 import user.UserSet;
@@ -19,6 +20,7 @@ public class MenuView {
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
+			
 			break;
 		case 2:
 			break;
@@ -27,6 +29,16 @@ public class MenuView {
 			break;
 		}
 
+	}
+	//case : - 로그인
+	private static void Login() {
+		System.out.println(" ID = ");
+		String userId = sc.nextLine();
+		System.out.println("PWD = ");
+		String userPwd = sc.nextLine();
+		
+		UserController.Login(userId, userPwd);
+		
 	}
 
 	/** 유저 메뉴 */
