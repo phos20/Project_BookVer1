@@ -6,15 +6,9 @@ import controller.AdminController;
 import controller.BooksController;
 import controller.CartController;
 import controller.OrderController;
-<<<<<<< HEAD
-import controller.RegBookController;
-import controller.UserController;
-=======
-import controller.UserController;
 import controller.RegBookController;
 import controller.UserController;
 import dto.BookDto;
->>>>>>> branch 'master' of https://github.com/phos20/Project_BookVer1.git
 import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
