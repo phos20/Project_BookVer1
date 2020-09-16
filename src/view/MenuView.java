@@ -4,24 +4,30 @@ import java.util.Scanner;
 
 import controller.AdminController;
 import controller.BooksController;
+import controller.CartController;
 import controller.OrderController;
 import controller.RegBookController;
+import controller.UserController;
 import dto.BookDto;
 import dto.OrderLine;
 import dto.Orders;
 import user.UserSet;
 
 public class MenuView {
-	
+
 	private static Scanner sc = new Scanner(System.in);
 
-	/** 초기 화면*/
+	/** 초기 화면 */
 	public static void menu() {
 		System.out.println("--- Book Store에 오신걸 환영합니다. ---");
 		System.out.println("      | 1.회원   | 2.비회원    |");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
+			manageBook();
+			//putCart();
+			//showCart();
+			//userPoint();
 			break;
 		case 2:
 			break;
@@ -32,7 +38,7 @@ public class MenuView {
 
 	}
 
-	/** 유저 메뉴*/
+	/** 유저 메뉴 */
 	public static void printUserMenu(String userId) {
 
 		while (true) {
@@ -47,16 +53,21 @@ public class MenuView {
 			case 1:
 				return;
 			case 2:
+				printInputOrder(userId);
 				break;
 			case 3:
+				OrderController.selectOrdersByUserId(userId);
 				break;
 			case 4:
 				break;
 			case 5:
+				putCart();
 				break;
 			case 6:
+				showCart();
 				break;
 			case 7:
+				userPoint();
 				break;
 			case 8:
 				break;
@@ -66,10 +77,26 @@ public class MenuView {
 			}
 		}
 	}
-	
 
+	// case : 2 -주문
+	public static void printInputOrder(String userId) {
+		System.out.print("주문할 책 번호 : ");
+		String booksId = sc.nextLine();
 
-	/** 관리자메뉴*/
+		System.out.print("주문수량 : ");
+		int qty = Integer.parseInt(sc.nextLine());
+
+		System.out.print("배송주소 : ");
+		String address = sc.nextLine();
+
+		Orders orders = new Orders(0, null, userId, address, 0);
+		OrderLine orderLine = new OrderLine(0, 0, booksId, 0, qty, 0);
+		orders.getOrderLineList().add(orderLine);
+
+		OrderController.insertOrders(orders);
+	}
+
+	/** 관리자메뉴 */
 	public static void printAdminMenu(String userId) {
 
 		while (true) {
@@ -86,6 +113,7 @@ public class MenuView {
 				manageBook();
 				break;
 			case 3:
+				SalesManagement(userId);
 				break;
 			case 4:
 				break;
@@ -160,5 +188,69 @@ public class MenuView {
 	}
 
 
+	// case : 3 - 매출관리
+	private static void SalesManagement(String userId) {
+		System.out.println("---- 매출관리 메뉴 ----");
+		System.out.println(" | 1.오늘의 매출 | 2.기간별 매출 | 3.총 매출   | 4.뒤로가기 ");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			AdminController.todaySales();
+			break;
+		case 2:
+			periodSales();
+			break;
+		case 3:
+			AdminController.totalSales();
+			break;
+		case 4:
+			printAdminMenu(userId);
+			break;
+		default:
+			System.out.println("번호에 맞게 선택해주세요");
+			break;
+		}
+	}
+
+	// case : 3-2 - 기간별 매출
+	private static void periodSales() {
+		System.out.println("언제부터 ? ");
+		String startdate = sc.nextLine();
+		System.out.println("언제까지 ? ");
+		String enddate = sc.nextLine();
+
+		AdminController.periodSales(startdate, enddate);
+
+	}
+	
+	/**
+	 * 장바구니 담기
+	 */
+	public static void putCart() {
+		System.out.println("-- 장바구니 담기 --");
+		System.out.print("도서코드: ");
+		String goodsId = sc.nextLine();
+		System.out.print("수량: ");
+		int quantity = Integer.parseInt(sc.nextLine());
+		
+		CartController.putCart("C",goodsId,quantity);
+	}
+	
+	/**
+	 * 장바구니 보기
+	 */
+	public static void showCart() {
+		CartController.showCart("C");
+	}
+	
+	/**
+	 * 포인트
+	 */
+	public static void userPoint() {
+		System.out.println("등록할 포인트: ");
+		int point = Integer.parseInt(sc.nextLine());
+		
+		UserController.userPoint("L", point);
+	}
 
 }

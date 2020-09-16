@@ -12,6 +12,9 @@ import user.UserSet;
 import dto.BookDto;
 import dto.RegBookDto;
 
+import dto.OrderLine;
+import dto.Orders;
+
 public class EndView {
 
 	public static void printBookList(List<BookDto> list) {
@@ -55,14 +58,14 @@ public class EndView {
 			 System.out.print("배송주소 : ");
 			 String address = sc.nextLine();
 
-			 Orders orders = new Orders(0, null, userId, null, address, 0);
+			 Orders orders = new Orders(0, null, userId, address, 0);
 			 List<OrderLine> orderLineList = orders.getOrderLineList();
-			 for(BookDto bookssKey : cart.keySet()) {
-				 int qty = cart.get(bookssKey);
-				 OrderLine orderLine = new OrderLine(0, 0, bookssKey.getBooksId() , 0, qty, 0);
+			 for(BookDto bookDto : cart.keySet()) {
+				 int qty = cart.get(bookDto);
+				 OrderLine orderLine = new OrderLine(0, 0, bookDto.getBooksId() , 0, qty, 0);
 				 orderLineList.add(orderLine);
 			 }
-			 System.out.println("orderLineList 개수 : " + orderLineList.size());
+			 System.out.println("주문 개수 : " + orderLineList.size());
 			 //OrderController.insertOrders(orders);
 			 
 			 //장바구니비우기
@@ -75,4 +78,19 @@ public class EndView {
 			break;
 		}
 	}
+
+	/** 주문내역확인 */
+	public static void printOrderByUserId(List<Orders> orderList) {
+		for (Orders order : orderList) {
+			System.out.println(order.getOrderId() + " | " + order.getOrderDate() + " | " + order.getTotalAmount()
+					+ " | " + order.getAddress());
+
+			for (OrderLine orderLine : order.getOrderLineList()) {
+				System.out.println("  주문품목  :" + orderLine);
+			}
+			System.out.println();
+		}
+
+	}
+
 }

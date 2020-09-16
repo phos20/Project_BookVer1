@@ -29,7 +29,6 @@ public class BooksDaoImpl implements BooksDao {
 			if (rs.next()) {
 				books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
 						rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
-
 			}
 		} finally {
 			DbUtil.close(con, ps, rs);
@@ -79,7 +78,7 @@ public class BooksDaoImpl implements BooksDao {
 	}
 
 	/**
-	 * 도서 등록
+	 * 신규도서 등록
 	 */
 	@Override
 	public int insertBook(BookDto bookDto) throws SQLException {
@@ -103,6 +102,15 @@ public class BooksDaoImpl implements BooksDao {
 			ps.setInt(8, bookDto.getStock());
 			
 			result = ps.executeUpdate();
+			
+			if(result == 0) {
+				con.rollback();
+				throw new SQLException("도서 등록 실패");
+			} else {
+				int re = booksDelete(con, bookDto.getBooksName());
+	            if (re == 0)
+	               throw new SQLException("등록 할수없습니다");
+			}
 			
 		} finally {
 			DbUtil.close(con, ps, null);
@@ -134,6 +142,25 @@ public class BooksDaoImpl implements BooksDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 희망도서 입고시 희망도서 삭제
+	 */
+	private int booksDelete(Connection con, String booksName) throws SQLException {
+	      PreparedStatement ps = null;
+	      int result = 0;
+
+	      try {
+	         ps = con.prepareStatement("delete regbook where reg_name =?");
+	         ps.setString(1, booksName);
+
+	         result = ps.executeUpdate();
+
+	      } finally {
+	         DbUtil.close(null, ps, null);
+	      }
+	      return result;
+	   }
 }
 
 
