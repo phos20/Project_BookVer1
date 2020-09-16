@@ -29,6 +29,7 @@ public class MenuView {
 		case 1:
 			break;
 		case 2:
+			MenuView.nonmember();
 			break;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
@@ -36,6 +37,44 @@ public class MenuView {
 		}
 
 	}
+	
+	//case : 2 - 비회원-
+	public static void nonmember() {
+		System.out.println("---- 비회원 메뉴 ----");
+		System.out.println(" | 1.회원가입 | 2.도서 목록 보기 | ");
+		
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			MenuView.signUp();
+			break;
+		case 2:
+			BooksController.selectBook();
+			break;
+		default:
+			System.out.println("올바른 번호를 선택해 주세요");
+			break;
+		}
+	}
+			
+	// case : 2-1 회원 가입
+	private static void signUp() {
+			System.out.println("가입 ID : ");
+			String userId = sc.nextLine();
+				
+			System.out.println("가입 PW : ");
+			String userPwd = sc.nextLine();
+				
+			System.out.println("가입 이름 : ");
+			String userName = sc.nextLine();
+				
+			System.out.println("가입 폰번호 : ");
+			String userPhone = sc.nextLine();
+			
+			UserDto userDto = new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
+			UserController.signUp(userDto);
+	}
+				
 	//case : - 로그인
 	private static void Login() {
 		System.out.println(" ID = ");
@@ -61,6 +100,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				MenuView.booksearch();
 				return;
 			case 2:
 				printInputOrder(userId);
@@ -88,8 +128,33 @@ public class MenuView {
 		}
 	}
 
+	//case : 1 -도서검색-
+		public static void booksearch() {
+			System.out.println("---- 도서 검색 ----");
+			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
+			System.out.println("-------------------");
+			
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:
+				BooksController.selectBook();
+				break;
+			case 2:
+				BooksController.selectByName();
+				break;
+			case 3:
+				BooksController.selectByGenre();
+				break;
+			default:
+				System.out.println("올바른 번호를 선택해 주세요");
+				break;
+			}
+		}
+	
 
 	// case : 2 -주문
+	
+	
 	public static void printInputOrder(String userId) {
 		System.out.print("주문할 책 번호 : ");
 		String booksId = sc.nextLine();
@@ -119,6 +184,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				UserManagement();
 				return;
 			case 2:
 				manageBook();
@@ -134,6 +200,39 @@ public class MenuView {
 
 			}
 		}
+	}
+	
+	//case : 1 -회원관리
+	private static void UserManagement() {
+		System.out.println("---- 회원 관리 메뉴 ----");
+		System.out.println("| 1. 회원 목록 보기  |  2.회원등업  | 3. 뒤로가기  |");
+
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			AdminController.selectUserList();
+			break;
+		case 2:
+			updateUserGrade();
+			break;
+		case 3 :
+			return;
+		default:
+			System.out.println("관리자님 올바른 번호를 선택해 주세요");
+			break;
+		}
+		
+	}
+	//case 1-2 : 회원등업
+	private static void updateUserGrade() {
+		System.out.println("등업 할 회원 ID : ");
+		String userId = sc.nextLine();
+		System.out.println("등급 : ");
+		String grade = sc.nextLine();
+		
+		AdminController.updateUserGrade(grade,userId);
+		
+
 	}
 	
 	public static void manageBook() {
