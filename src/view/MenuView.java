@@ -27,6 +27,7 @@ public class MenuView {
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
+			Login();
 			break;
 		case 2:
 			MenuView.nonmember();

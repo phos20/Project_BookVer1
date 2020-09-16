@@ -4,6 +4,7 @@ import dto.UserDto;
 import service.UserService;
 import view.EndView;
 import view.FailView;
+import view.MenuView;
 
 public class UserController {
 
@@ -46,7 +47,7 @@ public class UserController {
 	public static void Login(String userId, String userPwd) {
 		try {
 			UserDto userDto = userService.Login(userId, userPwd);
-			EndView.messagePrint(userDto.getUserId() + "님 로그인 성공");
+			MenuView.printUserMenu(userId);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
