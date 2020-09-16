@@ -106,10 +106,13 @@ public class BooksDaoImpl implements BooksDao {
 			if(result == 0) {
 				con.rollback();
 				throw new SQLException("도서 등록 실패");
-			} else {
+			} 
+			
+			else {
 				int re = booksDelete(con, bookDto.getBooksName());
 	            if (re == 0)
 	               throw new SQLException("등록 할수없습니다");
+	            con.commit();
 			}
 			
 		} finally {

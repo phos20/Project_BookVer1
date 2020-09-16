@@ -51,7 +51,7 @@ public class UserController {
 	public static void Login(String userId, String userPwd) {
 		try {
 			UserDto userDto = userService.Login(userId, userPwd);
-			MenuView.printUserMenu(userId);
+			MenuView.printAdminMenu(userId);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
