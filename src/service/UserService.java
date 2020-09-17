@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import dto.UserDto;
-import user.User;
-import user.UserSet;
-import view.FailView;
 import view.MenuView;
 
 public class UserService {
@@ -53,7 +50,6 @@ public class UserService {
 		return point;
 	}
 	
-
 	/**
 	 * 포인트 등록
 	 * */
@@ -70,10 +66,9 @@ public class UserService {
 	public UserDto Login(String userId, String userPwd) throws SQLException {
 		UserDto userDto = userDao.Login(userId, userPwd);
 		if (userDto == null) {
-			FailView.errorMessage("회원정보가 존재하지 않습니다");
+			System.out.println("회원정보가 존재하지 않습니다");
 			menuView.menu();
 		}
-		
 		return userDto;
 	}
 	

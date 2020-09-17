@@ -1,9 +1,10 @@
 package view;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import controller.AdminController;
 import controller.BooksController;
@@ -19,8 +20,6 @@ import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
 import dto.UserDto;
-import user.User;
-import user.UserSet;
 
 
 public class MenuView {
@@ -100,8 +99,6 @@ public class MenuView {
 	public static void printUserMenu(String userId) {
 
 		while (true) {
-			UserSet userset = UserSet.getInstance();
-			System.out.println(userset.getSet());
 			System.out.println("-----------------  User Menu -------------------");
 			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
 			System.out.println("| 1.도서검색        | 2.주문     | 3.주문내역확인 &결제  | 4.희망도서등록&보기 | ");
@@ -109,8 +106,8 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.booksearch();
-				break;
+				MenuView.booksearch(userId);
+				return;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -126,7 +123,6 @@ public class MenuView {
 				showCart(userId);
 				break;
 			case 7:
-				userPoint(userId);
 				myPage(userId);
 				break;
 			case 8:logOut(userId);
@@ -188,28 +184,57 @@ public class MenuView {
 		
 	}
 
-	//case : 1 -도서검색-
-	public static void booksearch() {
-		System.out.println("---- 도서 검색 ----");
-		System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
-		System.out.println("-------------------");
+
+	 //case : 1 -도서검색-
+    public static void booksearch(String userId) {
+       System.out.println("---- 도서 검색 ----");
+       System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
+       System.out.println("-------------------");
+       System.out.print("선택> ");
+       
+       
+       int menu = Integer.parseInt(sc.nextLine());
+       switch (menu) {
+       case 1:
+          System.out.println("-------------------");
+          BooksController.selectBook();
+          booksearch(userId);
+          break;
+       case 2:
+          System.out.println("-------------------");
+          searchName();
+          booksearch(userId);
+          break;
+       case 3:
+          System.out.println("-------------------");
+          searchGenre();
+          booksearch(userId);
+          break;
+       case 4:
+          printUserMenu(userId);
+       default:
+          System.out.println("올바른 번호를 선택해 주세요");
+          booksearch(userId);
+          break;
+       }
+    }
 		
-		int menu = Integer.parseInt(sc.nextLine());
-		switch (menu) {
-		case 1:
-			BooksController.selectBook();
-			return;
-		case 2:
-			BooksController.selectByName();
-			return;
-		case 3:
-			BooksController.selectByGenre();
-			return;
-		default:
-			System.out.println("올바른 번호를 선택해 주세요");
-			break;
-		}
-	}
+		//case : 1-2 -제목 검색-
+		   private static void searchName() {
+		      System.out.print("검색할 책 제목 : ");
+		      String booksName = sc.nextLine();
+		         
+		      BooksController.selectByName(booksName);
+		      
+		      }
+		      //case : 1-3 -장르 검색-
+		   private static void searchGenre() {
+		      System.out.print("검색할 책 장르 : ");
+		      String booksGenre = sc.nextLine();
+		      
+		      BooksController.selectByGenre(booksGenre);
+		      
+		   }
 	
 
 	// case : 2 -주문
@@ -236,7 +261,6 @@ public class MenuView {
 	public static void printAdminMenu(String userId) {
 
 		while (true) {
-			UserSet userset = UserSet.getInstance();
 			System.out.println("--------------  Admin Menu --------------");
 			System.out.println("------------- 관리자 " + userId + "님 모드    -------------");
 			System.out.println("| 1.회원관리   | 2.도서관리  | 3.매출관리  | 4.로그아웃  |");
@@ -395,8 +419,6 @@ public class MenuView {
 	// case : 4 희망도서등록&조회
 	public static void wishBook(String userId) {
 		while (true) {
-			UserSet userset = UserSet.getInstance();
-			System.out.println(userset.getSet());
 			System.out.println("-----------------  User Menu -------------------");
 			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
 			System.out.println("| 1. 희망도서등록		| 2. 희망도서목록조회		| 3. 나가기		");
@@ -469,7 +491,7 @@ public class MenuView {
 		System.out.println("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 		
-		UserDto userDto= new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto= new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.updateUserInfo(userDto);
 	}
 	
@@ -510,21 +532,40 @@ public class MenuView {
 	 */
 	public static void showCart(String userId) {
 		Map<BookDto, Integer> map = CartController.selectCart(userId);
-		System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
-		int num = Integer.parseInt(sc.nextLine());
+		Set<BookDto> set = map.keySet(); // 장바구니에 담긴 책정보 꺼내기 
 		
-		if(num==1) {
-			System.out.print("배송주소: ");
-			String address = sc.nextLine();
+		//if(map==null) {
+			//System.out.println("장바구니가 비어있습니다.");
+		//}
+		//else {
 			
-			Orders orders = new Orders(0, null, userId, address, 0);
-			OrderController.insertOrders(orders);
-		}
-		else if(num==2) {
-			CartController.deleteCart(userId);
-		}
-		else if(num==3) return;
-		//else System.out.println("다시 입력해주세요. ");
+			System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
+			int num = Integer.parseInt(sc.nextLine());
+			
+			if(num==1) {
+				System.out.print("배송주소: ");
+				String address = sc.nextLine();
+				
+				Orders orders = new Orders(0, null, userId, address, 0);
+				
+				Iterator<BookDto> iterator = set.iterator(); //반복자 얻기 
+				while(iterator.hasNext()) { // 객체 수 만큼 돌기 
+					BookDto bookDto = iterator.next(); // 한 개의 객체 가져옴 
+					
+					OrderLine orderLine = new OrderLine(0, 0, bookDto.getBooksId() , 0, map.get(bookDto), 0);
+					orders.getOrderLineList().add(orderLine);
+				}
+				
+				OrderController.insertOrders(orders);
+				CartController.deleteCart(userId);
+			}
+			else if(num==2) {
+				CartController.deleteCart(userId);
+			}
+			else if(num==3) return;
+			//else System.out.println("다시 입력해주세요. ");
+		//}
+		
 	}
 	
 	/**
