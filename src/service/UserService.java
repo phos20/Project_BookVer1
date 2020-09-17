@@ -52,9 +52,6 @@ public class UserService {
 	
 	/**
 	 * 포인트 등록
-	 */
-	/**
-	 * 포인트 등록
 	 * */
 	public int userPoint(String userId, int point) throws Exception {
 		int result = userDao.userPoint(userId, point);

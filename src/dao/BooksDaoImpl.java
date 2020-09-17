@@ -38,17 +38,52 @@ public class BooksDaoImpl implements BooksDao {
 		return books;
 	}
 
-	@Override
-	public BookDto SelectByName(String booksName) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	   /**책 제목 검색*/
+	   @Override
+	   public BookDto SelectByName(String booksName) throws SQLException {
+	      Connection con = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      BookDto books = null;
+	      
+	      try {
+	         con = DbUtil.getConnection();
+	         ps = con.prepareStatement("select * from books where books_name=?");
+	         ps.setString(1, booksName);
+	         rs = ps.executeQuery();
 
-	@Override
-	public BookDto SelectByGenre(String booksGenre) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	         if (rs.next()) {
+	            books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+	                  rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+	         }
+	      } finally {
+	         DbUtil.close(con, ps, rs);
+	      }
+	      return books;
+	   }
+
+	   /**책 장르 검색*/
+	   @Override
+	   public BookDto SelectByGenre(String booksGenre) throws SQLException {
+	      Connection con = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      BookDto books = null;
+	      try {
+	         con = DbUtil.getConnection();
+	         ps = con.prepareStatement("select * from books where books_genre=?");
+	         ps.setString(1, booksGenre);
+	         rs = ps.executeQuery();
+
+	         if (rs.next()) {
+	            books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+	                  rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+	         }
+	      } finally {
+	         DbUtil.close(con, ps, rs);
+	      }
+	      return books;
+	   }
 	
 	/**
 	 * 도서목록 검색

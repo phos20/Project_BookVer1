@@ -119,5 +119,15 @@ public class EndView {
 		}
 		System.out.println();
 	}
+	/** 책 제목 검색 */
+	   public static void printBookNameList(BookDto books) {
+	      System.out.println(books);
+	      
+	      
+	   }
 
+	   /** 책 장르 검색 */
+	   public static void printBookGenreList(BookDto books) {
+	      System.out.println(books);
+	   }
 }

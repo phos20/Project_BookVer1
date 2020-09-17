@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dao.BooksDao;
@@ -45,5 +44,21 @@ public class BooksService {
 		if(bookDto==null) throw new Exception("해당하는 도서가 존재하지 않습니다.");
 		return bookDto;
 	}
-	
+	/**
+	    * 책 제목 검색
+	    * */
+	   public BookDto selectByName(String booksName) throws Exception {
+	      BookDto books = booksDao.SelectByName(booksName);
+	      if(books == null) throw new Exception("해당하는 제목이 존재하지 않습니다.");
+	      return books;
+	   }
+
+	   /**
+	    * 책 장르 검색
+	    * */
+	   public BookDto selectByGenre(String booksGenre) throws Exception {
+	      BookDto books = booksDao.SelectByGenre(booksGenre);
+	      if(books == null) throw new Exception("해당하는 장르가 존재하지 않습니다.");
+	      return books;
+	   }
 }

@@ -15,7 +15,6 @@ import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
 import dto.UserDto;
-import user.User;
 import user.UserSet;
 
 
@@ -104,7 +103,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.booksearch();
+				MenuView.booksearch(userId);
 				return;
 			case 2:
 				printInputOrder(userId);
@@ -121,7 +120,6 @@ public class MenuView {
 				showCart(userId);
 				break;
 			case 7:
-				userPoint(userId);
 				myPage(userId);
 				break;
 			case 8:logOut(userId);
@@ -135,28 +133,38 @@ public class MenuView {
 
 	
 
-	//case : 1 -도서검색-
-		public static void booksearch() {
-			System.out.println("---- 도서 검색 ----");
-			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
-			System.out.println("-------------------");
-			
-			int menu = Integer.parseInt(sc.nextLine());
-			switch (menu) {
-			case 1:
-				BooksController.selectBook();
-				break;
-			case 2:
-				BooksController.selectByName();
-				break;
-			case 3:
-				BooksController.selectByGenre();
-				break;
-			default:
-				System.out.println("올바른 번호를 선택해 주세요");
-				break;
-			}
-		}
+	   //case : 1 -도서검색-
+    public static void booksearch(String userId) {
+       System.out.println("---- 도서 검색 ----");
+       System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
+       System.out.println("-------------------");
+       System.out.print("선택> ");
+       
+       
+       int menu = Integer.parseInt(sc.nextLine());
+       switch (menu) {
+       case 1:
+          System.out.println("-------------------");
+          BooksController.selectBook();
+          booksearch(userId);
+          break;
+       case 2:
+          System.out.println("-------------------");
+          searchName();
+          booksearch(userId);
+          break;
+       case 3:
+          System.out.println("-------------------");
+          searchGenre();
+          booksearch(userId);
+          break;
+       case 4:
+          printUserMenu(userId);
+       default:
+          System.out.println("올바른 번호를 선택해 주세요");
+          break;
+       }
+    }
 	
 
 	// case : 2 -주문
@@ -241,7 +249,23 @@ public class MenuView {
 		
 
 	}
-	
+	   //case : 1-2 -제목 검색-
+	   private static void searchName() {
+	      System.out.print("검색할 책 제목 : ");
+	      String booksName = sc.nextLine();
+	         
+	      BooksController.selectByName(booksName);
+	      
+	      }
+	      //case : 1-3 -장르 검색-
+	   private static void searchGenre() {
+	      System.out.print("검색할 책 장르 : ");
+	      String booksGenre = sc.nextLine();
+	      
+	      BooksController.selectByGenre(booksGenre);
+	      
+	   }
+	   
 	public static void manageBook() {
 		System.out.println("1. 도서목록 보기 2. 희망도서목록 보기 3. 도서 등록 4. 도서 삭제 5. 나가기");
 		int num = Integer.parseInt(sc.nextLine());
@@ -366,7 +390,8 @@ public class MenuView {
 		
 	}
 	public static void myPage(String userId) {
-		while(true) {
+		boolean boo = true;
+		while(boo) {
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
 			System.out.println("★★★★★★★★★여기는 현재 마이페이지 입니다★★★★★★★★");
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
@@ -376,6 +401,8 @@ public class MenuView {
 		case 1:updateUserInfo(userId);
 			break;
 		case 2:deleteUserInfo(userId);
+			boo = false;
+			menu();
 			break;
 		case 3:userPoint(userId);
 			break;
@@ -416,7 +443,7 @@ public class MenuView {
 		System.out.println("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 		
-		UserDto userDto= new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto= new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.updateUserInfo(userDto);
 	}
 	

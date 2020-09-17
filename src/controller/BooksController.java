@@ -50,14 +50,26 @@ public class BooksController {
 		
 	}
 
-	public static void selectByName() {
-		// TODO Auto-generated method stub
-		
-	}
+	   /**책 제목 검색*/
+	   public static void selectByName(String booksName) {
+	      try {
+	         BookDto books = booksService.selectByName(booksName);
+	         EndView.printBookNameList(books);
+	      } catch (Exception e){
+	         e.printStackTrace();
+	         FailView.errorMessage(e.getMessage());
+	      }
+	   }
 
-	public static void selectByGenre() {
-		// TODO Auto-generated method stub
-		
-	}
+	   /**책 장르 검색*/
+	   public static void selectByGenre(String booksGenre) {
+	      try {
+	         BookDto books = booksService.selectByGenre(booksGenre);
+	         EndView.printBookGenreList(books);
+	      } catch (Exception e){
+	         e.printStackTrace();
+	         FailView.errorMessage(e.getMessage());
+	      }
+	   }
 
 }
