@@ -50,7 +50,7 @@ public class MenuView {
 	//case : 2 - 비회원-
 	public static void nonmember() {
 		System.out.println("---- 비회원 메뉴 ----");
-		System.out.println(" | 1.회원가입 | 2.도서 목록 보기 | ");
+		System.out.println(" | 1.회원가입 | 2.도서 목록 보기 | 3.뒤로가기 | ");
 		
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -59,9 +59,14 @@ public class MenuView {
 			break;
 		case 2:
 			BooksController.selectBook();
+			nonmember();
+			break;
+		case 3:
+			menu();
 			break;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
+			nonmember();
 			break;
 		}
 	}
@@ -140,18 +145,23 @@ public class MenuView {
 	//case : 1 -도서검색-
 		public static void booksearch() {
 			System.out.println("---- 도서 검색 ----");
-			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
+			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
 			System.out.println("-------------------");
+			System.out.print("선택> ");
+			
 			
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				System.out.println("-------------------");
 				BooksController.selectBook();
 				break;
 			case 2:
+				System.out.println("-------------------");
 				searchName();
 				break;
 			case 3:
+				System.out.println("-------------------");
 				searchGenre();
 				break;
 			default:
@@ -242,7 +252,7 @@ public class MenuView {
 			updateUserGrade();
 			break;
 		case 3 :
-			return;
+			break;
 		default:
 			System.out.println("관리자님 올바른 번호를 선택해 주세요");
 			break;

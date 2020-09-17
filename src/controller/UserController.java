@@ -57,6 +57,7 @@ public class UserController {
 			} else {
 				System.out.println("접속을 환영합니다");
 				MenuView.printUserMenu(userId);
+				
 			}
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
