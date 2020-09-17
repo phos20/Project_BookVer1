@@ -46,4 +46,21 @@ public class BooksService {
 		return bookDto;
 	}
 	
+	/**
+	    * 책 제목 검색
+	    * */
+	   public BookDto selectByName(String booksName) throws Exception {
+	      BookDto books = booksDao.SelectByName(booksName);
+	      if(books == null) throw new Exception("해당하는 제목이 존재하지 않습니다.");
+	      return books;
+	   }
+
+	   /**
+	    * 책 장르 검색
+	    * */
+	   public List<BookDto> selectByGenre(String booksGenre) throws Exception {
+	      List<BookDto> list = booksDao.SelectByGenre(booksGenre);
+	      if(list == null) throw new Exception("해당하는 장르가 존재하지 않습니다.");
+	      return list;
+	   }
 }
