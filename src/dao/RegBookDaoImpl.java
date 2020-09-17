@@ -60,4 +60,30 @@ public class RegBookDaoImpl implements RegBookDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * Èñ¸Áµµ¼­ Á¦¸ñ ²¨³»¿À±â
+	 */
+	public List<String> selectRegBookName() throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select reg_name from regbook";
+		List<String> list =  new ArrayList<>();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		} finally {
+			DbUtil.close(con, ps, rs);
+		}
+		
+		return list;
+	}
 }

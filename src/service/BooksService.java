@@ -23,7 +23,7 @@ public class BooksService {
 	 * 도서 등록
 	 */
 	public int insertBook(BookDto bookDto) throws Exception{
-		int result = booksDao.insertBook(bookDto);
+		int result = booksDao.check(bookDto);
 		if(result==0) throw new Exception("등록되지 않았습니다.");
 		return result;
 	}
