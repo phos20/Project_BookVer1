@@ -83,9 +83,6 @@ public class UserController {
 	/**
 	 * 포인트 등록
 	 */
-/**
- *  포인트 적립
- * */
 	public static void userPoint(String userId, int point) {
 		try {
 			int result = userService.userPoint(userId, point);
@@ -97,5 +94,18 @@ public class UserController {
 		}
 
 	}
+
+	/**포인트차감*/
+	public static void Pay(int price, String userId) {
+		try {
+			userService.Pay(price,userId);
+			EndView.messagePrint("결제 성공");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
+
+
 
 }

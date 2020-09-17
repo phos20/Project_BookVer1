@@ -168,6 +168,49 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/**포인트 차감*/
+	@Override
+	public int Pay(int price, String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result =0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("update orders set total_amount= ? where user_id =?");
+			ps.setInt(1, Culculation(con,userId,price));
+			ps.setString(1, userId);
+			result = ps.executeUpdate();
+			
+		}finally {
+			DbUtil.close(con, ps, null);
+		}
+	
+		return result;
+	}
+
+	/**차감 포인트 계산*/
+	private int Culculation(Connection con, String userId, int price)throws SQLException {
+		PreparedStatement ps = null;
+		ResultSet rs =null;
+		int result =0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select total_amount from orders where user_id =?");
+			ps.setString(1, userId);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = (rs.getInt(1)-price);
+				
+				if(result <0) throw new SQLException("포인트가 부족합니다");
+						
+			}
+		}finally {
+			DbUtil.close(null, ps, rs);
+		}
+	
+		return result;
+	}
 
 	
 }

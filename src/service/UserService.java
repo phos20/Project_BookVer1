@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import dto.UserDto;
-import user.User;
-import user.UserSet;
 import view.MenuView;
 
 public class UserService {
@@ -61,6 +59,7 @@ public class UserService {
 			throw new Exception("포인트가 적립되지 않았습니다. ");
 		return result;
 	}
+	
 	/**
 	 * 회원정보 조회
 	 * */
@@ -71,7 +70,15 @@ public class UserService {
 			menuView.menu();
 		}
 		return userDto;
-
+	}
+	
+	/**포인트 차감*/
+	public void Pay(int price, String userId)throws SQLException{
+		int result = userDao.Pay(price,userId);
+		if (result == 0)
+			throw new SQLException("결제 불가");
+	
+		
 	}
 
 }
