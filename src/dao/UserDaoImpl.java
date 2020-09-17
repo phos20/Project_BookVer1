@@ -149,16 +149,19 @@ public class UserDaoImpl implements UserDao {
 	public int deleteUserInfo(UserDto userDto) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "delete from userlist where user_pwd=? and user_name=? and user_phone=?";
-		
+		String sql = "delete userlist where user_pwd=? and user_name=? and user_phone=?";
 		int result = 0;
+		
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			
 			ps.setString(1, userDto.getUserPwd());
 			ps.setString(2, userDto.getUserName());
 			ps.setString(3, userDto.getUserPhone());
+			
 			result = ps.executeUpdate();
+			
 		}finally {
 			DbUtil.close(con, ps,null);
 		}

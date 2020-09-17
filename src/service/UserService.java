@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import dto.UserDto;
+import user.User;
+import user.UserSet;
 
 public class UserService {
 	UserDao userDao = new UserDaoImpl();
@@ -51,17 +53,25 @@ public class UserService {
 	/**
 	 * 포인트 등록
 	 */
+	/**
+	 * 포인트 등록
+	 * */
 	public int userPoint(String userId, int point) throws Exception {
 		int result = userDao.userPoint(userId, point);
 		if (result == 0)
 			throw new Exception("포인트가 적립되지 않았습니다. ");
 		return result;
 	}
-
+	/**
+	 * 회원정보 조회
+	 * */
 	public UserDto Login(String userId, String userPwd) throws SQLException {
 		UserDto userDto = userDao.Login(userId, userPwd);
 		if (userDto == null)
 			throw new SQLException("회원정보가 존재하지 않습니다");
+		
+		
+		
 		return userDto;
 
 	}
