@@ -14,7 +14,7 @@ public interface BooksDao {
 	   /**
 	    * 책 장르로 검색
 	    * */
-	   BookDto SelectByGenre(String booksGenre)throws SQLException;
+	   List<BookDto> SelectByGenre(String booksGenre)throws SQLException;
 	   
 	   /** 책번호로 검색 */
 	   BookDto booksSelectBybooksId(String booksId) throws SQLException;

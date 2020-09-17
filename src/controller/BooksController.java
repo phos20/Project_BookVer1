@@ -64,8 +64,8 @@ public class BooksController {
 	/**책 장르 검색*/
 	public static void selectByGenre(String booksGenre) {
 		try {
-			BookDto books = booksService.selectByGenre(booksGenre);
-			EndView.printBookGenreList(books);
+			List<BookDto> list = booksService.selectByGenre(booksGenre);
+			EndView.printBookGenreList(list);
 		} catch (Exception e){
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

@@ -15,9 +15,7 @@ import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
 import dto.UserDto;
-import user.User;
 import user.UserSet;
-
 
 public class MenuView {
 
@@ -51,6 +49,7 @@ public class MenuView {
 		switch (menu) {
 		case 1:
 			MenuView.signUp();
+			menu();
 			break;
 		case 2:
 			BooksController.selectBook();
@@ -109,7 +108,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.booksearch();
+				MenuView.booksearch(userId);
 				return;
 			case 2:
 				printInputOrder(userId);
@@ -126,7 +125,6 @@ public class MenuView {
 				showCart(userId);
 				break;
 			case 7:
-				userPoint(userId);
 				myPage(userId);
 				break;
 			case 8:logOut(userId);
@@ -141,7 +139,7 @@ public class MenuView {
 	
 
 	//case : 1 -도서검색-
-		public static void booksearch() {
+		public static void booksearch(String userId) {
 			System.out.println("---- 도서 검색 ----");
 			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
 			System.out.println("-------------------");
@@ -153,20 +151,23 @@ public class MenuView {
 			case 1:
 				System.out.println("-------------------");
 				BooksController.selectBook();
+				booksearch(userId);
 				break;
 			case 2:
 				System.out.println("-------------------");
 				searchName();
+				booksearch(userId);
 				break;
 			case 3:
 				System.out.println("-------------------");
 				searchGenre();
+				booksearch(userId);
 				break;
 			case 4:
-				printAdminMenu(userId);
-				break;
+				printUserMenu(userId);
 			default:
 				System.out.println("올바른 번호를 선택해 주세요");
+				booksearch(userId);
 				break;
 			}
 		}
@@ -221,7 +222,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				UserManagement();
+				UserManagement(userId);
 				return;
 			case 2:
 				manageBook();
@@ -240,7 +241,7 @@ public class MenuView {
 	}
 	
 	//case : 1 -회원관리
-	private static void UserManagement() {
+	private static void UserManagement(String userId) {
 		System.out.println("---- 회원 관리 메뉴 ----");
 		System.out.println("| 1. 회원 목록 보기  |  2.회원등업  | 3. 뒤로가기  |");
 
@@ -253,6 +254,7 @@ public class MenuView {
 			updateUserGrade();
 			break;
 		case 3 :
+			printUserMenu(userId);
 			break;
 		default:
 			System.out.println("관리자님 올바른 번호를 선택해 주세요");
@@ -446,7 +448,7 @@ public class MenuView {
 		System.out.println("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 		
-		UserDto userDto= new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto= new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.updateUserInfo(userDto);
 	}
 	

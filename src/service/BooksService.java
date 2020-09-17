@@ -59,10 +59,11 @@ public class BooksService {
 	 * 책 장르 검색
 	 * */
 	public BookDto selectByGenre(String booksGenre) throws Exception {
-		BookDto books = booksDao.SelectByGenre(booksGenre);
-		if(books == null) throw new Exception("해당하는 장르가 존재하지 않습니다.");
-		return books;
+		List<BookDto> list = booksDao.SelectByGenre(booksGenre);
+		if(list.size()==0)throw new Exception("책 장르가 없습니다.");
+		return list;
 	}
+	
 	
 	
 }
