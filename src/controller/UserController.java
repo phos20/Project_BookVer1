@@ -52,6 +52,7 @@ public class UserController {
 	public static void Login(String userId, String userPwd) {
 		try {
 			UserDto userDto = userService.Login(userId, userPwd);
+
 			if (userDto.getGrade().equals("관리자")) {
 				System.out.println("관리자님 어서오세요");
 				MenuView.printAdminMenu(userId);
@@ -60,10 +61,28 @@ public class UserController {
 				MenuView.printUserMenu(userId);
 				
 			}
+
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+
+	/**
+	 * 포인트 검색
+	 */
+	public static int selectPoint(String userId) {
+		int point = 0;
+		try {
+			point = userService.getUserPoint(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return point;
+	}
+	
+	/**
+	 * 포인트 등록
+	 */
 /**
  *  포인트 적립
  * */

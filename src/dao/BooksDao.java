@@ -25,6 +25,11 @@ public interface BooksDao {
 	   List<BookDto> selectBook() throws SQLException;
 
 	   /**
+	    * 도서 제목 검사
+	    */
+	   int check(BookDto bookDto) throws SQLException;
+	   
+	   /**
 	    * 신규 도서 등록
 	    */
 	   int insertBook(BookDto bookDto) throws SQLException;

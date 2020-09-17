@@ -16,17 +16,23 @@ public class BookDto {
 
 	public BookDto(String booksId, String booksName, String booksWriter, String booksPublisher, String booksPubDate,
 			String booksGenre, int booksPrice, int stock, String regDate) {
+		this(booksId, booksName, booksWriter, booksPrice);
+		this.booksPublisher = booksPublisher;
+		this.booksPubDate = booksPubDate;
+		this.booksGenre = booksGenre;
+		this.stock = stock;
+		this.regDate = regDate;
+	}	
+
+	public BookDto(String booksId, String booksName, String booksWriter, int booksPrice) { // 장바구니 사용 
 		super();
 		this.booksId = booksId;
 		this.booksName = booksName;
 		this.booksWriter = booksWriter;
-		this.booksPublisher = booksPublisher;
-		this.booksPubDate = booksPubDate;
-		this.booksGenre = booksGenre;
 		this.booksPrice = booksPrice;
-		this.stock = stock;
-		this.regDate = regDate;
 	}
+	
+	
 	
 
 	public String getBooksId() {

@@ -15,6 +15,10 @@ public interface RegBookDao {
 	   * Èñ¸Áµµ¼­µî·Ï 
 	   */
 	   int insertRegbook(RegBookDto wish)throws Exception; 
-
+	   
+	   /**
+	    * Èñ¸Áµµ¼­ Á¦¸ñ¸ñ·Ï ²¨³»¿À±â
+	    */
+	   List<String> selectRegBookName() throws SQLException;
 
 }

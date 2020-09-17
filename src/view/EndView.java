@@ -24,6 +24,22 @@ public class EndView {
 	public static void printMessage(String message) {
 		System.out.println(message);
 	}
+	
+	/**
+	 * 장바구니 보기
+	 */
+	public static void showCart(Map<BookDto, Integer> map) {
+		
+		for(BookDto bookDto: map.keySet()) {
+			String booksId = bookDto.getBooksId(); // 도서 코드
+			String booksName = bookDto.getBooksName(); // 도서 제목
+			int price = bookDto.getBooksPrice(); // 도서 가격
+			//int quantity = map.get(bookDto);//
+			System.out.println(booksId+" : "+booksName+" : "+price+" \t " + map.get(bookDto) + "권");
+			//map.get(bookDto);
+		}
+		
+	}
 
 	/**
 	 * 장바구니 내용 확인

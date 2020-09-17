@@ -16,6 +16,10 @@ public interface UserDao {
 	UserDto Login(String userId, String userPwd) throws SQLException;
 
 	/**
+	 * userId에 해당하는 포인트 검색
+	 */
+	int getUserPoint(String userId) throws SQLException;
+	/**
 	 * 포인트 충전
 	 */
 	int userPoint(String userId, int point) throws SQLException;
