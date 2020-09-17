@@ -51,12 +51,36 @@ public class UserController {
 	public static void Login(String userId, String userPwd) {
 		try {
 			UserDto userDto = userService.Login(userId, userPwd);
-			MenuView.printAdminMenu(userId);
+
+			if (userDto.getGrade().equals("관리자")) {
+				System.out.println("관리자님 어서오세요");
+				MenuView.printAdminMenu(userId);
+			} else {
+				System.out.println("접속을 환영합니다");
+				MenuView.printUserMenu(userId);
+			}
+
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
 
+	/**
+	 * 포인트 검색
+	 */
+	public static int selectPoint(String userId) {
+		int point = 0;
+		try {
+			point = userService.getUserPoint(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return point;
+	}
+	
+	/**
+	 * 포인트 등록
+	 */
 	public static void userPoint(String userId, int point) {
 		try {
 			int result = userService.userPoint(userId, point);

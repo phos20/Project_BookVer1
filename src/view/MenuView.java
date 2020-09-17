@@ -1,22 +1,16 @@
 package view;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import controller.AdminController;
 import controller.BooksController;
 import controller.CartController;
 import controller.OrderController;
-
-
-import controller.RegBookController;
-import controller.UserController;
-
-import controller.UserController;
-
 import controller.RegBookController;
 import controller.UserController;
 import dto.BookDto;
-
+import dto.CartDto;
 import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
@@ -120,13 +114,13 @@ public class MenuView {
 			case 4:
 				break;
 			case 5:
-				putCart();
+				putCart(userId);
 				break;
 			case 6:
-				showCart();
+				showCart(userId);
 				break;
 			case 7:
-				userPoint();
+				userPoint(userId);
 				break;
 			case 8:
 				break;
@@ -415,31 +409,57 @@ public class MenuView {
 	/**
 	 * 장바구니 담기
 	 */
-	public static void putCart() {
+	public static void putCart(String userId) {
 		System.out.println("-- 장바구니 담기 --");
 		System.out.print("도서코드: ");
-		String goodsId = sc.nextLine();
+		String booksId = sc.nextLine();
 		System.out.print("수량: ");
 		int quantity = Integer.parseInt(sc.nextLine());
 		
-		CartController.putCart("C",goodsId,quantity);
+		CartDto cartDto = new CartDto(0, userId, booksId, quantity, null);
+		
+		CartController.insertCart(cartDto);
 	}
 	
 	/**
 	 * 장바구니 보기
 	 */
-	public static void showCart() {
-		CartController.showCart("C");
+	public static void showCart(String userId) {
+		Map<BookDto, Integer> map = CartController.selectCart(userId);
+		System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		if(num==1) {
+			System.out.print("배송주소: ");
+			String address = sc.nextLine();
+			
+			Orders orders = new Orders(0, null, userId, address, 0);
+			OrderController.insertOrders(orders);
+		}
+		else if(num==2) {
+			CartController.deleteCart(userId);
+		}
+		else if(num==3) return;
+		//else System.out.println("다시 입력해주세요. ");
 	}
 	
 	/**
 	 * 포인트
 	 */
-	public static void userPoint() {
-		System.out.println("등록할 포인트: ");
-		int point = Integer.parseInt(sc.nextLine());
+	public static void userPoint(String userId) {
 		
-		UserController.userPoint("L", point);
+		System.out.println("현재 포인트: " + UserController.selectPoint(userId));
+		System.out.println("1. 포인트 등록하기  2. 뒤로 ");
+		int num = Integer.parseInt(sc.nextLine());
+		if(num==1) {
+			System.out.print("등록할 포인트: ");
+			int point = Integer.parseInt(sc.nextLine());
+			
+			UserController.userPoint(userId, point);
+		}
+		if(num==2) return;
+		//else System.out.println("다시 입력해주세요. ");
+		
 	}
 
 }

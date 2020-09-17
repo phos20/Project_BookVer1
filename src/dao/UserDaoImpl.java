@@ -67,7 +67,10 @@ public class UserDaoImpl implements UserDao {
 		}
 		return userDto;
 	}
-
+	
+	/**
+	 * 포인트 등록
+	 */
 	@Override
 	public int userPoint(String userId, int point) throws SQLException {
 		
@@ -94,6 +97,7 @@ public class UserDaoImpl implements UserDao {
 	/**
 	 * userId에 해당하는 포인트 구하기 
 	 */
+	@Override
 	public int getUserPoint(String userId) throws SQLException{
 		
 		Connection con = null;
@@ -160,4 +164,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return result;
 	}
+
+
+	
 }

@@ -40,6 +40,17 @@ public class UserService {
 		return result;
 	}
 
+	/**
+	 * 포인트 검색
+	 */
+	public int getUserPoint(String userId) throws Exception {
+		int point = userDao.getUserPoint(userId);
+		return point;
+	}
+	
+	/**
+	 * 포인트 등록
+	 */
 	public int userPoint(String userId, int point) throws Exception {
 		int result = userDao.userPoint(userId, point);
 		if (result == 0)
