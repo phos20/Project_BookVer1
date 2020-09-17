@@ -6,21 +6,14 @@ import controller.AdminController;
 import controller.BooksController;
 import controller.CartController;
 import controller.OrderController;
-
-
-import controller.RegBookController;
-import controller.UserController;
-
-import controller.UserController;
-
 import controller.RegBookController;
 import controller.UserController;
 import dto.BookDto;
-
 import dto.OrderLine;
 import dto.Orders;
 import dto.RegBookDto;
 import dto.UserDto;
+import user.User;
 import user.UserSet;
 
 
@@ -86,7 +79,7 @@ public class MenuView {
 				
 	//case : - 로그인
 	private static void Login() {
-		System.out.println(" ID = ");
+		System.out.println("ID = ");
 		String userId = sc.nextLine();
 		System.out.println("PWD = ");
 		String userPwd = sc.nextLine();
@@ -117,7 +110,7 @@ public class MenuView {
 			case 3:
 				OrderController.selectOrdersByUserId(userId);
 				break;
-			case 4:
+			case 4:wishBook(userId);
 				break;
 			case 5:
 				putCart();
@@ -126,9 +119,9 @@ public class MenuView {
 				showCart();
 				break;
 			case 7:
-				userPoint();
+				myPage(userId);
 				break;
-			case 8:
+			case 8:logOut(userId);
 				break;
 			default:
 				System.out.println(userId + "님 올바른 번호를 선택해 주세요");
@@ -136,6 +129,8 @@ public class MenuView {
 			}
 		}
 	}
+
+	
 
 	//case : 1 -도서검색-
 		public static void booksearch() {
@@ -348,7 +343,7 @@ public class MenuView {
 			System.out.println(userset.getSet());
 			System.out.println("-----------------  User Menu -------------------");
 			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
-			System.out.println("| 1. 희망도서등록        | 2.희망도서목록조회    ");
+			System.out.println("| 1. 희망도서등록		| 2. 희망도서목록조회		| 3. 나가기		");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:  
@@ -357,6 +352,9 @@ public class MenuView {
 			case 2:
 				RegBookController.selectRegBook(); //조회
 				break;
+			case 3:
+				printUserMenu(userId); //나가기
+				
 			default:
 				System.out.println(userId + "님 올바른 번호를 선택해 주세요");
 				break;
@@ -364,7 +362,30 @@ public class MenuView {
 		}
 		
 	}
+	public static void myPage(String userId) {
+		while(true) {
+			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("★★★★★★★★★여기는 현재 마이페이지 입니다★★★★★★★★");
+			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("| 1.내정보 수정하기    | 2. 내정보 탈퇴하기    | 3. 포인트 충전하기 |4. 뒤로가기    ");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:updateUserInfo(userId);
+			break;
+		case 2:deleteUserInfo(userId);
+			break;
+		case 3:userPoint();
+			break;
+		case 4:printUserMenu(userId);
+		default:
+			System.out.println(userId + "님 올바른 번호를 선택해 주세요");
+			break;
+		}
+			
+		}
+	}
 	
+	////////////////////////////////////////////////////////////////////
 	// case : 4 희망도서등록
 	public static void insertRegBook(String userId) {
 		
@@ -392,9 +413,10 @@ public class MenuView {
 		System.out.println("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 		
-		UserDto userDto= new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto= new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.updateUserInfo(userDto);
 	}
+	
 	/**
 	 *  case : 7-2 마이페이지(회원탈퇴)
 	 * */
@@ -441,5 +463,13 @@ public class MenuView {
 		
 		UserController.userPoint("L", point);
 	}
+	/**
+	 *  로그아웃 
+	 * */
+	private static void logOut(String userId) {
+		System.out.println("로그아웃 되었습니다.");
+		System.exit(0);
+	}
+		
 
 }

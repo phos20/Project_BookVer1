@@ -25,7 +25,7 @@ public class UserController {
 	// 회원정보수정
 	public static void updateUserInfo(UserDto userDto) {
 		try {
-			int result = userService.updateUserInfo(userDto);
+			userService.updateUserInfo(userDto);
 			EndView.messagePrint("수정되었습니다.");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
@@ -36,9 +36,10 @@ public class UserController {
 	// 회원탈퇴
 	public static void deleteUserInfo(UserDto userDto) {
 		try {
-			int result = userService.deleteUserInfo(userDto);
+			userService.deleteUserInfo(userDto);
 			EndView.messagePrint("탈퇴되었습니다.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -62,13 +63,17 @@ public class UserController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-
+/**
+ *  포인트 적립
+ * */
 	public static void userPoint(String userId, int point) {
 		try {
 			int result = userService.userPoint(userId, point);
 			EndView.printMessage("포인트 적립 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+			
 		}
 
 	}
