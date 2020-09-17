@@ -39,6 +39,7 @@ public class CartController {
 	   try {
 		   map = cartService.selectCart(userId);
 		   EndView.showCart(map);
+		   
 	   } catch (Exception e) {
 		   e.printStackTrace();
 		   FailView.errorMessage(e.getMessage());

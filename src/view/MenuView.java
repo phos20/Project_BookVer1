@@ -1,7 +1,9 @@
 package view;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import controller.AdminController;
 import controller.BooksController;
@@ -133,7 +135,7 @@ public class MenuView {
 
 	
 
-	   //case : 1 -도서검색-
+	 //case : 1 -도서검색-
     public static void booksearch(String userId) {
        System.out.println("---- 도서 검색 ----");
        System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
@@ -162,10 +164,11 @@ public class MenuView {
           printUserMenu(userId);
        default:
           System.out.println("올바른 번호를 선택해 주세요");
+          booksearch(userId);
           break;
        }
     }
-	
+		
 
 	// case : 2 -주문
 	
@@ -484,21 +487,40 @@ public class MenuView {
 	 */
 	public static void showCart(String userId) {
 		Map<BookDto, Integer> map = CartController.selectCart(userId);
-		System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
-		int num = Integer.parseInt(sc.nextLine());
+		Set<BookDto> set = map.keySet(); // 장바구니에 담긴 책정보 꺼내기 
 		
-		if(num==1) {
-			System.out.print("배송주소: ");
-			String address = sc.nextLine();
+		//if(map==null) {
+			//System.out.println("장바구니가 비어있습니다.");
+		//}
+		//else {
 			
-			Orders orders = new Orders(0, null, userId, address, 0);
-			OrderController.insertOrders(orders);
-		}
-		else if(num==2) {
-			CartController.deleteCart(userId);
-		}
-		else if(num==3) return;
-		//else System.out.println("다시 입력해주세요. ");
+			System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
+			int num = Integer.parseInt(sc.nextLine());
+			
+			if(num==1) {
+				System.out.print("배송주소: ");
+				String address = sc.nextLine();
+				
+				Orders orders = new Orders(0, null, userId, address, 0);
+				
+				Iterator<BookDto> iterator = set.iterator(); //반복자 얻기 
+				while(iterator.hasNext()) { // 객체 수 만큼 돌기 
+					BookDto bookDto = iterator.next(); // 한 개의 객체 가져옴 
+					
+					OrderLine orderLine = new OrderLine(0, 0, bookDto.getBooksId() , 0, map.get(bookDto), 0);
+					orders.getOrderLineList().add(orderLine);
+				}
+				
+				OrderController.insertOrders(orders);
+				CartController.deleteCart(userId);
+			}
+			else if(num==2) {
+				CartController.deleteCart(userId);
+			}
+			else if(num==3) return;
+			//else System.out.println("다시 입력해주세요. ");
+		//}
+		
 	}
 	
 	/**

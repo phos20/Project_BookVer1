@@ -7,9 +7,11 @@ import dao.UserDaoImpl;
 import dto.UserDto;
 import user.User;
 import user.UserSet;
+import view.MenuView;
 
 public class UserService {
 	UserDao userDao = new UserDaoImpl();
+	MenuView menuView = new MenuView();
 
 	/**
 	 * 회원가입
@@ -64,11 +66,10 @@ public class UserService {
 	 * */
 	public UserDto Login(String userId, String userPwd) throws SQLException {
 		UserDto userDto = userDao.Login(userId, userPwd);
-		if (userDto == null)
-			throw new SQLException("회원정보가 존재하지 않습니다");
-		
-		
-		
+		if (userDto == null) {
+			System.out.println("회원정보가 존재하지 않습니다");
+			menuView.menu();
+		}
 		return userDto;
 
 	}
