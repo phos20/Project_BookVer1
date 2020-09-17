@@ -119,7 +119,7 @@ public class EndView {
 		}
 		System.out.println();
 	}
-
+	
 	/** 책 제목 검색 */
 	public static void printBookNameList(BookDto books) {
 		System.out.println(books);
