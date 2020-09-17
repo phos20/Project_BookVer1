@@ -1,5 +1,7 @@
 package view;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -9,6 +11,8 @@ import controller.CartController;
 import controller.OrderController;
 import controller.RegBookController;
 import controller.UserController;
+import dao.OrderDAO;
+import dao.OrderDAOImpl;
 import dto.BookDto;
 import dto.CartDto;
 import dto.OrderLine;
@@ -22,6 +26,7 @@ import user.UserSet;
 public class MenuView {
 
 	private static Scanner sc = new Scanner(System.in);
+	static OrderDAO orderDao = new OrderDAOImpl();
 
 	/** 초기 화면 */
 	public static void menu() {
@@ -99,18 +104,18 @@ public class MenuView {
 			System.out.println(userset.getSet());
 			System.out.println("-----------------  User Menu -------------------");
 			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
-			System.out.println("| 1.도서검색        | 2.주문     | 3.주문내역확인    | 4.희망도서등록&보기 | ");
+			System.out.println("| 1.도서검색        | 2.주문     | 3.주문내역확인 &결제  | 4.희망도서등록&보기 | ");
 			System.out.println("| 5.장바구니담기  | 6.장바구니보기  |  7.마이페이지   |  8.로그아웃     |");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
 				MenuView.booksearch();
-				return;
+				break;
 			case 2:
 				printInputOrder(userId);
 				break;
 			case 3:
-				OrderController.selectOrdersByUserId(userId);
+				selectOrderAndPay(userId);
 				break;
 			case 4:wishBook(userId);
 				break;
@@ -134,29 +139,77 @@ public class MenuView {
 	}
 
 	
+	//case : 3 - 주문내역확인& 결제
+	private static void selectOrderAndPay(String userId) {
+		System.out.println("| 1.주문내역 확인  | 2.결제  |");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			OrderController.selectOrdersByUserId(userId);
+			break;
+		case 2:
+			OrderController.Payment(userId);
+			break;
+		default:
+			System.out.println("올바른 번호를 선택해 주세요");
+			break;
+		}
+		
+	}
+	
+	/**결제*/
+	public static void Payment(List<Orders> list) {
+//		try {
+//			List<Orders> olist = orderDao.selectOrdersByUserId(list.get(0).getUserId());
+//			int price = 0;
+//			for(Orders order :olist) {
+//				price += order.getTotalAmount();
+//			}
+			int price = list.get(0).getTotalAmount();
+			System.out.println("총금액 : "+price +" 결제 하시겠습니까?");
+			System.out.println(" | 1. 결제  | 2.취소  |");
+			int menu = Integer.parseInt(sc.nextLine());
+			switch(menu) {
+				case 1:
+					UserController.Pay(price,list.get(0).getUserId());
+					break;
+				case 2 :
+					break;
+				default :
+					System.out.println("올바른 번호를 누르세요");
+					break;
+			}
+			
+			
+//		}catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		
+		
+	}
 
 	//case : 1 -도서검색-
-		public static void booksearch() {
-			System.out.println("---- 도서 검색 ----");
-			System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
-			System.out.println("-------------------");
-			
-			int menu = Integer.parseInt(sc.nextLine());
-			switch (menu) {
-			case 1:
-				BooksController.selectBook();
-				break;
-			case 2:
-				BooksController.selectByName();
-				break;
-			case 3:
-				BooksController.selectByGenre();
-				break;
-			default:
-				System.out.println("올바른 번호를 선택해 주세요");
-				break;
-			}
+	public static void booksearch() {
+		System.out.println("---- 도서 검색 ----");
+		System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 |");
+		System.out.println("-------------------");
+		
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			BooksController.selectBook();
+			return;
+		case 2:
+			BooksController.selectByName();
+			return;
+		case 3:
+			BooksController.selectByGenre();
+			return;
+		default:
+			System.out.println("올바른 번호를 선택해 주세요");
+			break;
 		}
+	}
 	
 
 	// case : 2 -주문

@@ -7,9 +7,12 @@ import dao.UserDaoImpl;
 import dto.UserDto;
 import user.User;
 import user.UserSet;
+import view.FailView;
+import view.MenuView;
 
 public class UserService {
 	UserDao userDao = new UserDaoImpl();
+	MenuView menuView = new MenuView();
 
 	/**
 	 * 회원가입
@@ -50,9 +53,7 @@ public class UserService {
 		return point;
 	}
 	
-	/**
-	 * 포인트 등록
-	 */
+
 	/**
 	 * 포인트 등록
 	 * */
@@ -62,18 +63,27 @@ public class UserService {
 			throw new Exception("포인트가 적립되지 않았습니다. ");
 		return result;
 	}
+	
 	/**
 	 * 회원정보 조회
 	 * */
 	public UserDto Login(String userId, String userPwd) throws SQLException {
 		UserDto userDto = userDao.Login(userId, userPwd);
-		if (userDto == null)
-			throw new SQLException("회원정보가 존재하지 않습니다");
-		
-		
+		if (userDto == null) {
+			FailView.errorMessage("회원정보가 존재하지 않습니다");
+			menuView.menu();
+		}
 		
 		return userDto;
-
+	}
+	
+	/**포인트 차감*/
+	public void Pay(int price, String userId)throws SQLException{
+		int result = userDao.Pay(price,userId);
+		if (result == 0)
+			throw new SQLException("결제 불가");
+	
+		
 	}
 
 }

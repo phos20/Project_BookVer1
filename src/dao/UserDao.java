@@ -33,4 +33,7 @@ public interface UserDao {
 	 * 회원정보탈퇴
 	 */
 	int deleteUserInfo(UserDto userDto) throws SQLException;
+	
+	/**포인트 차감*/
+	int Pay(int price, String userId)throws SQLException;
 }
