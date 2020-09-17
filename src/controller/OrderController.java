@@ -6,6 +6,7 @@ import dto.Orders;
 import service.OrderService;
 import view.EndView;
 import view.FailView;
+import view.MenuView;
 
 public class OrderController {
 	private static OrderService orderService = new OrderService();
@@ -15,6 +16,7 @@ public class OrderController {
 		try {
 			orderService.insertOrders(orders);
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 
@@ -24,6 +26,11 @@ public class OrderController {
 	public static void selectOrdersByUserId(String userId) {
 		try {
 			List<Orders> orderList = orderService.selectOrdersByUserId(userId);
+			int price = 0;
+			for(Orders order :orderList) {
+				price += order.getTotalAmount();
+			}
+		System.out.println(price);
 			EndView.printOrderByUserId(orderList);
 
 		} catch (Exception e) {
@@ -31,5 +38,20 @@ public class OrderController {
 		}
 
 	}
+	/**∞·¡¶*/
+	public static void Payment(String userId) {
+			
+		try {
+			List<Orders> list = orderService.Payment(userId);
+			MenuView.Payment(list);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+			
+	}
+		
+	
 
 }

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+
 import java.util.Map;
 import java.util.Scanner;
 
@@ -136,8 +137,6 @@ public class EndView {
 			System.out.println();
 	   }
 
-	   /** 책 장르 검색 */
-	   public static void printBookGenreList(BookDto books) {
-	      System.out.println(books);
-	   }
+	
+
 }
