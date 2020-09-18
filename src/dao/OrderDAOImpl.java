@@ -267,8 +267,6 @@ public class OrderDAOImpl implements OrderDAO {
 		return list;
 
 	}
-
-
 	
 	/**결제가격검색*/
 	@Override
@@ -294,21 +292,5 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		return list;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

@@ -111,8 +111,8 @@ public class BookDto {
 
 	@Override
 	public String toString() {
-		return booksId +" | " + booksName +" | " + booksWriter +" | " + booksPublisher + " | " + booksPubDate 
-				+ " | " + booksGenre + " | " + booksPrice + " | " + stock + " | " + regDate ; 
+		return booksId +"\t | " + booksName +"\t | " + booksWriter +"\t | " + booksPublisher + "\t | " + booksPubDate 
+				+ "\t | " + booksGenre + "\t | " + booksPrice + "\t | " + stock + "\t | " + regDate ; 
 	}
 
 	@Override
