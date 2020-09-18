@@ -69,7 +69,7 @@ DROP TABLE BOOKS;
 
 COMMIT;
 
-
+select * from orders;
 
 -- ORDERS TABLE 주문 -- 
 CREATE TABLE ORDERS(
@@ -87,6 +87,19 @@ INSERT INTO ORDERS VALUES(ORDER_ID_SEQ.NEXTVAL, SYSDATE, 'C', '서울', 20000);
 INSERT INTO ORDERS VALUES(ORDER_ID_SEQ.NEXTVAL, SYSDATE, 'P', '성남', 7000);
 
 select * from orders;
+
+commit;
+
+--결제 테이블 
+CREATE TABLE PAY(
+PAY_NO number(5) primary key,
+USER_ID VARCHAR2(30)NOT NULL REFERENCES userlist(USER_ID) ,
+PAY_DATE DATE DEFAULT SYSDATE,
+ADDRESS VARCHAR2(100) NOT NULL,
+TOTAL_AMOUNT NUMBER(20) NOT NULL 
+);
+
+CREATE SEQUENCE PAY_NO_SEQ NOCACHE;
 
 
 
@@ -156,6 +169,8 @@ select books_id, books_name, books_writer, books_price, quantity, cart.reg_date 
 
 
 
+
+
 SELECT*FROM USERLIST;
 SELECT*FROM USERGRADE;
 SELECT*FROM BOOKS;
@@ -163,6 +178,12 @@ SELECT*FROM ORDERS;
 SELECT*FROM ORDER_LINE;
 SELECT*FROM REGBOOK;
 SELECT*FROM CART;
+SELECT*FROM PAY;
+SELECT*FROM BOOKS;
+
+
+insert into pay values (PAY_NO_SEQ.NEXTVAL, 'C',SYSDATE,'11212',20000);
+delete userlist where user_pwd ='1111' and user_name ='이창균' and user_phone='010-1111-1111' ;
 
 COMMIT;
 rollback;
