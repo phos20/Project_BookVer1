@@ -652,5 +652,5 @@ public class MenuView {
 		AdminController.periodSales(startdate, enddate);
 	}
 	
-} // MainView ³¡ 
+} // MainView ³¡   
 
