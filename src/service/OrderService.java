@@ -25,12 +25,6 @@ public class OrderService {
 		return list;
 	}
 
-	/**결제*/
-	public List<Orders> Payment(String userId) throws SQLException{
-		List<Orders> list = orderDao.Payment(userId);
-		if(list.size()==0)
-			throw new SQLException("주문내역이 없습니다");
-		return list;
-	}
+	
 
 }

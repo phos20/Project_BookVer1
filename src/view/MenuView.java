@@ -144,7 +144,7 @@ public class MenuView {
 			OrderController.selectOrdersByUserId(userId);
 			break;
 		case 2:
-			OrderController.Payment(userId);
+			
 			break;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");

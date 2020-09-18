@@ -38,19 +38,7 @@ public class OrderController {
 		}
 
 	}
-	/**∞·¡¶*/
-	public static void Payment(String userId) {
-			
-		try {
-			List<Orders> list = orderService.Payment(userId);
-			MenuView.Payment(list);
-				
-		}catch (Exception e) {
-			e.printStackTrace();
-			FailView.errorMessage(e.getMessage());
-		}
-			
-	}
+	
 		
 	
 
