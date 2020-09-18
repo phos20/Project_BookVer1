@@ -113,7 +113,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				MenuView.booksearch(userId);
-				return;
+				break;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -206,17 +206,14 @@ public class MenuView {
        case 1:
           System.out.println("-------------------");
           BooksController.selectBook();
-          booksearch(userId);
           break;
        case 2:
           System.out.println("-------------------");
           searchName();
-          booksearch(userId);
           break;
        case 3:
           System.out.println("-------------------");
           searchGenre();
-          booksearch(userId);
           break;
        case 4:
           printUserMenu(userId);
@@ -277,7 +274,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				UserManagement(userId);
-				return;
+				break;
 			case 2:
 				manageBook();
 				break;
@@ -308,10 +305,10 @@ public class MenuView {
 			updateUserGrade();
 			break;
 		case 3 :
-			printUserMenu(userId);
+			printAdminMenu(userId);
 			break;
 		default:
-			System.out.println("관리자님 올바른 번호를 선택해 주세요");
+			System.out.println(userId + "관리자님 올바른 번호를 선택해 주세요");
 			break;
 		}
 		
@@ -322,6 +319,7 @@ public class MenuView {
 		String userId = sc.nextLine();
 		System.out.println("등급 : ");
 		String grade = sc.nextLine();
+		
 		
 		AdminController.updateUserGrade(grade,userId);
 		
@@ -338,10 +336,10 @@ public class MenuView {
 				return;	
 			case 2 : // 희망도서목록 
 				RegBookController.selectRegBook();
-				break;
+				return;
 			case 3: // 도서등록 
 				printInsertBook();
-				break;
+				return;
 			case 4: // 도서삭제
 				printDeleteBook();
 				break;
