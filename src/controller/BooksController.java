@@ -71,5 +71,16 @@ public class BooksController {
 	        FailView.errorMessage(e.getMessage());
 	     }
 	  }
+	  
+	  /**
+	   * 도서 코드로 도서 검색
+	   */
+	  public static void selectByBooksId(String booksId) {
+		  try{
+			  booksService.selectByBooksId(booksId);
+		  } catch (Exception e) {
+			  e.printStackTrace();
+		  }
+	  }
 
 }
