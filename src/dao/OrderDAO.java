@@ -11,7 +11,6 @@ public interface OrderDAO {
 	int orderInsert(Orders orders)throws SQLException;
 	/**주문내역확인*/
 	List<Orders> selectOrdersByUserId(String userId)throws SQLException;
-	/**결제*/
-	List<Orders> Payment(String userId)throws SQLException;
+	
 
 }
