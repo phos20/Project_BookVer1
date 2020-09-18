@@ -15,6 +15,7 @@ import user.UserSet;
 public class EndView {
 
 	public static void printBookList(List<BookDto> list) {
+		System.out.println("*** 도서 목록 ***");
 		System.out.println("-- 도서 " + list.size() + "권 --");
 		for (BookDto bookDto : list) {
 			System.out.println(bookDto);
@@ -126,6 +127,7 @@ public class EndView {
 
 	/** 희망도서목록조회 */
 	public static void printRegBookList(List<RegBookDto> list) {
+		System.out.println("*** 희망도서 목록 ***");
 		System.out.println("-- 도서 " + list.size() + "권 --");
 		for (RegBookDto regbookDto : list) {
 			System.out.println(regbookDto);
@@ -135,6 +137,7 @@ public class EndView {
 	
 	/** 책 제목 검색 */
 	   public static void printBookNameList(BookDto books) {
+		   System.out.println("*** " + books.getBooksName() + " 검색 결과 ***");
 	      System.out.println(books);
 	      
 	      
