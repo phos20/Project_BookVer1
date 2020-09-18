@@ -18,6 +18,7 @@ import dto.BookDto;
 import dto.CartDto;
 import dto.OrderLine;
 import dto.Orders;
+import dto.Pay;
 import dto.RegBookDto;
 import dto.UserDto;
 
@@ -149,7 +150,7 @@ public class MenuView {
 			OrderController.selectOrdersByUserId(userId);
 			break;
 		case 2:
-			OrderController.Payment(userId);
+			Payment(userId);
 			break;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
@@ -159,20 +160,22 @@ public class MenuView {
 	}
 	
 	/**결제*/
-	public static void Payment(List<Orders> list) {
-//		try {
-//			List<Orders> olist = orderDao.selectOrdersByUserId(list.get(0).getUserId());
-//			int price = 0;
-//			for(Orders order :olist) {
-//				price += order.getTotalAmount();
-//			}
-			int price = list.get(0).getTotalAmount();
+	public static void Payment(String userId) {
+		try {
+			List<Pay> paylist = orderDao.ordersPriceByUserId(userId);
+			int price = 0;
+			for(Pay pay :paylist) {
+				price += pay.getTotalAmount();
+				
+			}
+			
+			// price = list.get(0).getTotalAmount();
 			System.out.println("총금액 : "+price +" 결제 하시겠습니까?");
 			System.out.println(" | 1. 결제  | 2.취소  |");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1:
-					UserController.Pay(price,list.get(0).getUserId());
+					UserController.Pay(price,userId);
 					break;
 				case 2 :
 					break;
@@ -182,9 +185,9 @@ public class MenuView {
 			}
 			
 			
-//		}catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 	}

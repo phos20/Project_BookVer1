@@ -11,6 +11,7 @@ import java.util.List;
 import dto.BookDto;
 import dto.OrderLine;
 import dto.Orders;
+import dto.Pay;
 import dto.UserDto;
 import util.DbUtil;
 
@@ -223,7 +224,7 @@ public class OrderDAOImpl implements OrderDAO {
 		List<Orders> list = new ArrayList<>();
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from orders where user_id=?");
+			ps = con.prepareStatement("select * from orders where user_id=? order by order_date desc");
 			ps.setString(1, userId);
 			rs = ps.executeQuery();
 
@@ -265,6 +266,31 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		return list;
 
+	}
+
+	/**결제가격검색*/
+	@Override
+	public List<Pay> ordersPriceByUserId(String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from pay where USER_ID=?";
+		List<Pay> list = new ArrayList<Pay>();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps =con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(new Pay(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+			}
+			
+			
+		}finally {
+			DbUtil.close(null, ps, null);
+		}
+		return list;
 	}
 
 }
