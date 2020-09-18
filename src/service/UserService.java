@@ -72,7 +72,7 @@ public class UserService {
 		return userDto;
 	}
 	
-	/**포인트 차감*/
+	/**결제*/
 	public void Pay(int price, String userId)throws SQLException{
 		int result = userDao.Pay(price,userId);
 		if (result == 0)
