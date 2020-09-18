@@ -21,7 +21,19 @@ public class EndView {
 		}
 		System.out.println();
 	}
+	
+	public static void nonprintBookList(List<BookDto> list) {
+		System.out.println("-- 도서 " + list.size() + "권 --");
+		for (BookDto bookDto : list) {
+			System.out.println(bookDto);
+		}
+		System.out.println();
+		MenuView.nonmember();
+	}
 
+	
+	
+	
 	public static void printMessage(String message) {
 		System.out.println(message);
 	}
@@ -87,7 +99,7 @@ public class EndView {
 	/** 주문내역확인 */
 	public static void printOrderByUserId(List<Orders> orderList) {
 		for (Orders order : orderList) {
-			System.out.println(order.getOrderId() + " | " + order.getOrderDate() + " | " + order.getTotalAmount()
+			System.out.println("주문일 : "+ order.getOrderDate() + " | " + order.getTotalAmount()
 					+ " | " + order.getAddress());
 
 			for (OrderLine orderLine : order.getOrderLineList()) {

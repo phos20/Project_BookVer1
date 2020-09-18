@@ -59,7 +59,7 @@ public class MenuView {
 			break;
 		case 2:
 			BooksController.selectBook();
-			break;
+			break ;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
 			break;
@@ -108,7 +108,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				MenuView.booksearch(userId);
-				return;
+				break;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -201,23 +201,19 @@ public class MenuView {
        case 1:
           System.out.println("-------------------");
           BooksController.selectBook();
-          booksearch(userId);
           break;
        case 2:
           System.out.println("-------------------");
           searchName();
-          booksearch(userId);
           break;
        case 3:
           System.out.println("-------------------");
           searchGenre();
-          booksearch(userId);
           break;
        case 4:
-          printUserMenu(userId);
+          return;
        default:
           System.out.println("올바른 번호를 선택해 주세요");
-          booksearch(userId);
           break;
        }
     }
@@ -329,7 +325,7 @@ public class MenuView {
 		switch(num) {
 			case 1 : // 도서목록
 				BooksController.selectBook(); 
-				return;	
+				break;	
 			case 2 : // 희망도서목록 
 				RegBookController.selectRegBook();
 				break;
@@ -340,7 +336,7 @@ public class MenuView {
 				printDeleteBook();
 				break;
 			case 5:
-				System.exit(0);
+				return;
 		
 		}
 	}
@@ -445,9 +441,9 @@ public class MenuView {
 	}
 	public static void myPage(String userId) {
 		while(true) {
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-			System.out.println("★★★★★★★★★여기는 현재 마이페이지 입니다★★★★★★★★");
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("-------------------------------------");
+			System.out.println("--------  여기는 현재 마이페이지 입니다  ---------");
+			System.out.println("-------------------------------------");
 			System.out.println("| 1.내정보 수정하기    | 2. 내정보 탈퇴하기    | 3. 포인트 충전하기 |4. 뒤로가기    ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -487,6 +483,8 @@ public class MenuView {
 	 * case: 7-1 마이페이지(회원수정)
 	 * */ 
 	private static void updateUserInfo(String userId) {
+		System.out.println("   변경하실 정보를 입력하세요   ");
+		System.out.println("변경을 원치 않는경우 기존정보를 입력하세요");
 		System.out.println("회원 비밀번호: ");
 		String userPwd = sc.nextLine();
 		System.out.println("회원 이름: ");

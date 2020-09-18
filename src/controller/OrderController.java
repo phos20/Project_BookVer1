@@ -26,11 +26,6 @@ public class OrderController {
 	public static void selectOrdersByUserId(String userId) {
 		try {
 			List<Orders> orderList = orderService.selectOrdersByUserId(userId);
-//			int price = 0;
-//			for(Orders order :orderList) {
-//				price += order.getTotalAmount();
-//			}
-//		System.out.println(price);
 			EndView.printOrderByUserId(orderList);
 
 		} catch (Exception e) {

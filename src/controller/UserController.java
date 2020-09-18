@@ -17,6 +17,7 @@ public class UserController {
 		try {
 			userService.signup(userDto);
 			EndView.messagePrint("회원 가입을 축하드립니다");
+			MenuView.printUserMenu(userDto.getUserName());
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
