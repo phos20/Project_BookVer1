@@ -75,7 +75,7 @@ public class BooksService {
 	 */
 	public BookDto selectByBooksId(String booksId) throws Exception{
 		BookDto bookDto = booksDao.booksSelectBybooksId(booksId);
-		if(bookDto == null) throw new Exception("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
+		//if(bookDto == null) throw new Exception("해당하는 도서가 존재하지 않습니다. ");
 		return bookDto;
 	}
 }

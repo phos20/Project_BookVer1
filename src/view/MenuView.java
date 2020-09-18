@@ -336,9 +336,12 @@ public class MenuView {
 
 		CartDto cartDto = new CartDto(0, userId, booksId, quantity, null);
 
-		CartController.insertCart(cartDto);
+		if(BooksController.selectByBooksId(booksId)==null) {
+			System.out.println("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
+		} else CartController.insertCart(cartDto); 
 	}
-
+	
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 
 	/**

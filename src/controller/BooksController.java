@@ -75,12 +75,14 @@ public class BooksController {
 	  /**
 	   * 도서 코드로 도서 검색
 	   */
-	  public static void selectByBooksId(String booksId) {
+	  public static BookDto selectByBooksId(String booksId) {
+		  BookDto bookDto = null;
 		  try{
-			  booksService.selectByBooksId(booksId);
+			  bookDto = booksService.selectByBooksId(booksId);
 		  } catch (Exception e) {
 			  e.printStackTrace();
 		  }
+		  return bookDto;
 	  }
 
 }
