@@ -59,7 +59,7 @@ public class OrderLine {
 	
 	@Override
 	public String toString() {
-		return  orderLineId +" | "+ orderId +" | "+ booksId +" | "+ unitPrice +" | "+ qty +" | "+ amount ;
+		return  /*orderLineId +" | "+ orderId +" | "+*/ booksId +" | "+ unitPrice +" | "+ qty +" | "+ amount ;
 	}
 }
 
