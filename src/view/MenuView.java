@@ -84,6 +84,7 @@ public class MenuView {
 			System.exit(0);
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
+			nonmember();
 			break;
 		}
 	}
@@ -108,9 +109,6 @@ public class MenuView {
 		UserController.signUp(userDto);
 	}
 
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 
 	/** 유저 메뉴 */
 	public static void printUserMenu(String userId) {
@@ -125,7 +123,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				MenuView.booksearch(userId);
-				return;
+				break;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -154,7 +152,6 @@ public class MenuView {
 		}
 	}
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * case : 1 -도서검색 -
@@ -420,7 +417,7 @@ public class MenuView {
 				break;
 			case 2:
 				deleteUserInfo(userId);
-				break;
+				menu();
 			case 3:
 				userPoint(userId);
 				break;
@@ -483,18 +480,18 @@ public class MenuView {
 		// else System.out.println("다시 입력해주세요. ");
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * case : 8 -로그아웃-
 	 */
 	private static void logOut(String userId) {
 		System.out.println("로그아웃 되었습니다.");
+		UserDto userDto = new UserDto(null, null, null, null, 0, null, 0, null);
 		System.exit(0);
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/** 
 	 * 관리자메뉴 
@@ -509,8 +506,8 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				UserManagement();
-				return;
+				UserManagement(userId);
+				break;
 			case 2:
 				manageBook();
 				break;
@@ -518,6 +515,7 @@ public class MenuView {
 				SalesManagement(userId);
 				break;
 			case 4:
+				logOut(userId);
 				break;
 			default:
 				System.out.println(userId + "관리자님 올바른 번호를 선택해 주세요");
@@ -526,13 +524,13 @@ public class MenuView {
 		}
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	/**
 	 * case : 1 -회원관리-
 	 */
-	private static void UserManagement() {
+	private static void UserManagement(String userId) {
 		System.out.println("---- 회원 관리 메뉴 ----");
 		System.out.println("| 1. 회원 목록 보기  |  2.회원등업  | 3. 뒤로가기  |");
 
@@ -544,8 +542,9 @@ public class MenuView {
 		case 2:
 			updateUserGrade();
 			break;
-		case 3:
-			return;
+		case 3 :
+			printAdminMenu(userId);
+			break;
 		default:
 			System.out.println("관리자님 올바른 번호를 선택해 주세요");
 			break;
@@ -563,9 +562,6 @@ public class MenuView {
 
 		AdminController.updateUserGrade(grade, userId);
 	}
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	
 	/**
 	 * case : 2 -도서관리-

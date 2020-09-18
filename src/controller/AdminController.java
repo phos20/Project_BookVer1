@@ -7,6 +7,7 @@ import dto.UserDto;
 import service.AdminService;
 import view.AdminEndView;
 import view.FailView;
+import view.MenuView;
 
 public class AdminController {
 	static AdminService adminService = new AdminService();
