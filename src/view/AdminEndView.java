@@ -40,9 +40,9 @@ public class AdminEndView {
 	public static void selectUserList(List<UserDto> list) {
 		System.out.println("---------회원 목록 보기-------------");
 		for(UserDto userDto : list) {
-			System.out.println(list);
+			System.out.println(userDto);
 		}
-		
 	}
-
 }
+
+

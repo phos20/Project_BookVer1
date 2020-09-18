@@ -11,7 +11,7 @@ public class BooksController {
 	static BooksService booksService = new BooksService();
 	
 	/**
-	 * 도서목록 검색 
+	 * 도서 목록 검색 
 	 */
 	public static void selectBook() {
 		try {
@@ -51,6 +51,7 @@ public class BooksController {
 	}
 
 	/**책 제목 검색*/
+
 	  public static void selectByName(String booksName) {
 	     try {
 	        BookDto books = booksService.selectByName(booksName);
@@ -71,5 +72,7 @@ public class BooksController {
 	        FailView.errorMessage(e.getMessage());
 	     }
 	  }
+
+
 
 }
