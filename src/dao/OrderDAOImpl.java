@@ -267,7 +267,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return list;
 
 	}
-
+	
 	/**결제가격검색*/
 	@Override
 	public List<Pay> ordersPriceByUserId(String userId) throws SQLException {
@@ -292,5 +292,4 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		return list;
 	}
-
 }
