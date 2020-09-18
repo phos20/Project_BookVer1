@@ -1,11 +1,14 @@
 package dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import dto.Orders;
+import dto.Pay;
 import dto.UserDto;
 import util.DbUtil;
 
@@ -168,7 +171,7 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
-	/**포인트 차감*/
+	/**결제*/
 	@Override
 	public int Pay(int price, String userId) throws SQLException {
 		Connection con = null;
@@ -176,10 +179,24 @@ public class UserDaoImpl implements UserDao {
 		int result =0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("update orders set total_amount= ? where user_id =?");
+			con.getAutoCommit();
+			ps = con.prepareStatement("update userlist set USER_POINT= ? where user_id =?");
 			ps.setInt(1, Culculation(con,userId,price));
-			ps.setString(1, userId);
+			ps.setString(2, userId);
 			result = ps.executeUpdate();
+			
+			if(result ==0) {
+				con.rollback();
+				throw new SQLException("포인트 차감 오류");
+			}else {
+				int re = deletePay(con,userId);
+				if(re ==0) {
+					con.rollback();
+					throw new SQLException("결제목록 삭제 오류");
+				}
+			}
+			
+			con.commit();
 			
 		}finally {
 			DbUtil.close(con, ps, null);
@@ -192,24 +209,43 @@ public class UserDaoImpl implements UserDao {
 	private int Culculation(Connection con, String userId, int price)throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs =null;
+		UserDto userDto = null;
 		int result =0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select total_amount from orders where user_id =?");
+			ps = con.prepareStatement("select * from userlist where user_id =?");
 			ps.setString(1, userId);
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				result = (rs.getInt(1)-price);
-				
-				if(result <0) throw new SQLException("포인트가 부족합니다");
-						
+				userDto = new UserDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+						  rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8));
 			}
+			result = userDto.getUserPoint()-price;
+			if(result <0) throw new SQLException("포인트가 부족합니다");
 		}finally {
 			DbUtil.close(null, ps, rs);
 		}
 	
 		return result;
+	}
+	
+	/**결제시 결제테이블에 주문목록 삭제*/
+	private int deletePay(Connection con, String userId)throws SQLException {
+		PreparedStatement ps = null;
+		int result =0;
+		String sql = "delete pay where user_id=?";
+		try {
+			ps =con.prepareStatement(sql);
+			ps.setString(1, userId);
+			result = ps.executeUpdate();
+			
+			
+		}finally {
+			DbUtil.close(null, ps, null);
+		}
+		return result;
+		
 	}
 
 	
