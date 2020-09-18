@@ -139,18 +139,16 @@ public class EndView {
 	   public static void printBookNameList(BookDto books) {
 		   System.out.println("*** " + books.getBooksName() + " 검색 결과 ***");
 	      System.out.println(books);
-	      
-	      
 	   }
 
-	   /** 책 장르 검색 */
-	   public static void printBookGenreList(List<BookDto> list) {
-		   System.out.println("-- 도서 " + list.size() + "권 --");
-			for (BookDto bookDto : list) {
-				System.out.println(bookDto);
-			}
-			System.out.println();
-	   }
+	/** 책 장르 검색 */
+	public static void printBookGenreList(List<BookDto> list) {
+		System.out.println("-- 도서 " + list.size() + "권 --");
+		for (BookDto bookDto : list) {
+			System.out.println(bookDto);
+		}
+		System.out.println();
+	}
 
 	
 
