@@ -28,7 +28,7 @@ public class MenuView {
 	static OrderDAO orderDao = new OrderDAOImpl();
 
 	/** 
-	 * 초기 화면
+	 * 초기 화면  
 	 * */
 	public static void menu() {
 		System.out.println("--- Book Store에 오신걸 환영합니다. ---");
