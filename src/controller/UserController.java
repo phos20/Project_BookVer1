@@ -17,7 +17,7 @@ public class UserController {
 		try {
 			userService.signup(userDto);
 			EndView.messagePrint("회원 가입을 축하드립니다");
-			MenuView.printUserMenu(userDto.getUserName());
+			MenuView.printUserMenu(userDto.getUserId());
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -60,7 +60,6 @@ public class UserController {
 			} else {
 				System.out.println("접속을 환영합니다");
 				MenuView.printUserMenu(userId);
-				
 			}
 
 		} catch (Exception e) {
@@ -96,13 +95,12 @@ public class UserController {
 
 	}
 
-	/**결제*/
+	/**포인트차감*/
 	public static void Pay(int price, String userId) {
 		try {
 			userService.Pay(price,userId);
 			EndView.messagePrint("결제 성공");
 		} catch (Exception e) {
-			e.getStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}

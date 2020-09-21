@@ -70,18 +70,12 @@ public class MenuView {
 		switch (menu) {
 		case 1:
 			MenuView.signUp();
-			menu();
 			break;
 		case 2:
 			BooksController.selectBook();
-			nonmember();
-			break;
-		case 3:
-			menu();
 			break;
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
-			nonmember();
 			break;
 		}
 	}
@@ -106,6 +100,9 @@ public class MenuView {
 		UserController.signUp(userDto);
 	}
 
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 
 	/** 유저 메뉴 */
 	public static void printUserMenu(String userId) {
@@ -119,7 +116,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				MenuView.booksearch(userId);
-				break;
+				return;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -148,56 +145,66 @@ public class MenuView {
 		}
 	}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * case : 1 -도서검색 -
+	 */
+	public static void booksearch(String userId) {
+		System.out.println("---- 도서 검색 ----");
+		System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
+		System.out.println("-------------------");
+		System.out.print("선택> ");
 
-	 //case : 1 -도서검색-
-    public static void booksearch(String userId) {
-       System.out.println("---- 도서 검색 ----");
-       System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
-       System.out.println("-------------------");
-       System.out.print("선택> ");
-       
-       
-       int menu = Integer.parseInt(sc.nextLine());
-       switch (menu) {
-       case 1:
-          System.out.println("-------------------");
-          BooksController.selectBook();
-          break;
-       case 2:
-          System.out.println("-------------------");
-          searchName();
-          break;
-       case 3:
-          System.out.println("-------------------");
-          searchGenre();
-          break;
-       case 4:
-          printUserMenu(userId);
-       default:
-          System.out.println("올바른 번호를 선택해 주세요");
-          booksearch(userId);
-          break;
-       }
-    }
-		
-		//case : 1-2 -제목 검색-
-		   private static void searchName() {
-		      System.out.print("검색할 책 제목 : ");
-		      String booksName = sc.nextLine();
-		         
-		      BooksController.selectByName(booksName);
-		      
-		      }
-		      //case : 1-3 -장르 검색-
-		   private static void searchGenre() {
-		      System.out.print("검색할 책 장르 : ");
-		      String booksGenre = sc.nextLine();
-		      
-		      BooksController.selectByGenre(booksGenre);
-		      
-		   }
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			System.out.println("-------------------");
+			BooksController.selectBook();
+			booksearch(userId);
+			break;
+		case 2:
+			System.out.println("-------------------");
+			searchName();
+			booksearch(userId);
+			break;
+		case 3:
+			System.out.println("-------------------");
+			searchGenre();
+			booksearch(userId);
+			break;
+		case 4:
+			printUserMenu(userId);
+		default:
+			System.out.println("올바른 번호를 선택해 주세요");
+			booksearch(userId);
+			break;
+		}
+	}
 
+	/**
+	 * case : 1-2 -제목 검색-
+	 */
+	private static void searchName() {
+		System.out.print("검색할 책 제목 : ");
+		String booksName = sc.nextLine();
+
+		BooksController.selectByName(booksName);
+
+	}
+
+	/**
+	 * case : 1-3 -장르 검색-
+	 */
+	private static void searchGenre() {
+		System.out.print("검색할 책 장르 : ");
+		String booksGenre = sc.nextLine();
+
+		BooksController.selectByGenre(booksGenre);
+
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * case : 2 -주문-
@@ -455,6 +462,7 @@ public class MenuView {
 		// else System.out.println("다시 입력해주세요. ");
 	}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	/**
 	 * case : 8 -로그아웃-
@@ -463,6 +471,8 @@ public class MenuView {
 		System.out.println("로그아웃 되었습니다.");
 		System.exit(0);
 	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	
 	/** 
@@ -478,7 +488,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				UserManagement(userId);
+				UserManagement();
 				break;
 			case 2:
 				manageBook();
@@ -495,11 +505,13 @@ public class MenuView {
 		}
 	}
 	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	/**
 	 * case : 1 -회원관리-
 	 */
-	private static void UserManagement(String userId) {
+	private static void UserManagement() {
 		System.out.println("---- 회원 관리 메뉴 ----");
 		System.out.println("| 1. 회원 목록 보기  |  2.회원등업  | 3. 뒤로가기  |");
 
@@ -511,9 +523,8 @@ public class MenuView {
 		case 2:
 			updateUserGrade();
 			break;
-		case 3 :
-			printAdminMenu(userId);
-			break;
+		case 3:
+			return;
 		default:
 			System.out.println("관리자님 올바른 번호를 선택해 주세요");
 			break;
@@ -531,6 +542,9 @@ public class MenuView {
 
 		AdminController.updateUserGrade(grade, userId);
 	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	/**
 	 * case : 2 -도서관리-
@@ -638,4 +652,8 @@ public class MenuView {
 		AdminController.periodSales(startdate, enddate);
 	}
 	
-} // MainView 끝 
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+} // MainView 끝   
+

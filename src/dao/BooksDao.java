@@ -38,8 +38,6 @@ public interface BooksDao {
 	    * 신규 도서 삭제
 	    */
 	   int deleteBook(String bookId) throws SQLException;
-	
-	
 
 
 

@@ -7,7 +7,6 @@ import dto.UserDto;
 import service.AdminService;
 import view.AdminEndView;
 import view.FailView;
-import view.MenuView;
 
 public class AdminController {
 	static AdminService adminService = new AdminService();
@@ -18,6 +17,7 @@ public class AdminController {
 			List<Orders> list = adminService.todaySales();
 			AdminEndView.printSales(list);
 		} catch (Exception e) {
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -29,6 +29,7 @@ public class AdminController {
 			AdminEndView.totalSales(result);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -39,6 +40,7 @@ public class AdminController {
 			int result = adminService.periodSales(startdate, enddate);
 			AdminEndView.periodSales(startdate, enddate, result);
 		} catch (Exception e) {
+		//	e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}

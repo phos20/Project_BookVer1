@@ -22,7 +22,7 @@ public class AdminDaoImpl implements AdminDao {
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("Select*from orders where order_date = sysdate");
+			ps = con.prepareStatement("Select*from orders where TRUNC(order_date)= TRUNC(SYSDATE)");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -41,7 +41,7 @@ public class AdminDaoImpl implements AdminDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Orders or = null;
+		Orders orders = null;
 		int total = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -50,8 +50,8 @@ public class AdminDaoImpl implements AdminDao {
 
 			while (rs.next()) {
 
-				or = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
-				total += or.getTotalAmount();
+				orders = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+				total += orders.getTotalAmount();
 			}
 
 		} finally {
@@ -67,11 +67,11 @@ public class AdminDaoImpl implements AdminDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Orders or = null;
+		Orders orders = null;
 		int total = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("Select*from orders where order_date between ? and ?");
+			ps = con.prepareStatement("Select*from orders where TRUNC(order_date) between ? and ?");
 			ps.setString(1, startdate);
 			ps.setString(2, enddate);
 
@@ -79,8 +79,8 @@ public class AdminDaoImpl implements AdminDao {
 
 			while (rs.next()) {
 
-				or = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
-				total += or.getTotalAmount();
+				orders = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+				total += orders.getTotalAmount();
 			}
 
 		} finally {

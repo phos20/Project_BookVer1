@@ -16,9 +16,10 @@ public class AdminEndView {
 	public static void printSales(List<Orders> list) {
 		int total = 0;
 		System.out.println("--------------오늘의 매출표-------------");
-		for (Orders or : list) {
-			System.out.println(or);
-			total += or.getTotalAmount();
+		for (Orders orders : list) {
+			System.out.println(orders);
+			total += orders.getTotalAmount();
+			System.out.println(total);
 		}
 		System.out.println("오늘 총 매출 = " + total);
 		System.out.println();
@@ -33,7 +34,7 @@ public class AdminEndView {
 
 	/** 기간동안 매출액 */
 	public static void periodSales(String startdate, String enddate, int result) {
-		System.out.println(startdate + "~" + enddate + " 까지 총매출 =" + result);
+		System.out.println(startdate + "부터" + enddate + " 까지 총매출 =" + result);
 
 	}
 	/**회원 목록 보기*/
@@ -42,7 +43,7 @@ public class AdminEndView {
 		for(UserDto userDto : list) {
 			System.out.println(userDto);
 		}
+		
 	}
+
 }
-
-
