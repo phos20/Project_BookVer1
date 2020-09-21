@@ -51,11 +51,11 @@ public class UserController {
 			UserDto userDto = userService.Login(userId, userPwd);
 
 			if (userDto.getGrade().equals("관리자")) {
-				System.out.println("★★★★★★★★ 관리자님 어서오세요 ★★★★★★★★");
+				System.out.println("───────── 관리자님 어서오세요 ─────────");
 				System.out.println();
 				MenuView.printAdminMenu(userId);
 			} else {
-				System.out.println("★★★★★★★★ 접속을 환영합니다 ★★★★★★★★");
+				System.out.println("───────── 접속을 환영합니다 ─────────");
 				System.out.println();
 				MenuView.printUserMenu(userId);
 			}
