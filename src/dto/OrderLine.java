@@ -59,7 +59,7 @@ public class OrderLine {
 	
 	@Override
 	public String toString() {
-		return  /*orderLineId +" | "+ orderId +" | "+*/ booksId +" | "+ unitPrice +" | "+ qty +" | "+ amount ;
+		return  "책코드   "+booksId +" | 책수량   "+ qty +"권 | 총가격   "+ amount ;
 	}
 }
 

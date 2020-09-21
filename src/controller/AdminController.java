@@ -17,7 +17,6 @@ public class AdminController {
 			List<Orders> list = adminService.todaySales();
 			AdminEndView.printSales(list);
 		} catch (Exception e) {
-			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -29,7 +28,6 @@ public class AdminController {
 			AdminEndView.totalSales(result);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -40,31 +38,29 @@ public class AdminController {
 			int result = adminService.periodSales(startdate, enddate);
 			AdminEndView.periodSales(startdate, enddate, result);
 		} catch (Exception e) {
-		//	e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-	
-	/**회원 목록 보기*/
+
+	/** 회원 목록 보기 */
 	public static void selectUserList() {
 		try {
 			List<UserDto> list = adminService.selectUserList();
 			AdminEndView.selectUserList(list);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
 
-	/**회원 등업*/
-	public static void updateUserGrade(String grade,String userId) {
+	/** 회원 등업 */
+	public static void updateUserGrade(String grade, String userId) {
 		try {
-			int result = adminService.updateUserGrade(grade,userId);
+			int result = adminService.updateUserGrade(grade, userId);
 			AdminEndView.printMessage("등업이 처리 완료되었습니다.");
-		}catch (Exception e) {
+		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
-		
-	}
 
+	}
 
 }// class

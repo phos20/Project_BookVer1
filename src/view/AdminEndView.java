@@ -15,11 +15,10 @@ public class AdminEndView {
 	/** 일일 매출표 */
 	public static void printSales(List<Orders> list) {
 		int total = 0;
-		System.out.println("--------------오늘의 매출표-------------");
+		System.out.println("────────────── 오늘의 매출표 ──────────────");
 		for (Orders orders : list) {
 			System.out.println(orders);
 			total += orders.getTotalAmount();
-			System.out.println(total);
 		}
 		System.out.println("오늘 총 매출 = " + total);
 		System.out.println();
@@ -37,13 +36,14 @@ public class AdminEndView {
 		System.out.println(startdate + "부터" + enddate + " 까지 총매출 =" + result);
 
 	}
-	/**회원 목록 보기*/
+
+	/** 회원 목록 보기 */
 	public static void selectUserList(List<UserDto> list) {
-		System.out.println("---------회원 목록 보기-------------");
-		for(UserDto userDto : list) {
+		System.out.println("────────────── 회원 목록 보기 ──────────────");
+		for (UserDto userDto : list) {
 			System.out.println(userDto);
 		}
-		
+
 	}
 
 }

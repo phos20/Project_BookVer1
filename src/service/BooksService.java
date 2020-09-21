@@ -1,6 +1,6 @@
 package service;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 import dao.BooksDao;
@@ -44,14 +44,10 @@ public class BooksService {
 	/**
 	 * 도서코드로 도서 검색
 	 */
-//	public BookDto selectByBooksId(String booksId) throws Exception{
-//		BookDto bookDto = booksDao.booksSelectBybooksId(booksId);
-//		if(bookDto == null) throw new Exception("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
-		
 	public BookDto selectByBooksId(String bookId) throws Exception {
 		BookDto bookDto = booksDao.booksSelectBybooksId(bookId);
 		if (bookDto == null)
-			throw new Exception("해당하는 도서가 존재하지 않습니다.");
+			throw new Exception("도서코드에 해당하는 도서가 존재하지 않습니다.");
 		return bookDto;
 	}
 
@@ -61,7 +57,7 @@ public class BooksService {
 	public BookDto selectByName(String booksName) throws Exception {
 		BookDto books = booksDao.SelectByName(booksName);
 		if (books == null)
-			throw new Exception("해당하는 제목이 존재하지 않습니다.");
+			throw new Exception("해당하는 제목의 도서가 존재하지 않습니다.");
 		return books;
 	}
 
@@ -71,7 +67,7 @@ public class BooksService {
 	public List<BookDto> selectByGenre(String booksGenre) throws Exception {
 		List<BookDto> list = booksDao.SelectByGenre(booksGenre);
 		if (list == null)
-			throw new Exception("해당하는 장르가 존재하지 않습니다.");
+			throw new Exception("해당하는 장르의 도서가 존재하지 않습니다.");
 		return list;
 	}
 }

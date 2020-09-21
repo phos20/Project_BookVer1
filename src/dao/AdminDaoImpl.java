@@ -88,53 +88,52 @@ public class AdminDaoImpl implements AdminDao {
 		}
 		return total;
 	}
-	
-	/** 회원 목록 보기*/
+
+	/** 회원 목록 보기 */
 	@Override
 	public List<UserDto> selectUserList() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<UserDto> list = new ArrayList<>(); 
-		
+		List<UserDto> list = new ArrayList<>();
+
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from userlist");
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				UserDto userDto = new UserDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						                      rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8));
-					list.add(userDto);
+						rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getString(8));
+				list.add(userDto);
 			}
-			
-		}finally {
-			
+
+		} finally {
+
 			DbUtil.close(con, ps, rs);
 		}
-		
+
 		return list;
 	}
 
-	/** 회원 등업*/
+	/** 회원 등업 */
 	@Override
 	public int updateUserGrade(String grade, String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "update userlist set grade = ? where user_id = ?";
-		
+
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, grade);
 			ps.setString(2, userId);
-			
+
 			result = ps.executeUpdate();
-			
-			
-		}finally {
+
+		} finally {
 			DbUtil.close(con, ps, null);
 		}
 		return result;

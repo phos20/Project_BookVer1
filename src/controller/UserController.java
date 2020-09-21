@@ -40,13 +40,9 @@ public class UserController {
 			userService.deleteUserInfo(userDto);
 			EndView.messagePrint("탈퇴되었습니다.");
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-
-
-
 
 	/** 로그인 */
 
@@ -77,11 +73,11 @@ public class UserController {
 		try {
 			point = userService.getUserPoint(userId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 		return point;
 	}
-	
+
 	/**
 	 * 포인트 등록
 	 */
@@ -90,24 +86,20 @@ public class UserController {
 			int result = userService.userPoint(userId, point);
 			EndView.printMessage("포인트 적립 완료");
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
+
 		}
 
 	}
 
-	/**포인트차감*/
+	/** 포인트차감 */
 	public static void Pay(int price, String userId) {
 		try {
-			userService.Pay(price,userId);
+			userService.Pay(price, userId);
 			EndView.messagePrint("결제 성공");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-
-
-
 
 }

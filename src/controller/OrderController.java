@@ -16,7 +16,6 @@ public class OrderController {
 		try {
 			orderService.insertOrders(orders);
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 
@@ -27,10 +26,10 @@ public class OrderController {
 		try {
 			List<Orders> orderList = orderService.selectOrdersByUserId(userId);
 			int price = 0;
-			for(Orders order :orderList) {
+			for (Orders order : orderList) {
 				price += order.getTotalAmount();
 			}
-		System.out.println(price);
+			System.out.println(price);
 			EndView.printOrderByUserId(orderList);
 
 		} catch (Exception e) {
@@ -38,8 +37,5 @@ public class OrderController {
 		}
 
 	}
-	
-		
-	
 
 }

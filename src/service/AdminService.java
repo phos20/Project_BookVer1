@@ -39,7 +39,7 @@ public class AdminService {
 	public List<UserDto> selectUserList() throws Exception{
 		List<UserDto> list = adminDao.selectUserList();
 		if(list.size() == 0)
-			throw new SQLException("회원 목록이 없습니다");
+			throw new SQLException("가입된 회원 목록이 없습니다");
 		return list;
 	}
 

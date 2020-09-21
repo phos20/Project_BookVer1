@@ -53,8 +53,8 @@ public class OrderDAOImpl implements OrderDAO {
 				// 주문수량만큼 재고량 감소하기
 				decrementStock(con, orders.getOrderLineList());
 				con.commit();
-				//주문시 결제테이블 추가
-				Payment(con,orders,totalAmountByGrade(con,orders));
+				// 주문시 결제테이블 추가
+				Payment(con, orders, totalAmountByGrade(con, orders));
 			}
 
 		} finally {
@@ -64,26 +64,26 @@ public class OrderDAOImpl implements OrderDAO {
 
 		return result;
 	}
-	
-	/**주문시결제테이블에 목록 추가*/
-	private int Payment(Connection con, Orders orders, int price)throws SQLException {
+
+	/** 주문시결제테이블에 목록 추가 */
+	private int Payment(Connection con, Orders orders, int price) throws SQLException {
 		PreparedStatement ps = null;
 		int result;
 		String sql = "insert into pay values(PAY_NO_SEQ.nextval,?,SYSDATE,?,?)";
 		try {
-			ps=con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 			ps.setString(1, orders.getUserId());
 			ps.setString(2, orders.getAddress());
 			ps.setInt(3, price);
-			result= ps.executeUpdate();
-			if(result ==0) throw new SQLException("결제목록에 주문목록이 추가되지않았습니다");
-			
-		}finally {
+			result = ps.executeUpdate();
+			if (result == 0)
+				throw new SQLException("결제목록에 주문목록이 추가되지않았습니다");
+
+		} finally {
 			DbUtil.close(null, ps, null);
 		}
 		return result;
-		
-		
+
 	}
 
 	// ps.setInt(3)
@@ -267,8 +267,8 @@ public class OrderDAOImpl implements OrderDAO {
 		return list;
 
 	}
-	
-	/**결제가격검색*/
+
+	/** 결제가격검색 */
 	@Override
 	public List<Pay> ordersPriceByUserId(String userId) throws SQLException {
 		Connection con = null;
@@ -276,21 +276,20 @@ public class OrderDAOImpl implements OrderDAO {
 		ResultSet rs = null;
 		String sql = "select * from pay where USER_ID=?";
 		List<Pay> list = new ArrayList<Pay>();
-		
+
 		try {
 			con = DbUtil.getConnection();
-			ps =con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 			ps.setString(1, userId);
 			rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				list.add(new Pay(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
 			}
-			
-			
-		}finally {
+
+		} finally {
 			DbUtil.close(null, ps, null);
 		}
 		return list;
 	}
-	
+
 }

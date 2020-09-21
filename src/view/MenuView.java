@@ -31,10 +31,11 @@ public class MenuView {
 	 * ÃÊ±â È­¸é
 	 * */
 	public static void menu() {
-		System.out.println(" ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ");
-		System.out.println(" ¡Ú¡Ú¡Ú¡Ú¡Ú Book Store¿¡ ¿À½Å°É È¯¿µÇÕ´Ï´Ù.¡Ú¡Ú¡Ú¡Ú¡Ú ");
-		System.out.println(" ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ");
-		System.out.println("      |    1.È¸¿ø    |   2.ºñÈ¸¿ø   |");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ");
+		System.out.println("      Book Store¿¡ ¿À½Å°É È¯¿µÇÕ´Ï´Ù.     ");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("                     ¨ç  È¸¿ø           ¨è ºñÈ¸¿ø   ");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		System.out.println();
@@ -68,8 +69,11 @@ public class MenuView {
 	 * case : 2 -ºñÈ¸¿ø-
 	 */
 	public static void nonmember() {
-		System.out.println(" ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ºñÈ¸¿ø ¸Þ´º ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ");
-		System.out.println(" |  1.È¸¿ø°¡ÀÔ  |  2.µµ¼­ ¸ñ·Ï º¸±â  |  3. Á¾·á");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ºñÈ¸¿ø ¸Þ´º ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ");
+		System.out.println("                ¹æ¹®ÀÚ´Ô ¸Þ´º¸¦ ¼±ÅÃÇÏ¼¼¿ä");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("         ¨ç È¸¿ø°¡ÀÔ  ¨è µµ¼­ ¸ñ·Ï º¸±â  ¨é Á¾·á");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		System.out.println();
@@ -78,7 +82,7 @@ public class MenuView {
 			MenuView.signUp();
 			break;
 		case 2:
-			BooksController.selectBook();
+			BooksController.selectBooks();
 			break;
 		case 3:
 			System.exit(0);
@@ -116,16 +120,18 @@ public class MenuView {
 	public static void printUserMenu(String userId) {
 
 		while (true) {
-			System.out.println(" ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú User Menu ¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú ");
-			System.out.println("--------------- " + userId + " ´Ô Á¢¼ÓÁß  --------------");
-			System.out.println("| 1.µµ¼­°Ë»ö        | 2.ÁÖ¹®     | 3.ÁÖ¹®³»¿ªÈ®ÀÎ &°áÁ¦  | 4.Èñ¸Áµµ¼­µî·Ï&º¸±â | ");
-			System.out.println("| 5.Àå¹Ù±¸´Ï´ã±â  | 6.Àå¹Ù±¸´Ïº¸±â  |  7.¸¶ÀÌÆäÀÌÁö   |  8.·Î±×¾Æ¿ô     |");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ User Menu ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ");
+			System.out.println("                            Á¢¼ÓÀÚ : " + userId + " ´Ô  ¸Þ´º¸¦ ¼±ÅÃÇÏ¼¼¿ä ");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ");
+			System.out.println(" ¨çµµ¼­°Ë»ö         ¨èÁÖ¹®               ¨éÁÖ¹®È®ÀÎ &°áÁ¦     ¨êÈñ¸Áµµ¼­µî·Ï&º¸±â  ");
+			System.out.println(" ¨ëÀå¹Ù±¸´Ï´ã±â   ¨ìÀå¹Ù±¸´Ïº¸±â   ¨í¸¶ÀÌÆäÀÌÁö           ¨î·Î±×¾Æ¿ô     ");
+			System.out.println();
 			System.out.print("¼±ÅÃ> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
 				MenuView.booksearch(userId);
-				return;
+				break;
 			case 2:
 				printInputOrder(userId);
 				break;
@@ -160,30 +166,30 @@ public class MenuView {
 	 * case : 1 -µµ¼­°Ë»ö -
 	 */
 	public static void booksearch(String userId) {
-		System.out.println("---- µµ¼­ °Ë»ö ----");
-		System.out.println(" | 1.ÀüÃ¼ °Ë»ö | 2.Á¦¸ñ °Ë»ö | 3.Àå¸£ °Ë»ö | 4.µÚ·Î°¡±â |");
-		System.out.println("-------------------");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ µµ¼­ °Ë»ö  ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("                    Á¢¼ÓÀÚ : " + userId + " ´Ô  ¸Þ´º¸¦ ¼±ÅÃÇÏ¼¼¿ä ");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ");
+		System.out.println("     ¨ç ÀüÃ¼ °Ë»ö   ¨è Á¦¸ñ °Ë»ö  ¨é Àå¸£ °Ë»ö  ¨ê µÚ·Î°¡±â ");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
-			System.out.println("-------------------");
 			BooksController.selectBook();
 			booksearch(userId);
 			break;
 		case 2:
-			System.out.println("-------------------");
 			searchName();
 			booksearch(userId);
 			break;
 		case 3:
-			System.out.println("-------------------");
 			searchGenre();
 			booksearch(userId);
 			break;
 		case 4:
 			printUserMenu(userId);
+			break;
 		default:
 			System.out.println("¿Ã¹Ù¸¥ ¹øÈ£¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä");
 			booksearch(userId);
@@ -242,7 +248,8 @@ public class MenuView {
 	 * case : 3 - ÁÖ¹®³»¿ªÈ®ÀÎ& °áÁ¦
 	 */
 	private static void selectOrderAndPay(String userId) {
-		System.out.println("| 1.ÁÖ¹®³»¿ª È®ÀÎ  | 2.°áÁ¦  |");
+		System.out.println(" ¨ç ÁÖ¹®³»¿ª È®ÀÎ     ¨è°áÁ¦  ");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -272,7 +279,8 @@ public class MenuView {
 
 			// price = list.get(0).getTotalAmount();
 			System.out.println("ÃÑ±Ý¾× : " + price + " °áÁ¦ ÇÏ½Ã°Ú½À´Ï±î?");
-			System.out.println(" | 1. °áÁ¦  | 2.Ãë¼Ò  |");
+			System.out.println("         ¨ç  °áÁ¦         ¨è Ãë¼Ò  ");
+			System.out.println();
 			System.out.print("¼±ÅÃ> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -297,9 +305,8 @@ public class MenuView {
 	 */
 	public static void wishBook(String userId) {
 		while (true) {
-			System.out.println("-----------------  User Menu -------------------");
-			System.out.println("--------------- " + userId + " ´Ô Á¢¼ÓÀ» È¯¿µÇÕ´Ï´Ù  --------------");
-			System.out.println("| 1. Èñ¸Áµµ¼­µî·Ï		| 2. Èñ¸Áµµ¼­¸ñ·ÏÁ¶È¸		| 3. ³ª°¡±â		");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ Èñ¸Áµµ¼­ µî·Ï&Á¶È¸  ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+			System.out.println("         ¨ç Èñ¸Áµµ¼­µî·Ï    ¨è Èñ¸Áµµ¼­¸ñ·ÏÁ¶È¸   ¨é ³ª°¡±â");
 			System.out.print("¼±ÅÃ> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -341,7 +348,7 @@ public class MenuView {
 	 * case : 5 -Àå¹Ù±¸´Ï ´ã±â-
 	 */
 	public static void putCart(String userId) {
-		System.out.println("-- Àå¹Ù±¸´Ï ´ã±â --");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ Àå¹Ù±¸´Ï ´ã±â ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		System.out.print("µµ¼­ÄÚµå: ");
 		String booksId = sc.nextLine();
 		System.out.print("¼ö·®: ");
@@ -362,7 +369,7 @@ public class MenuView {
 	 * case : 6 -Àå¹Ù±¸´Ï º¸±â-
 	 */
 	public static void showCart(String userId) {
-		System.out.println("*** Àå¹Ù±¸´Ï ¸ñ·Ï ***");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ Àå¹Ù±¸´Ï ¸ñ·Ï ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
 		Map<BookDto, Integer> map = CartController.selectCart(userId);
 		Set<BookDto> set = map.keySet(); // Àå¹Ù±¸´Ï¿¡ ´ã±ä Ã¥Á¤º¸ ²¨³»±â
 
@@ -371,7 +378,7 @@ public class MenuView {
 		// }
 		// else {
 		System.out.println();
-		System.out.println("1. ÁÖ¹®ÇÏ±â 2. »èÁ¦ÇÏ±â 3. ³ª°¡±â");
+		System.out.println("¨ç ÁÖ¹®ÇÏ±â    ¨è »èÁ¦ÇÏ±â    ¨é³ª°¡±â");
 		
 		int num = Integer.parseInt(sc.nextLine());
 
@@ -407,10 +414,12 @@ public class MenuView {
 	 */
 	public static void myPage(String userId) {
 		while (true) {
-			System.out.println("¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú");
-			System.out.println("¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¿©±â´Â ÇöÀç ¸¶ÀÌÆäÀÌÁö ÀÔ´Ï´Ù¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú");
-			System.out.println("¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú¡Ú");
-			System.out.println("| 1.³»Á¤º¸ ¼öÁ¤ÇÏ±â    | 2. ³»Á¤º¸ Å»ÅðÇÏ±â    | 3. Æ÷ÀÎÆ® ÃæÀüÇÏ±â |4. µÚ·Î°¡±â    ");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+			System.out.println("               ¿©±â´Â ÇöÀç ¸¶ÀÌÆäÀÌÁö ÀÔ´Ï´Ù ");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+			System.out.println("  ¨ç³»Á¤º¸ ¼öÁ¤ÇÏ±â    ¨è ³»Á¤º¸ Å»ÅðÇÏ±â    ¨é Æ÷ÀÎÆ® ÃæÀüÇÏ±â  ¨ê µÚ·Î°¡±â    ");
+			System.out.println();
+			System.out.print("¼±ÅÃ> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -467,7 +476,8 @@ public class MenuView {
 	public static void userPoint(String userId) {
 
 		System.out.println("ÇöÀç Æ÷ÀÎÆ®: " + UserController.selectPoint(userId));
-		System.out.println("1. Æ÷ÀÎÆ® µî·ÏÇÏ±â  2. µÚ·Î ");
+		System.out.println(" ¨ç Æ÷ÀÎÆ® µî·ÏÇÏ±â    ¨è µÚ·Î ");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int num = Integer.parseInt(sc.nextLine());
 		if (num == 1) {
@@ -500,10 +510,12 @@ public class MenuView {
 	public static void printAdminMenu(String userId) {
 
 		while (true) {
-			System.out.println("--------------  Admin Menu --------------");
-			System.out.println("------------- °ü¸®ÀÚ " + userId + "´Ô ¸ðµå    -------------");
-			System.out.println("| 1.È¸¿ø°ü¸®   | 2.µµ¼­°ü¸®  | 3.¸ÅÃâ°ü¸®  | 4.·Î±×¾Æ¿ô  |");
-
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡  Admin Menu ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+			System.out.println("                                      °ü¸®ÀÚ " + userId + "´Ô ¸ðµå   ");
+			System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+			System.out.println("  ¨çÈ¸¿ø°ü¸®   ¨èµµ¼­°ü¸®   ¨é¸ÅÃâ°ü¸®   ¨ê·Î±×¾Æ¿ô  ");
+			System.out.println();
+			System.out.print("¼±ÅÃ> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -532,8 +544,8 @@ public class MenuView {
 	 * case : 1 -È¸¿ø°ü¸®-
 	 */
 	private static void UserManagement() {
-		System.out.println("---- È¸¿ø °ü¸® ¸Þ´º ----");
-		System.out.println("| 1. È¸¿ø ¸ñ·Ï º¸±â  |  2.È¸¿øµî¾÷  | 3. µÚ·Î°¡±â  |");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ È¸¿ø °ü¸® ¸Þ´º ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("    ¨ç È¸¿ø ¸ñ·Ï º¸±â   ¨è È¸¿øµî¾÷   ¨é µÚ·Î°¡±â ");
 
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -570,7 +582,8 @@ public class MenuView {
 	 * case : 2 -µµ¼­°ü¸®-
 	 */
 	public static void manageBook() {
-		System.out.println("1. µµ¼­¸ñ·Ï º¸±â 2. Èñ¸Áµµ¼­¸ñ·Ï º¸±â 3. µµ¼­ µî·Ï 4. µµ¼­ »èÁ¦ 5. ³ª°¡±â");
+		System.out.println(" ¨ç µµ¼­¸ñ·Ï º¸±â   ¨èÈñ¸Áµµ¼­¸ñ·Ï º¸±â   ¨éµµ¼­ µî·Ï   ¨êµµ¼­ »èÁ¦   ¨ë³ª°¡±â");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int num = Integer.parseInt(sc.nextLine());
 
@@ -588,7 +601,7 @@ public class MenuView {
 			printDeleteBook();
 			break;
 		case 5:
-			System.exit(0);
+			return;
 
 		}
 	}
@@ -639,8 +652,9 @@ public class MenuView {
 	 * case : 3 -¸ÅÃâ°ü¸®-
 	 */
 	private static void SalesManagement(String userId) {
-		System.out.println("---- ¸ÅÃâ°ü¸® ¸Þ´º ----");
-		System.out.println(" | 1.¿À´ÃÀÇ ¸ÅÃâ | 2.±â°£º° ¸ÅÃâ | 3.ÃÑ ¸ÅÃâ   | 4.µÚ·Î°¡±â ");
+		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡ ¸ÅÃâ°ü¸® ¸Þ´º ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("    ¨ç ¿À´ÃÀÇ ¸ÅÃâ   ¨è ±â°£º° ¸ÅÃâ   ¨é ÃÑ ¸ÅÃâ   ¨ê µÚ·Î°¡±â ");
+		System.out.println();
 		System.out.print("¼±ÅÃ> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
