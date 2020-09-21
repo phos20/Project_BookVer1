@@ -23,11 +23,6 @@ public interface BooksDao {
 	    * 전체 검색
 	    */
 	   List<BookDto> selectBook() throws SQLException;
-
-	   /**
-	    * 도서 제목 검사
-	    */
-	   int check(BookDto bookDto) throws SQLException;
 	   
 	   /**
 	    * 신규 도서 등록

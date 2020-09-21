@@ -29,9 +29,9 @@ public class BooksController {
 	public static void insertBook(BookDto bookDto) {
 		try {
 			int result = booksService.insertBook(bookDto);
-			if(result!=0) System.out.println("등록 완료");
+			EndView.messagePrint("등록 완료");
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -42,7 +42,7 @@ public class BooksController {
 	public static void deleteBook(String bookId) {
 		try {
 			int result = booksService.deleteBook(bookId);
-			if(result!=0) System.out.println("삭제 완료");
+			EndView.messagePrint("삭제 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
@@ -70,6 +70,19 @@ public class BooksController {
 	        e.printStackTrace();
 	        FailView.errorMessage(e.getMessage());
 	     }
+	  }
+	  
+	  /**
+	   * 도서 코드로 도서 검색
+	   */
+	  public static BookDto selectByBooksId(String booksId) {
+		  BookDto bookDto = null;
+		  try{
+			  bookDto = booksService.selectByBooksId(booksId);
+		  } catch (Exception e) {
+			  e.printStackTrace();
+		  }
+		  return bookDto;
 	  }
 
 }

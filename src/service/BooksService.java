@@ -24,7 +24,7 @@ public class BooksService {
 	 * 도서 등록
 	 */
 	public int insertBook(BookDto bookDto) throws Exception {
-		int result = booksDao.check(bookDto);
+		int result = booksDao.insertBook(bookDto);
 		if (result == 0)
 			throw new Exception("등록되지 않았습니다.");
 		return result;
@@ -40,10 +40,15 @@ public class BooksService {
 		return result;
 	}
 
+
 	/**
 	 * 도서코드로 도서 검색
 	 */
-	public BookDto selectByBookId(String bookId) throws Exception {
+//	public BookDto selectByBooksId(String booksId) throws Exception{
+//		BookDto bookDto = booksDao.booksSelectBybooksId(booksId);
+//		if(bookDto == null) throw new Exception("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
+		
+	public BookDto selectByBooksId(String bookId) throws Exception {
 		BookDto bookDto = booksDao.booksSelectBybooksId(bookId);
 		if (bookDto == null)
 			throw new Exception("해당하는 도서가 존재하지 않습니다.");
@@ -68,14 +73,5 @@ public class BooksService {
 		if (list == null)
 			throw new Exception("해당하는 장르가 존재하지 않습니다.");
 		return list;
-	}
-	
-	/**
-	 * 도서 코드로 도서 검색
-	 */
-	public BookDto selectByBooksId(String booksId) throws Exception{
-		BookDto bookDto = booksDao.booksSelectBybooksId(booksId);
-		if(bookDto == null) throw new Exception("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
-		return bookDto;
 	}
 }

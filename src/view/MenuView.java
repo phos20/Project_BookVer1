@@ -31,9 +31,13 @@ public class MenuView {
 	 * 초기 화면
 	 * */
 	public static void menu() {
-		System.out.println("--- Book Store에 오신걸 환영합니다. ---");
-		System.out.println("      | 1.회원   | 2.비회원    |");
+		System.out.println(" ★★★★★★★★★★★★★★★★★★★★★★★★★★ ");
+		System.out.println(" ★★★★★ Book Store에 오신걸 환영합니다.★★★★★ ");
+		System.out.println(" ★★★★★★★★★★★★★★★★★★★★★★★★★★ ");
+		System.out.println("      |    1.회원    |   2.비회원   |");
+		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
+		System.out.println();
 		switch (menu) {
 		case 1:
 			Login();
@@ -51,10 +55,11 @@ public class MenuView {
 	 * 로그인
 	 */
 	private static void Login() {
-		System.out.println("ID = ");
+		System.out.print("ID = ");
 		String userId = sc.nextLine();
-		System.out.println("PWD = ");
+		System.out.print("PWD = ");
 		String userPwd = sc.nextLine();
+		System.out.println();
 
 		UserController.Login(userId, userPwd);
 	}
@@ -63,10 +68,11 @@ public class MenuView {
 	 * case : 2 -비회원-
 	 */
 	public static void nonmember() {
-		System.out.println("---- 비회원 메뉴 ----");
-		System.out.println(" | 1.회원가입 | 2.도서 목록 보기 | ");
-
+		System.out.println(" ★★★★★★★★ 비회원 메뉴 ★★★★★★★★ ");
+		System.out.println(" |  1.회원가입  |  2.도서 목록 보기  |  3. 종료");
+		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
+		System.out.println();
 		switch (menu) {
 		case 1:
 			MenuView.signUp();
@@ -74,6 +80,8 @@ public class MenuView {
 		case 2:
 			BooksController.selectBook();
 			break;
+		case 3:
+			System.exit(0);
 		default:
 			System.out.println("올바른 번호를 선택해 주세요");
 			break;
@@ -84,16 +92,16 @@ public class MenuView {
 	 * case : 2-1 -회원 가입-
 	 */
 	private static void signUp() {
-		System.out.println("가입 ID : ");
+		System.out.print("가입 ID : ");
 		String userId = sc.nextLine();
 
-		System.out.println("가입 PW : ");
+		System.out.print("가입 PW : ");
 		String userPwd = sc.nextLine();
 
-		System.out.println("가입 이름 : ");
+		System.out.print("가입 이름 : ");
 		String userName = sc.nextLine();
 
-		System.out.println("가입 폰번호 : ");
+		System.out.print("가입 폰번호 : ");
 		String userPhone = sc.nextLine();
 
 		UserDto userDto = new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
@@ -108,10 +116,11 @@ public class MenuView {
 	public static void printUserMenu(String userId) {
 
 		while (true) {
-			System.out.println("-----------------  User Menu -------------------");
-			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
+			System.out.println(" ★★★★★★★★ User Menu ★★★★★★★★ ");
+			System.out.println("--------------- " + userId + " 님 접속중  --------------");
 			System.out.println("| 1.도서검색        | 2.주문     | 3.주문내역확인 &결제  | 4.희망도서등록&보기 | ");
 			System.out.println("| 5.장바구니담기  | 6.장바구니보기  |  7.마이페이지   |  8.로그아웃     |");
+			System.out.print("선택> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -182,13 +191,14 @@ public class MenuView {
 		}
 	}
 
+
 	/**
 	 * case : 1-2 -제목 검색-
 	 */
 	private static void searchName() {
 		System.out.print("검색할 책 제목 : ");
 		String booksName = sc.nextLine();
-
+		System.out.println();
 		BooksController.selectByName(booksName);
 
 	}
@@ -199,7 +209,7 @@ public class MenuView {
 	private static void searchGenre() {
 		System.out.print("검색할 책 장르 : ");
 		String booksGenre = sc.nextLine();
-
+		System.out.println();
 		BooksController.selectByGenre(booksGenre);
 
 	}
@@ -233,6 +243,7 @@ public class MenuView {
 	 */
 	private static void selectOrderAndPay(String userId) {
 		System.out.println("| 1.주문내역 확인  | 2.결제  |");
+		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
@@ -262,6 +273,7 @@ public class MenuView {
 			// price = list.get(0).getTotalAmount();
 			System.out.println("총금액 : " + price + " 결제 하시겠습니까?");
 			System.out.println(" | 1. 결제  | 2.취소  |");
+			System.out.print("선택> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -288,6 +300,7 @@ public class MenuView {
 			System.out.println("-----------------  User Menu -------------------");
 			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
 			System.out.println("| 1. 희망도서등록		| 2. 희망도서목록조회		| 3. 나가기		");
+			System.out.print("선택> ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -311,11 +324,11 @@ public class MenuView {
 	 */
 	public static void insertRegBook(String userId) {
 
-		System.out.println("희망도서 제목: ");
+		System.out.print("희망도서 제목: ");
 		String regName = sc.nextLine();
-		System.out.println("희망도서 저자: ");
+		System.out.print("희망도서 저자: ");
 		String regWriter = sc.nextLine();
-		System.out.println("희망도서 출판사: ");
+		System.out.print("희망도서 출판사: ");
 		String regPublisher = sc.nextLine();
 
 		RegBookDto wish = new RegBookDto(0, regName, regWriter, regPublisher, userId, null);
@@ -333,12 +346,16 @@ public class MenuView {
 		String booksId = sc.nextLine();
 		System.out.print("수량: ");
 		int quantity = Integer.parseInt(sc.nextLine());
+		System.out.println();
 
 		CartDto cartDto = new CartDto(0, userId, booksId, quantity, null);
 
-		CartController.insertCart(cartDto);
+		if(BooksController.selectByBooksId(booksId)==null) {
+			System.out.println("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
+		} else CartController.insertCart(cartDto); 
 	}
-
+	
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 
 	/**
@@ -353,8 +370,9 @@ public class MenuView {
 		// System.out.println("장바구니가 비어있습니다.");
 		// }
 		// else {
-
+		System.out.println();
 		System.out.println("1. 주문하기 2. 삭제하기 3. 나가기");
+		
 		int num = Integer.parseInt(sc.nextLine());
 
 		if (num == 1) {
@@ -400,7 +418,7 @@ public class MenuView {
 				break;
 			case 2:
 				deleteUserInfo(userId);
-				break;
+				menu();
 			case 3:
 				userPoint(userId);
 				break;
@@ -417,11 +435,11 @@ public class MenuView {
 	 * case: 7-1 -회원수정-
 	 */
 	private static void updateUserInfo(String userId) {
-		System.out.println("회원 비밀번호: ");
+		System.out.print("회원 비밀번호: ");
 		String userPwd = sc.nextLine();
-		System.out.println("회원 이름: ");
+		System.out.print("회원 이름: ");
 		String userName = sc.nextLine();
-		System.out.println("회원 휴대폰번호: ");
+		System.out.print("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 
 		UserDto userDto = new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
@@ -432,14 +450,14 @@ public class MenuView {
 	 * case : 7-2 -회원탈퇴-
 	 */
 	private static void deleteUserInfo(String userId) {
-		System.out.println("회원 비밀번호: ");
+		System.out.print("회원 비밀번호: ");
 		String userPwd = sc.nextLine();
-		System.out.println("회원 이름: ");
+		System.out.print("회원 이름: ");
 		String userName = sc.nextLine();
-		System.out.println("회원 휴대폰번호: ");
+		System.out.print("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 
-		UserDto userDto = new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto = new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.deleteUserInfo(userDto);
 	}
 
@@ -450,6 +468,7 @@ public class MenuView {
 
 		System.out.println("현재 포인트: " + UserController.selectPoint(userId));
 		System.out.println("1. 포인트 등록하기  2. 뒤로 ");
+		System.out.print("선택> ");
 		int num = Integer.parseInt(sc.nextLine());
 		if (num == 1) {
 			System.out.print("등록할 포인트: ");
@@ -462,18 +481,18 @@ public class MenuView {
 		// else System.out.println("다시 입력해주세요. ");
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * case : 8 -로그아웃-
 	 */
 	private static void logOut(String userId) {
 		System.out.println("로그아웃 되었습니다.");
+		UserDto userDto = new UserDto(null, null, null, null, 0, null, 0, null);
 		System.exit(0);
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/** 
 	 * 관리자메뉴 
@@ -497,6 +516,7 @@ public class MenuView {
 				SalesManagement(userId);
 				break;
 			case 4:
+				logOut(userId);
 				break;
 			default:
 				System.out.println(userId + "관리자님 올바른 번호를 선택해 주세요");
@@ -505,8 +525,8 @@ public class MenuView {
 		}
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	/**
 	 * case : 1 -회원관리-
@@ -535,9 +555,9 @@ public class MenuView {
 	 * case 1-2 : -회원등업-
 	 */
 	private static void updateUserGrade() {
-		System.out.println("등업 할 회원 ID : ");
+		System.out.print("등업 할 회원 ID : ");
 		String userId = sc.nextLine();
-		System.out.println("등급 : ");
+		System.out.print("등급 : ");
 		String grade = sc.nextLine();
 
 		AdminController.updateUserGrade(grade, userId);
@@ -551,6 +571,7 @@ public class MenuView {
 	 */
 	public static void manageBook() {
 		System.out.println("1. 도서목록 보기 2. 희망도서목록 보기 3. 도서 등록 4. 도서 삭제 5. 나가기");
+		System.out.print("선택> ");
 		int num = Integer.parseInt(sc.nextLine());
 
 		switch (num) {
@@ -577,21 +598,21 @@ public class MenuView {
 	 */
 	public static void printInsertBook() {
 
-		System.out.println("등록도서 코드: ");
+		System.out.print("등록도서 코드: ");
 		String booksId = sc.nextLine();
-		System.out.println("등록도서 제목 : ");
+		System.out.print("등록도서 제목 : ");
 		String booksName = sc.nextLine();
-		System.out.println("등록도서 저자 : ");
+		System.out.print("등록도서 저자 : ");
 		String booksWriter = sc.nextLine();
-		System.out.println("등록도서 출판사 : ");
+		System.out.print("등록도서 출판사 : ");
 		String booksPublisher = sc.nextLine();
-		System.out.println("등록도서 출판일 : ");
+		System.out.print("등록도서 출판일 : ");
 		String booksPubDate = sc.nextLine();
-		System.out.println("등록도서 장르 : ");
+		System.out.print("등록도서 장르 : ");
 		String booksGenre = sc.nextLine();
-		System.out.println("등록도서 가격 : ");
+		System.out.print("등록도서 가격 : ");
 		int booksPrice = Integer.parseInt(sc.nextLine());
-		System.out.println("등록도서 개수 : ");
+		System.out.print("등록도서 개수 : ");
 		int bookStock = Integer.parseInt(sc.nextLine());
 
 		BookDto bookDto = new BookDto(booksId, booksName, booksWriter, booksPublisher, booksPubDate, booksGenre,
@@ -604,7 +625,7 @@ public class MenuView {
 	 * case : 2-4 -도서 삭제-
 	 */
 	public static void printDeleteBook() {
-		System.out.println("삭제도서 코드: ");
+		System.out.print("삭제도서 코드: ");
 		String bookId = sc.nextLine();
 
 		BooksController.deleteBook(bookId);
@@ -620,6 +641,7 @@ public class MenuView {
 	private static void SalesManagement(String userId) {
 		System.out.println("---- 매출관리 메뉴 ----");
 		System.out.println(" | 1.오늘의 매출 | 2.기간별 매출 | 3.총 매출   | 4.뒤로가기 ");
+		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
@@ -644,9 +666,9 @@ public class MenuView {
 	 * case : 3-2 -기간별 매출-
 	 */
 	private static void periodSales() {
-		System.out.println("언제부터 ? ");
+		System.out.print("언제부터 ? ");
 		String startdate = sc.nextLine();
-		System.out.println("언제까지 ? ");
+		System.out.print("언제까지 ? ");
 		String enddate = sc.nextLine();
 
 		AdminController.periodSales(startdate, enddate);
