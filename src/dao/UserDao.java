@@ -35,5 +35,5 @@ public interface UserDao {
 	int deleteUserInfo(UserDto userDto) throws SQLException;
 	
 	/**포인트 차감*/
-	int Pay(int price, String userId)throws SQLException;
+	double Pay(double price, String userId)throws SQLException;
 }

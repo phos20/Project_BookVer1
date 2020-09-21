@@ -34,7 +34,7 @@ public class MenuView {
 		System.out.println("─────────────────────────────────── ");
 		System.out.println("      Book Store에 오신걸 환영합니다.     ");
 		System.out.println("───────────────────────────────────");
-		System.out.println("                     ①  회원           ② 비회원   ");
+		System.out.println("\t①  회원           ② 비회원   ");
 		System.out.println();
 		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
@@ -70,7 +70,7 @@ public class MenuView {
 	 */
 	public static void nonmember() {
 		System.out.println("────────── 비회원 메뉴 ────────── ");
-		System.out.println("                방문자님 메뉴를 선택하세요");
+		System.out.println("\t방문자님 메뉴를 선택하세요");
 		System.out.println("────────────────────────────");
 		System.out.println("         ① 회원가입  ② 도서 목록 보기  ③ 종료");
 		System.out.println();
@@ -121,7 +121,7 @@ public class MenuView {
 
 		while (true) {
 			System.out.println("───────────────── User Menu ─────────────────── ");
-			System.out.println("                            접속자 : " + userId + " 님  메뉴를 선택하세요 ");
+			System.out.println("      \t접속자 : " + userId + " 님  메뉴를 선택하세요 ");
 			System.out.println("─────────────────────────────────────────────── ");
 			System.out.println(" ①도서검색         ②주문               ③주문확인 &결제     ④희망도서등록&보기  ");
 			System.out.println(" ⑤장바구니담기   ⑥장바구니보기   ⑦마이페이지           ⑧로그아웃     ");
@@ -271,14 +271,14 @@ public class MenuView {
 	public static void Payment(String userId) {
 		try {
 			List<Pay> paylist = orderDao.ordersPriceByUserId(userId);
-			int price = 0;
+			double price = 0;
 			for (Pay pay : paylist) {
 				price += pay.getTotalAmount();
 
 			}
 
 			// price = list.get(0).getTotalAmount();
-			System.out.println("총금액 : " + price + " 결제 하시겠습니까?");
+			System.out.println("총금액 : " + Double.parseDouble(String.format("%.1f", price)) + " 결제 하시겠습니까?");
 			System.out.println("         ①  결제         ② 취소  ");
 			System.out.println();
 			System.out.print("선택> ");
@@ -512,7 +512,7 @@ public class MenuView {
 
 		while (true) {
 			System.out.println("──────────────  Admin Menu ───────────────");
-			System.out.println("                                      관리자 " + userId + "님 모드   ");
+			System.out.println("\t\t관리자 " + userId + "님 모드   ");
 			System.out.println("──────────────────────────────────────────");
 			System.out.println("  ①회원관리   ②도서관리   ③매출관리   ④로그아웃  ");
 			System.out.println();

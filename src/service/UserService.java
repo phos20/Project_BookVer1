@@ -73,8 +73,8 @@ public class UserService {
 	}
 	
 	/**결제*/
-	public void Pay(int price, String userId)throws SQLException{
-		int result = userDao.Pay(price,userId);
+	public void Pay(double price, String userId)throws SQLException{
+		double result = userDao.Pay(price,userId);
 		if (result == 0)
 			throw new SQLException("결제 불가");
 	

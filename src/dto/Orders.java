@@ -8,12 +8,12 @@ public class Orders {
 	private String orderDate;
 	private String userId;
 	private String address;
-	private int totalAmount;
+	private double totalAmount;
   
 	private List<OrderLine> orderLineList = new ArrayList<OrderLine>();
   
     public Orders() {}
-	public Orders(int orderId, String orderDate, String userId, String address, int totalAmount) {
+	public Orders(int orderId, String orderDate, String userId, String address, double totalAmount) {
 	super();
 	this.orderId = orderId;
 	this.orderDate = orderDate;
@@ -56,11 +56,11 @@ public class Orders {
 		this.address = address;
 	}
 	
-	public int getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
 	
-	public void setTotalAmount(int totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 	

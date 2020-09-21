@@ -169,7 +169,7 @@ public class UserDaoImpl implements UserDao {
 
 	/** 결제 */
 	@Override
-	public int Pay(int price, String userId) throws SQLException {
+	public double Pay(double price, String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -177,7 +177,7 @@ public class UserDaoImpl implements UserDao {
 			con = DbUtil.getConnection();
 			con.getAutoCommit();
 			ps = con.prepareStatement("update userlist set USER_POINT= ? where user_id =?");
-			ps.setInt(1, Culculation(con, userId, price));
+			ps.setDouble(1, Culculation(con, userId, price));
 			ps.setString(2, userId);
 			result = ps.executeUpdate();
 
@@ -202,11 +202,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	/** 차감 포인트 계산 */
-	private int Culculation(Connection con, String userId, int price) throws SQLException {
+	private double Culculation(Connection con, String userId, double price) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		UserDto userDto = null;
-		int result = 0;
+		double result = 0;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from userlist where user_id =?");

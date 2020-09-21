@@ -35,7 +35,7 @@ public class OrderDAOImpl implements OrderDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, orders.getUserId());
 			ps.setString(2, orders.getAddress());
-			ps.setInt(3, totalAmountByGrade(con, orders));
+			ps.setDouble(3, totalAmountByGrade(con, orders));
 
 			result = ps.executeUpdate();
 			if (result == 0) {
@@ -66,7 +66,7 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	/** 주문시결제테이블에 목록 추가 */
-	private int Payment(Connection con, Orders orders, int price) throws SQLException {
+	private int Payment(Connection con, Orders orders, double price) throws SQLException {
 		PreparedStatement ps = null;
 		int result;
 		String sql = "insert into pay values(PAY_NO_SEQ.nextval,?,SYSDATE,?,?)";
@@ -74,7 +74,7 @@ public class OrderDAOImpl implements OrderDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, orders.getUserId());
 			ps.setString(2, orders.getAddress());
-			ps.setInt(3, price);
+			ps.setDouble(3, Double.parseDouble(String.format("%.1f",price )));
 			result = ps.executeUpdate();
 			if (result == 0)
 				throw new SQLException("결제목록에 주문목록이 추가되지않았습니다");
@@ -87,12 +87,12 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	// ps.setInt(3)
-	private int totalAmountByGrade(Connection con, Orders order) throws SQLException {
+	private double totalAmountByGrade(Connection con, Orders order) throws SQLException {
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		UserDto ud = null;
-		int result = 0;
+		double result = 0;
 		String sql = "SELECT*FROM USERLIST WHERE USER_ID=?";
 		try {
 			con = DbUtil.getConnection();
@@ -105,9 +105,9 @@ public class OrderDAOImpl implements OrderDAO {
 						rs.getString(6), rs.getInt(7), rs.getString(8));
 
 				if (ud.getGrade().equals("silver")) {
-					result = getsilverTotalAmount(order);
+					result = 0.95*getTotalAmount(order);
 				} else if (ud.getGrade().equals("gold")) {
-					result = getgoldTotalAmount(order);
+					result = 0.9*getTotalAmount(order);
 				} else {
 					result = getTotalAmount(order);
 				}
@@ -121,43 +121,15 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	/** TOTAL AMOUNT */
-	public int getTotalAmount(Orders order) throws SQLException {
+	public double getTotalAmount(Orders order) throws SQLException {
 		List<OrderLine> orderLineList = order.getOrderLineList();
-		int total = 0;
+		double total = 0;
 		for (OrderLine line : orderLineList) {
 			BookDto books = booksDao.booksSelectBybooksId(line.getBooksId());
 			if (books == null)
 				throw new SQLException("상품번호 오류입니다.... 주문 실패..");
 			total += line.getQty() * books.getBooksPrice();
 		}
-		return total;
-	}
-
-	/** SILVER TOTAL AMOUNT */
-	private int getsilverTotalAmount(Orders order) throws SQLException {
-		List<OrderLine> orderLineList = order.getOrderLineList();
-		int total = 0;
-		for (OrderLine line : orderLineList) {
-			BookDto books = booksDao.booksSelectBybooksId(line.getBooksId());
-			if (books == null)
-				throw new SQLException("상품번호 오류입니다.... 주문 실패..");
-			total += 0.95 * (line.getQty() * books.getBooksPrice());
-		}
-
-		return total;
-	}
-
-	/** GOLD TOTAL AMOUNT */
-	private int getgoldTotalAmount(Orders order) throws SQLException {
-		List<OrderLine> orderLineList = order.getOrderLineList();
-		int total = 0;
-		for (OrderLine line : orderLineList) {
-			BookDto books = booksDao.booksSelectBybooksId(line.getBooksId());
-			if (books == null)
-				throw new SQLException("상품번호 오류입니다.... 주문 실패..");
-			total += 0.90 * (line.getQty() * books.getBooksPrice());
-		}
-
 		return total;
 	}
 

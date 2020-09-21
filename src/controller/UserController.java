@@ -94,7 +94,7 @@ public class UserController {
 	}
 
 	/** 포인트차감 */
-	public static void Pay(int price, String userId) {
+	public static void Pay(double price, String userId) {
 		try {
 			userService.Pay(price, userId);
 			EndView.messagePrint("결제 성공");
