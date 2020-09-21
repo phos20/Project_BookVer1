@@ -379,7 +379,8 @@ public class MenuView {
 		// else {
 		System.out.println();
 		System.out.println("① 주문하기    ② 삭제하기    ③나가기");
-		
+		System.out.print("선택> ");
+		System.out.println();
 		int num = Integer.parseInt(sc.nextLine());
 
 		if (num == 1) {
@@ -546,6 +547,8 @@ public class MenuView {
 	private static void UserManagement() {
 		System.out.println("─────────── 회원 관리 메뉴 ───────────");
 		System.out.println("    ① 회원 목록 보기   ② 회원등업   ③ 뒤로가기 ");
+		System.out.print("선택> ");
+		System.out.println();
 
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -582,6 +585,7 @@ public class MenuView {
 	 * case : 2 -도서관리-
 	 */
 	public static void manageBook() {
+		System.out.println("─────────────── 도서관리 메뉴 ──────────────────");
 		System.out.println(" ① 도서목록 보기   ②희망도서목록 보기   ③도서 등록   ④도서 삭제   ⑤나가기");
 		System.out.println();
 		System.out.print("선택> ");

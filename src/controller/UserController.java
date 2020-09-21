@@ -41,6 +41,7 @@ public class UserController {
 			EndView.messagePrint("Å»ÅðµÇ¾ú½À´Ï´Ù.");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
+			MenuView.myPage(userDto.getUserId());
 		}
 	}
 
