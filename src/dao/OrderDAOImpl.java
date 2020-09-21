@@ -46,17 +46,23 @@ public class OrderDAOImpl implements OrderDAO {
 				for (int i : re) {
 					if (i != Statement.SUCCESS_NO_INFO) {
 						con.rollback();
-						throw new SQLException("주문 실패");
+						throw new SQLException("주문 실패 - 결제내역에 주문목록이 추가되지않았습니다");
 					}
 				}
 
 				// 주문수량만큼 재고량 감소하기
 				decrementStock(con, orders.getOrderLineList());
-				con.commit();
-				// 주문시 결제테이블 추가
-				Payment(con, orders, totalAmountByGrade(con, orders));
-			}
 
+				// 주문시 결제테이블 추가
+				int re2 = Payment(con, orders, totalAmountByGrade(con, orders));
+				if (re2 == 0) {
+					con.rollback();
+					throw new SQLException("주문 실패 - 결제목록에 주문목록이 추가되지않았습니다");
+				}
+				
+				con.commit();
+
+			}
 		} finally {
 			con.commit();
 			DbUtil.close(con, ps, null);
@@ -74,10 +80,8 @@ public class OrderDAOImpl implements OrderDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, orders.getUserId());
 			ps.setString(2, orders.getAddress());
-			ps.setDouble(3, Double.parseDouble(String.format("%.1f",price )));
+			ps.setDouble(3, Double.parseDouble(String.format("%.1f", price)));
 			result = ps.executeUpdate();
-			if (result == 0)
-				throw new SQLException("결제목록에 주문목록이 추가되지않았습니다");
 
 		} finally {
 			DbUtil.close(null, ps, null);
@@ -86,7 +90,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	}
 
-	// ps.setInt(3)
+	/**등급별 총액 구하기*/
 	private double totalAmountByGrade(Connection con, Orders order) throws SQLException {
 
 		PreparedStatement ps = null;
@@ -105,9 +109,9 @@ public class OrderDAOImpl implements OrderDAO {
 						rs.getString(6), rs.getInt(7), rs.getString(8));
 
 				if (ud.getGrade().equals("silver")) {
-					result = 0.95*getTotalAmount(order);
+					result = 0.95 * getTotalAmount(order);
 				} else if (ud.getGrade().equals("gold")) {
-					result = 0.9*getTotalAmount(order);
+					result = 0.9 * getTotalAmount(order);
 				} else {
 					result = getTotalAmount(order);
 				}
@@ -120,7 +124,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	}
 
-	/** TOTAL AMOUNT */
+	/** 총액 */
 	public double getTotalAmount(Orders order) throws SQLException {
 		List<OrderLine> orderLineList = order.getOrderLineList();
 		double total = 0;
@@ -154,7 +158,6 @@ public class OrderDAOImpl implements OrderDAO {
 
 			}
 			result = ps.executeBatch();// 일괄처리
-			System.out.println("주문완료");
 
 		} finally {
 			DbUtil.close(null, ps, null);
@@ -164,8 +167,36 @@ public class OrderDAOImpl implements OrderDAO {
 
 	}
 
-	/** 재고관리 */
-	public int[] decrementStock(Connection con, List<OrderLine> orderLineList) throws SQLException {
+	/** 재고량 관리 */
+	public void managementStock(Connection con, List<OrderLine> orderLineList) throws SQLException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select stock from books where books_id =?";
+		BookDto bookDto = null;
+		try {
+			ps = con.prepareStatement(sql);
+			for (OrderLine orderline : orderLineList) {
+				ps.setString(1, orderline.getBooksId());
+
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					bookDto = new BookDto(rs.getInt(1));
+					if (bookDto.getStock() < 0) {
+						con.rollback();
+						throw new SQLException("주문 실패 - 재고가 부족합니다");
+					}
+				}
+
+			}
+
+		} finally {
+			DbUtil.close(null, ps, null);
+		}
+
+	}
+
+	/** 재고량 감소 */
+	private int[] decrementStock(Connection con, List<OrderLine> orderLineList) throws SQLException {
 		PreparedStatement ps = null;
 		String sql = "update books set stock = stock-? where books_id=?";
 		int result[] = null;
@@ -175,17 +206,21 @@ public class OrderDAOImpl implements OrderDAO {
 				ps.setInt(1, orderline.getQty());
 				ps.setString(2, orderline.getBooksId());
 
-				ps.addBatch(); // 일괄처리할 작업에 추가
+				ps.addBatch();
 				ps.clearParameters();
 			}
 
-			result = ps.executeBatch();// 일괄처리
+			result = ps.executeBatch();
+
+			// 재고량 체크
+			managementStock(con, orderLineList);
 
 		} finally {
 			DbUtil.close(null, ps, null);
 		}
 
 		return result;
+
 	}
 
 	/** 주문내역 */

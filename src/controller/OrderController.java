@@ -15,6 +15,7 @@ public class OrderController {
 	public static void insertOrders(Orders orders) {
 		try {
 			orderService.insertOrders(orders);
+			EndView.messagePrint("주문 완료");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}

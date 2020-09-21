@@ -183,13 +183,21 @@ public class UserDaoImpl implements UserDao {
 
 			if (result == 0) {
 				con.rollback();
-				throw new SQLException("포인트 차감 오류");
-			} else {
+				throw new SQLException("결제 실패 - 포인트 차감 오류");
+			} else { //결제목록에서 삭제
 				int re = deletePay(con, userId);
 				if (re == 0) {
 					con.rollback();
-					throw new SQLException("결제목록 삭제 오류");
+					throw new SQLException("결제 실패 -결제목록 삭제 오류");
 				}
+				
+				//결제후 누적포인트에 따른 등업
+				int re2 =updateAutoGrade(con,userId);
+				if(re2==0) {
+					con.rollback();
+					throw new SQLException("결제 실패 -자동등업 오류");
+				}
+				
 			}
 
 			con.commit();
@@ -201,6 +209,24 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	/**자동등업*/
+	private int updateAutoGrade(Connection con, String userId)throws SQLException {
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "UPDATE USERLIST SET GRADE =(SELECT GRADE FROM USERGRADE "
+					+ "WHERE USERLIST.USER_TOTAL BETWEEN LOWAMOUNT and HIGHAMOUNT) WHERE USER_ID =?";
+		try {
+			ps=con.prepareStatement(sql);
+			ps.setString(1, userId);
+			
+			result = ps.executeUpdate();
+					
+		}finally {
+			DbUtil.close(null, ps, null);
+		}
+		return result;
+		
+	}
 	/** 차감 포인트 계산 */
 	private double Culculation(Connection con, String userId, double price) throws SQLException {
 		PreparedStatement ps = null;

@@ -35,6 +35,10 @@ public class BookDto {
 	
 	
 
+	public BookDto(int stock) {
+		this.stock = stock;
+	}
+
 	public String getBooksId() {
 		return booksId;
 	}
