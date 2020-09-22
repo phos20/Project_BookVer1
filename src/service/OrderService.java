@@ -25,4 +25,12 @@ public class OrderService {
 		return list;
 	}
 
+	/** 주문취소 */
+	public int cancleOrders(String userId, int orderNo) throws SQLException {
+		int result = orderDao.cancleOrders(userId, orderNo);
+		if (result == 0)
+			throw new SQLException("주문 취소 실패");
+		return result;
+	}
+
 }

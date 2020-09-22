@@ -59,7 +59,7 @@ public class OrderDAOImpl implements OrderDAO {
 					con.rollback();
 					throw new SQLException("주문 실패 - 결제목록에 주문목록이 추가되지않았습니다");
 				}
-				
+
 				con.commit();
 
 			}
@@ -90,7 +90,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	}
 
-	/**등급별 총액 구하기*/
+	/** 등급별 총액 구하기 */
 	private double totalAmountByGrade(Connection con, Orders order) throws SQLException {
 
 		PreparedStatement ps = null;
@@ -297,6 +297,61 @@ public class OrderDAOImpl implements OrderDAO {
 			DbUtil.close(null, ps, null);
 		}
 		return list;
+	}
+
+	/** 주문취소 */
+	@Override
+	public int cancleOrders(String userId, int orderNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete orders where order_id=?";
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, orderNo);
+			result = ps.executeUpdate();
+
+			if (result == 0) {
+				con.rollback();
+				throw new SQLException("주문취소 오류 - 주문목록에서 삭제 불가");
+
+			} else {
+				// 결제목록삭제
+				canclePay(con, userId);
+				// 주문상세삭제 는 주문테이블삭제시 on delete cascade라서 따로안함
+
+				con.commit();
+			}
+
+		} finally {
+			DbUtil.close(con, ps, null);
+		}
+		return result;
+	}
+
+	/** 주문취소시 결제내역 삭제 */
+	private int canclePay(Connection con, String userId) throws SQLException {
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete pay where user_id=?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			result = ps.executeUpdate();
+
+			if (result == 0) {
+				con.rollback();
+				throw new SQLException("주문취소 오류 - 결제목록에서 삭제 불가");
+			}
+
+		} finally {
+			DbUtil.close(null, ps, null);
+		}
+
+		return result;
 	}
 
 }

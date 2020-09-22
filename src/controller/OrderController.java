@@ -34,4 +34,15 @@ public class OrderController {
 
 	}
 
+	/** 주문취소 */
+	public static void cancleOrders(String userId, int orderNo) {
+		try {
+			orderService.cancleOrders(userId, orderNo);
+			EndView.messagePrint("주문 취소 완료 ");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+
+	}
+
 }

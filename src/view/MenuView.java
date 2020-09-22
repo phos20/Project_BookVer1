@@ -27,9 +27,9 @@ public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
 	static OrderDAO orderDao = new OrderDAOImpl();
 
-	/** 
+	/**
 	 * 초기 화면
-	 * */
+	 */
 	public static void menu() {
 		System.out.println("─────────────────────────────────── ");
 		System.out.println("      Book Store에 오신걸 환영합니다.     ");
@@ -51,7 +51,7 @@ public class MenuView {
 			break;
 		}
 	}
-	
+
 	/**
 	 * 로그인
 	 */
@@ -112,9 +112,7 @@ public class MenuView {
 		UserController.signUp(userDto);
 	}
 
-	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 
 	/** 유저 메뉴 */
 	public static void printUserMenu(String userId) {
@@ -197,7 +195,6 @@ public class MenuView {
 		}
 	}
 
-
 	/**
 	 * case : 1-2 -제목 검색-
 	 */
@@ -248,13 +245,13 @@ public class MenuView {
 	 * case : 3 - 주문내역확인& 결제
 	 */
 	private static void selectOrderAndPay(String userId) {
-		System.out.println(" ① 주문내역 확인     ②결제  ");
+		System.out.println(" ① 주문확인     ②결제  ");
 		System.out.println();
 		System.out.print("선택> ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
-			OrderController.selectOrdersByUserId(userId);
+			selectOrderMenu(userId);
 			break;
 		case 2:
 			Payment(userId);
@@ -263,6 +260,34 @@ public class MenuView {
 			System.out.println("올바른 번호를 선택해 주세요");
 			break;
 		}
+	}
+
+	/** case : 3-1 -주문확인 */
+	private static void selectOrderMenu(String userId) {
+		System.out.println(" ① 주문내역확인     ②주문취소  ");
+		System.out.println();
+		System.out.print("선택> ");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			OrderController.selectOrdersByUserId(userId);
+			break;
+		case 2:
+			cancleOrders(userId);
+			break;
+		default:
+			System.out.println("올바른 번호를 선택해 주세요");
+			break;
+		}
+
+	}
+
+	/** case :3-1-2 -주문취소 */
+	private static void cancleOrders(String userId) {
+		System.out.println("삭제하고자하는 주문 번호를 입력하세요 :");
+		int orderNo = Integer.parseInt(sc.nextLine());
+		OrderController.cancleOrders(userId, orderNo);
+
 	}
 
 	/**
@@ -357,12 +382,12 @@ public class MenuView {
 
 		CartDto cartDto = new CartDto(0, userId, booksId, quantity, null);
 
-		if(BooksController.selectByBooksId(booksId)==null) {
+		if (BooksController.selectByBooksId(booksId) == null) {
 			System.out.println("도서가 존재하지 않아 장바구니에 담을 수 없습니다. ");
-		} else CartController.insertCart(cartDto); 
+		} else
+			CartController.insertCart(cartDto);
 	}
-	
-	
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 
 	/**
@@ -504,10 +529,10 @@ public class MenuView {
 	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/** 
-	 * 관리자메뉴 
-	 * */
+
+	/**
+	 * 관리자메뉴
+	 */
 	public static void printAdminMenu(String userId) {
 
 		while (true) {
@@ -537,9 +562,8 @@ public class MenuView {
 			}
 		}
 	}
-	
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-	
 
 	/**
 	 * case : 1 -회원관리-
@@ -577,10 +601,9 @@ public class MenuView {
 
 		AdminController.updateUserGrade(grade, userId);
 	}
-	
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
+
 	/**
 	 * case : 2 -도서관리-
 	 */
@@ -647,10 +670,8 @@ public class MenuView {
 
 		BooksController.deleteBook(bookId);
 	}
-	
-	
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 
 	/**
 	 * case : 3 -매출관리-
@@ -691,9 +712,7 @@ public class MenuView {
 
 		AdminController.periodSales(startdate, enddate);
 	}
-	
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-} // MainView 끝   
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+} // MainView 끝
