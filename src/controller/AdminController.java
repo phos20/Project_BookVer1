@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import dto.Orders;
+import dto.Sales;
 import dto.UserDto;
 import service.AdminService;
 import view.AdminEndView;
@@ -14,7 +14,7 @@ public class AdminController {
 	/** ø¿¥√¿«∏≈√‚ */
 	public static void todaySales() {
 		try {
-			List<Orders> list = adminService.todaySales();
+			List<Sales> list = adminService.todaySales();
 			AdminEndView.printSales(list);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());

@@ -21,7 +21,7 @@ public class OrderService {
 	public List<Orders> selectOrdersByUserId(String userId) throws SQLException {
 		List<Orders> list = orderDao.selectOrdersByUserId(userId);
 		if (list == null || list.size() == 0)
-			throw new SQLException(userId + "의 주문내역이 없습니다.");
+			throw new SQLException(userId + "님의 주문내역이 없습니다.");
 		return list;
 	}
 

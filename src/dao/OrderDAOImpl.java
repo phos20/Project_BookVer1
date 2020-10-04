@@ -316,7 +316,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 			if (result == 0) {
 				con.rollback();
-				throw new SQLException("주문취소 오류 - 주문목록에서 삭제 불가");
+				throw new SQLException("주문취소 오류 - 주문번호 오류");
 
 			} else {
 				// 결제목록삭제

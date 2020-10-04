@@ -74,7 +74,7 @@ public class Orders {
   
    @Override
 	public String toString() {
-		return orderId +" | "+ orderDate +" | "+ userId +" | "  + address +" | "+ totalAmount;
+		return "주문번호 : "+orderId +"주문일자 : "+ orderDate +"배송지 : " + address +"총금액 : "+ totalAmount;
 				
 	}
 }

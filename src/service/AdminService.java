@@ -5,15 +5,15 @@ import java.util.List;
 
 import dao.AdminDao;
 import dao.AdminDaoImpl;
-import dto.Orders;
+import dto.Sales;
 import dto.UserDto;
 
 public class AdminService {
 	AdminDao adminDao = new AdminDaoImpl();
 
 	/** 일일매출액 */
-	public List<Orders> todaySales() throws Exception {
-		List<Orders> list = adminDao.todaySales();
+	public List<Sales> todaySales() throws Exception {
+		List<Sales> list = adminDao.todaySales();
 		if (list.size() == 0)
 			throw new SQLException("오늘 매출이 없습니다");
 		return list;

@@ -302,7 +302,6 @@ public class MenuView {
 
 			}
 
-			// price = list.get(0).getTotalAmount();
 			System.out.println("총금액 : " + Double.parseDouble(String.format("%.1f", price)) + " 결제 하시겠습니까?");
 			System.out.println("         ①  결제         ② 취소  ");
 			System.out.println();

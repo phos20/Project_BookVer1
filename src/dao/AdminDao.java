@@ -1,15 +1,14 @@
 package dao;
 
 import java.sql.SQLException;
-
 import java.util.List;
 
-import dto.Orders;
+import dto.Sales;
 import dto.UserDto;
 
 public interface AdminDao {
 	/** 일일매출 */
-	List<Orders> todaySales() throws SQLException;
+	List<Sales> todaySales() throws SQLException;
 
 	/** 총매출 */
 	int totalSales() throws SQLException;

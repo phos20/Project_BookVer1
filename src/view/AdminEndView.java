@@ -2,7 +2,7 @@ package view;
 
 import java.util.List;
 
-import dto.Orders;
+import dto.Sales;
 import dto.UserDto;
 
 public class AdminEndView {
@@ -13,12 +13,12 @@ public class AdminEndView {
 	}
 
 	/** 橾橾 衙轎ル */
-	public static void printSales(List<Orders> list) {
+	public static void printSales(List<Sales> list) {
 		int total = 0;
 		System.out.println("式式式式式式式式式式式式式式 螃棺曖 衙轎ル 式式式式式式式式式式式式式式");
-		for (Orders orders : list) {
-			System.out.println(orders);
-			total += orders.getTotalAmount();
+		for (Sales sales : list) {
+			System.out.println(sales);
+			total += sales.getTotalAmount();
 		}
 		System.out.println("螃棺 識 衙轎 = " + total);
 		System.out.println();

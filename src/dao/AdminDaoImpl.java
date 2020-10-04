@@ -8,25 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.Orders;
+import dto.Sales;
 import dto.UserDto;
 import util.DbUtil;
 
 public class AdminDaoImpl implements AdminDao {
 	/** 일일매출 */
 	@Override
-	public List<Orders> todaySales() throws SQLException {
+	public List<Sales> todaySales() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Orders> list = new ArrayList<Orders>();
+		List<Sales> list = new ArrayList<Sales>();
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("Select*from orders where TRUNC(order_date)= TRUNC(SYSDATE)");
+			ps = con.prepareStatement("Select*from sales where TRUNC(sales_date)= TRUNC(SYSDATE)");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				list.add(new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+				list.add(new Sales(rs.getInt(1), rs.getString(2), rs.getDouble(3)));
 			}
 
 		} finally {
@@ -41,7 +42,7 @@ public class AdminDaoImpl implements AdminDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Orders orders = null;
+		Sales sales = null;
 		int total = 0;
 		try {
 			con = DbUtil.getConnection();
@@ -50,8 +51,8 @@ public class AdminDaoImpl implements AdminDao {
 
 			while (rs.next()) {
 
-				orders = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
-				total += orders.getTotalAmount();
+				sales = new Sales(rs.getInt(1), rs.getString(2), rs.getDouble(3));
+				total += sales.getTotalAmount();
 			}
 
 		} finally {
@@ -67,11 +68,11 @@ public class AdminDaoImpl implements AdminDao {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Orders orders = null;
+		Sales sales = null;
 		int total = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("Select*from orders where TRUNC(order_date) between ? and ?");
+			ps = con.prepareStatement("Select*from sales where TRUNC(sales_date) between ? and ?");
 			ps.setString(1, startdate);
 			ps.setString(2, enddate);
 
@@ -79,8 +80,8 @@ public class AdminDaoImpl implements AdminDao {
 
 			while (rs.next()) {
 
-				orders = new Orders(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
-				total += orders.getTotalAmount();
+				sales = new Sales(rs.getInt(1), rs.getString(2), rs.getDouble(3));
+				total += sales.getTotalAmount();
 			}
 
 		} finally {

@@ -2,7 +2,6 @@ package view;
 
 import java.util.List;
 
-
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ import user.User;
 import user.UserSet;
 
 public class EndView {
-	/**전체 도서 검색*/
+	/** 전체 도서 검색 */
 	public static void printBookList(List<BookDto> list) {
 		System.out.println("────────────── 도서 목록 ──────────────");
 		System.out.println("     총 도서 " + list.size() + "권 ");
@@ -91,8 +90,8 @@ public class EndView {
 	/** 주문내역확인 */
 	public static void printOrderByUserId(List<Orders> orderList) {
 		for (Orders order : orderList) {
-			System.out.println(order.getOrderId() + " | " + order.getOrderDate() + " | " + order.getTotalAmount()
-					+ " | " + order.getAddress());
+			System.out.println("주문번호 : " + order.getOrderId() + "  주문일 :" + order.getOrderDate() + "  할인률적용된 총가격 :"
+					+ order.getTotalAmount() + "  배송지 : " + order.getAddress());
 
 			for (OrderLine orderLine : order.getOrderLineList()) {
 				System.out.println("  주문품목  :" + orderLine);
