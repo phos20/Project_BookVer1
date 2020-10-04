@@ -10,17 +10,6 @@ import view.FailView;
 
 public class RegBookController {
 	static RegBookService regbookService = new RegBookService();
-	/**
-	    * Èñ¸Áµµ¼­¸ñ·Ï °Ë»ö
-	    */
-	   public static void selectRegBook() {
-	      try {
-	         List<RegBookDto> list = regbookService.selectRegBook();
-	         EndView.printRegBookList(list);
-	      } catch (Exception e){
-	         e.printStackTrace();
-	      }
-	   }
 	   /**
 	    *  Èñ¸Áµµ¼­ µî·Ï
 	    * */
@@ -32,4 +21,15 @@ public class RegBookController {
 				FailView.errorMessage(e.getMessage());
 			}
 		}
+	   /**
+	    * Èñ¸Áµµ¼­¸ñ·Ï °Ë»ö
+	    */
+	   public static void selectRegBook() {
+	      try {
+	         List<RegBookDto> list = regbookService.selectRegBook();
+	         EndView.printRegBookList(list);
+	      } catch (Exception e){
+	         e.printStackTrace();
+	      }
+	   }
 }

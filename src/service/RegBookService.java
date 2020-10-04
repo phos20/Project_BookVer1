@@ -9,7 +9,15 @@ import dto.RegBookDto;
 
 public class RegBookService {
 	RegBookDao regbookDao = new RegBookDaoImpl();
-
+	/** 
+	 * 희망도서등록
+	 */
+	public void insertRegbook(RegBookDto wish) throws Exception {
+		int result = regbookDao.insertRegbook(wish);
+		if (result == 0)
+			throw new Exception("등록되지 않았습니다.");
+	}
+	
 	/**
 	 * 희망도서목록 검색
 	 */
@@ -17,12 +25,4 @@ public class RegBookService {
 		List<RegBookDto> list = regbookDao.selectRegBook();
 		return list;
 	}
-
-	/** 희망도서등록 **/
-	public void insertRegbook(RegBookDto wish) throws Exception {
-		int result = regbookDao.insertRegbook(wish);
-		if (result == 0)
-			throw new Exception("등록되지 않았습니다.");
-	}
-
 }

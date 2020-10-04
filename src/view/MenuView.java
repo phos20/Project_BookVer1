@@ -31,8 +31,17 @@ public class MenuView {
 	 * 초기 화면
 	 * */
 	public static void menu() {
-		System.out.println("--- Book Store에 오신걸 환영합니다. ---");
-		System.out.println("      | 1.회원   | 2.비회원    |");
+		System.out.println("┌──────────────────────────┐");
+		System.out.println("│                                                    │");
+		System.out.println("│          Book Store에 오신걸 환영합니다.           │");
+		System.out.println("│                                                    │");
+		System.out.println("└──────────────────────────┘");		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("1. 회원     │     2. 비회원            ");
+		System.out.println();
+		System.out.println();
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
@@ -42,7 +51,7 @@ public class MenuView {
 			MenuView.nonmember();
 			break;
 		default:
-			System.out.println("올바른 번호를 선택해 주세요");
+			System.out.println("▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
 			break;
 		}
 	}
@@ -51,9 +60,9 @@ public class MenuView {
 	 * 로그인
 	 */
 	private static void Login() {
-		System.out.println("ID = ");
+		System.out.println("아이디 = ");
 		String userId = sc.nextLine();
-		System.out.println("PWD = ");
+		System.out.println("비밀번호 = ");
 		String userPwd = sc.nextLine();
 
 		UserController.Login(userId, userPwd);
@@ -63,9 +72,16 @@ public class MenuView {
 	 * case : 2 -비회원-
 	 */
 	public static void nonmember() {
-		System.out.println("---- 비회원 메뉴 ----");
-		System.out.println(" | 1.회원가입 | 2.도서 목록 보기 | ");
-
+		System.out.println("┌──────────────────────────┐");
+		System.out.println("│                                                    │");
+		System.out.println("│                     비회원 메뉴                    │");
+		System.out.println("│                                                    │");
+		System.out.println("└──────────────────────────┘");	
+		System.out.println();
+		System.out.println();
+		System.out.println(" 1.회원 가입 │     2.도서 목록 보기   ");
+		System.out.println();
+		System.out.println();
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
 		case 1:
@@ -80,7 +96,7 @@ public class MenuView {
 			menu();
 			break;
 		default:
-			System.out.println("올바른 번호를 선택해 주세요");
+			System.out.println("▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
 			nonmember();
 			break;
 		}
@@ -111,8 +127,14 @@ public class MenuView {
 	public static void printUserMenu(String userId) {
 
 		while (true) {
-			System.out.println("-----------------  User Menu -------------------");
-			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
+			System.out.println("┌──────────────────────────┐");
+			System.out.println("│                                                    │");
+			System.out.println("│                      회원 메뉴                     │");
+			System.out.println("│                                                    │");
+			System.out.println("└──────────────────────────┘");	
+			System.out.println();
+			System.out.println();
+			System.out.println("─────── " + userId + " 님 접속을 환영합니다  ───────");
 			System.out.println("| 1.도서검색        | 2.주문     | 3.주문내역확인 &결제  | 4.희망도서등록&보기 | ");
 			System.out.println("| 5.장바구니담기  | 6.장바구니보기  |  7.마이페이지   |  8.로그아웃     |");
 			int menu = Integer.parseInt(sc.nextLine());
@@ -142,7 +164,7 @@ public class MenuView {
 				logOut(userId);
 				break;
 			default:
-				System.out.println(userId + "님 올바른 번호를 선택해 주세요");
+				System.out.println(userId +"님 ▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
 				break;
 			}
 		}
@@ -152,30 +174,30 @@ public class MenuView {
 
 	 //case : 1 -도서검색-
     public static void booksearch(String userId) {
-       System.out.println("---- 도서 검색 ----");
+       System.out.println("─────────────도서 검색  ─────────── ");
        System.out.println(" | 1.전체 검색 | 2.제목 검색 | 3.장르 검색 | 4.뒤로가기 |");
-       System.out.println("-------------------");
+       System.out.println("─────────────────────────────");
        System.out.print("선택> ");
        
        
        int menu = Integer.parseInt(sc.nextLine());
        switch (menu) {
        case 1:
-          System.out.println("-------------------");
+          System.out.println("───────────");
           BooksController.selectBook();
           break;
        case 2:
-          System.out.println("-------------------");
+          System.out.println("───────────");
           searchName();
           break;
        case 3:
-          System.out.println("-------------------");
+          System.out.println("───────────");
           searchGenre();
           break;
        case 4:
           printUserMenu(userId);
        default:
-          System.out.println("올바른 번호를 선택해 주세요");
+          System.out.println("▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
           booksearch(userId);
           break;
        }
@@ -235,7 +257,7 @@ public class MenuView {
 			Payment(userId);
 			break;
 		default:
-			System.out.println("올바른 번호를 선택해 주세요");
+			System.out.println("▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
 			break;
 		}
 	}
@@ -263,7 +285,7 @@ public class MenuView {
 			case 2:
 				break;
 			default:
-				System.out.println("올바른 번호를 누르세요");
+				System.out.println("▷▶▷▶올바른 번호를 선택해 주세요!!◀◁◀◁");
 				break;
 			}
 		} catch (Exception e) {
@@ -381,7 +403,7 @@ public class MenuView {
 		System.out.println("회원 휴대폰번호: ");
 		String userPhone = sc.nextLine();
 
-		UserDto userDto = new UserDto(null, userPwd, userName, userPhone, 0, null, 0, null);
+		UserDto userDto = new UserDto(userId, userPwd, userName, userPhone, 0, null, 0, null);
 		UserController.deleteUserInfo(userDto);
 	}
 
@@ -420,8 +442,8 @@ public class MenuView {
 	public static void printAdminMenu(String userId) {
 
 		while (true) {
-			System.out.println("--------------  Admin Menu --------------");
-			System.out.println("------------- 관리자 " + userId + "님 모드    -------------");
+			System.out.println("───────────  Admin Menu ───────────");
+			System.out.println("─────── 관리자 " + userId + "님 모드  ───────");
 			System.out.println("| 1.회원관리   | 2.도서관리  | 3.매출관리  | 4.로그아웃  |");
 
 			int menu = Integer.parseInt(sc.nextLine());
@@ -449,7 +471,7 @@ public class MenuView {
 	 * case : 1 -회원관리-
 	 */
 	private static void UserManagement(String userId) {
-		System.out.println("---- 회원 관리 메뉴 ----");
+		System.out.println("───────── 회원 관리 메뉴 ─────────");
 		System.out.println("| 1. 회원 목록 보기  |  2.회원등업  | 3. 뒤로가기  |");
 
 		int menu = Integer.parseInt(sc.nextLine());
@@ -555,7 +577,7 @@ public class MenuView {
 	 * case : 3 -매출관리-
 	 */
 	private static void SalesManagement(String userId) {
-		System.out.println("---- 매출관리 메뉴 ----");
+		System.out.println("─────────── 매출관리 메뉴 ─────────────");
 		System.out.println(" | 1.오늘의 매출 | 2.기간별 매출 | 3.총 매출   | 4.뒤로가기 ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -592,8 +614,8 @@ public class MenuView {
 	// case : 4 희망도서등록&조회
 	public static void wishBook(String userId) {
 		while (true) {
-			System.out.println("-----------------  User Menu -------------------");
-			System.out.println("--------------- " + userId + " 님 접속을 환영합니다  --------------");
+			System.out.println("─────────────  User Menu ─────────────");
+			System.out.println("─────── " + userId + " 님 접속을 환영합니다 ───────");
 			System.out.println("| 1. 희망도서등록		| 2. 희망도서목록조회		| 3. 나가기		");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -616,9 +638,11 @@ public class MenuView {
 	public static void myPage(String userId) {
 		boolean boo = true;
 		while(boo) {
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-			System.out.println("★★★★★★★★★여기는 현재 마이페이지 입니다★★★★★★★★");
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("┌──────────────────────────┐");
+			System.out.println("│                                                    │");
+			System.out.println("│                     마이페이지                     │");
+			System.out.println("│                                                    │");
+			System.out.println("└──────────────────────────┘");	
 			System.out.println("| 1.내정보 수정하기    | 2. 내정보 탈퇴하기    | 3. 포인트 충전하기 |4. 뒤로가기    ");
 		int menu = Integer.parseInt(sc.nextLine());
 		switch (menu) {
@@ -632,7 +656,7 @@ public class MenuView {
 			break;
 		case 4:printUserMenu(userId);
 		default:
-			System.out.println(userId + "님 올바른 번호를 선택해 주세요");
+			System.out.println("▷▶▷▶"+userId +"님 올바른 번호를 선택해 주세요!!◀◁◀◁");
 			break;
 		}
 			
