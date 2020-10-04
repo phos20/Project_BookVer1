@@ -49,20 +49,20 @@ public class UserService {
 		int point = userDao.getUserPoint(userId);
 		return point;
 	}
-	
+
 	/**
 	 * 포인트 등록
-	 * */
+	 */
 	public int userPoint(String userId, int point) throws Exception {
 		int result = userDao.userPoint(userId, point);
 		if (result == 0)
 			throw new Exception("포인트가 적립되지 않았습니다. ");
 		return result;
 	}
-	
+
 	/**
 	 * 회원정보 조회
-	 * */
+	 */
 	public UserDto Login(String userId, String userPwd) throws SQLException {
 		UserDto userDto = userDao.Login(userId, userPwd);
 		if (userDto == null) {
@@ -71,14 +71,13 @@ public class UserService {
 		}
 		return userDto;
 	}
-	
-	/**결제*/
-	public void Pay(double price, String userId)throws SQLException{
-		double result = userDao.Pay(price,userId);
+
+	/** 결제 */
+	public void Pay(double price, String userId) throws SQLException {
+		double result = userDao.Pay(price, userId);
 		if (result == 0)
 			throw new SQLException("결제 불가");
-	
-		
+
 	}
 
 }

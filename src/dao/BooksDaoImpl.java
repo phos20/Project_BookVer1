@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,20 +38,19 @@ public class BooksDaoImpl implements BooksDao {
 		return books;
 	}
 
+	/** 책 제목 검색 */
+	@Override
+	public BookDto SelectByName(String booksName) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		BookDto books = null;
 
-	 /**책 제목 검색*/
-	   @Override
-	   public BookDto SelectByName(String booksName) throws SQLException {
-	      Connection con = null;
-	      PreparedStatement ps = null;
-	      ResultSet rs = null;
-	      BookDto books = null;
-	      
-	      try {
-	         con = DbUtil.getConnection();
-	         ps = con.prepareStatement("select * from books where books_name=?");
-	         ps.setString(1, booksName);
-	         rs = ps.executeQuery();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where books_name=?");
+			ps.setString(1, booksName);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				books = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
@@ -61,7 +61,6 @@ public class BooksDaoImpl implements BooksDao {
 		return books;
 	}
 
-	       
 	/** 책 장르 검색 */
 	@Override
 	public List<BookDto> SelectByGenre(String booksGenre) throws SQLException {
@@ -119,7 +118,6 @@ public class BooksDaoImpl implements BooksDao {
 		return list;
 	}
 
-
 	/**
 	 * 신규도서 등록
 	 */
@@ -132,7 +130,7 @@ public class BooksDaoImpl implements BooksDao {
 		int result = 0;
 
 		try {
-			
+
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 
@@ -146,7 +144,7 @@ public class BooksDaoImpl implements BooksDao {
 			ps.setInt(8, bookDto.getStock());
 
 			result = ps.executeUpdate();
-			
+
 			booksDelete(con, bookDto.getBooksName());
 
 		} finally {
@@ -155,24 +153,23 @@ public class BooksDaoImpl implements BooksDao {
 		return result;
 	}
 
-
 	/**
 	 * 희망도서 입고시 희망도서 삭제
 	 */
 	private int[] booksDelete(Connection con, String booksName) throws SQLException {
 		PreparedStatement ps = null;
 		String sql = "delete from regbook where reg_name =?";
-		int result [] = null;
+		int result[] = null;
 
 		try {
-			
+
 			ps = con.prepareStatement(sql);
 			ps.setString(1, booksName);
-			
-			ps.addBatch(); //일괄처리할 작업에 추가
+
+			ps.addBatch(); // 일괄처리할 작업에 추가
 			ps.clearParameters();
 
-			result = ps.executeBatch();//일괄처리
+			result = ps.executeBatch();// 일괄처리
 
 		} finally {
 			DbUtil.close(null, ps, null);

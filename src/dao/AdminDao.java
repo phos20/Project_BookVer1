@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.SQLException;
+
 import java.util.List;
 
 import dto.Sales;
@@ -26,8 +27,6 @@ public interface AdminDao {
 	 * 회원 관리 - 회원 등업
 	 */
 
-	int updateUserGrade(String grade,String userId) throws SQLException;
-
-
+	int updateUserGrade(String grade, String userId) throws SQLException;
 
 }

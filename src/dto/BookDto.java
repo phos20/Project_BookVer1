@@ -1,4 +1,4 @@
-package dto; 
+package dto;
 
 public class BookDto {
 	private String booksId;
@@ -22,18 +22,15 @@ public class BookDto {
 		this.booksGenre = booksGenre;
 		this.stock = stock;
 		this.regDate = regDate;
-	}	
+	}
 
-	public BookDto(String booksId, String booksName, String booksWriter, int booksPrice) { // 장바구니 사용 
+	public BookDto(String booksId, String booksName, String booksWriter, int booksPrice) { // 장바구니 사용
 		super();
 		this.booksId = booksId;
 		this.booksName = booksName;
 		this.booksWriter = booksWriter;
 		this.booksPrice = booksPrice;
 	}
-	
-	
-	
 
 	public BookDto(int stock) {
 		this.stock = stock;
@@ -111,12 +108,10 @@ public class BookDto {
 		this.regDate = regDate;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return booksId +"\t | " + booksName +"\t | " + booksWriter +"\t | " + booksPublisher + "\t | " + booksPubDate 
-				+ "\t | " + booksGenre + "\t | " + booksPrice + "\t | " + stock + "\t | " + regDate ; 
+		return booksId + "\t | " + booksName + "\t | " + booksWriter + "\t | " + booksPublisher + "\t | " + booksPubDate
+				+ "\t | " + booksGenre + "\t | " + booksPrice + "\t | " + stock + "\t | " + regDate;
 	}
 
 	@Override
