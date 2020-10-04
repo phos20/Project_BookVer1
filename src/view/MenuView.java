@@ -24,6 +24,7 @@ import dto.UserDto;
 
 public class MenuView {
 
+	
 	private static Scanner sc = new Scanner(System.in);
 	static OrderDAO orderDao = new OrderDAOImpl();
 
