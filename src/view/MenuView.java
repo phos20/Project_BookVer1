@@ -609,7 +609,7 @@ public class MenuView {
 	 */
 	public static void manageBook() {
 		System.out.println("─────────────── 도서관리 메뉴 ──────────────────");
-		System.out.println(" ① 도서목록 보기   ②희망도서목록 보기   ③도서 등록   ④도서 삭제   ⑤나가기");
+		System.out.println(" ① 도서목록 보기   ②희망도서목록 보기   ③신규도서 등록   ④도서 재고추가  ⑤도서 삭제   ⑥나가기");
 		System.out.println();
 		System.out.print("선택> ");
 		int num = Integer.parseInt(sc.nextLine());
@@ -624,10 +624,13 @@ public class MenuView {
 		case 3: // 도서등록
 			printInsertBook();
 			break;
-		case 4: // 도서삭제
+		case 4: //재고추가
+			printUpdateBook();
+			break;
+		case 5: // 도서삭제
 			printDeleteBook();
 			break;
-		case 5:
+		case 6:
 			return;
 
 		}
@@ -660,9 +663,21 @@ public class MenuView {
 
 		BooksController.insertBook(bookDto);
 	}
+	
+	/**
+	 * case : 2-4 -도서 재고추가- 
+	 */
+	public static void printUpdateBook() {
+		System.out.print("추가할 도서 코드: ");
+		String booksId = sc.nextLine();
+		System.out.print("추가할 개수 : ");
+		int bookStock = Integer.parseInt(sc.nextLine());
+		
+		BooksController.updateBook(booksId, bookStock);
+	}
 
 	/**
-	 * case : 2-4 -도서 삭제-
+	 * case : 2-5 -도서 삭제-
 	 */
 	public static void printDeleteBook() {
 		System.out.print("삭제도서 코드: ");

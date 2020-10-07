@@ -80,7 +80,9 @@ public class BooksDaoImpl implements BooksDao {
 			while (rs.next()) {
 				BookDto bookDto = new BookDto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+
 				list.add(bookDto);
+				
 			}
 		} finally {
 			DbUtil.close(con, ps, rs);
@@ -122,7 +124,7 @@ public class BooksDaoImpl implements BooksDao {
 	 * 신규도서 등록
 	 */
 	@Override
-	public int insertBook(BookDto bookDto) throws SQLException {
+	public int insertBook(BookDto bookDto) throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -130,22 +132,26 @@ public class BooksDaoImpl implements BooksDao {
 		int result = 0;
 
 		try {
+			
+			BookDto books = booksSelectBybooksId(bookDto.getBooksId());
+			if(books==null) {
 
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, bookDto.getBooksId());
-			ps.setString(2, bookDto.getBooksName());
-			ps.setString(3, bookDto.getBooksWriter());
-			ps.setString(4, bookDto.getBooksPublisher());
-			ps.setString(5, bookDto.getBooksPubDate());
-			ps.setString(6, bookDto.getBooksGenre());
-			ps.setInt(7, bookDto.getBooksPrice());
-			ps.setInt(8, bookDto.getStock());
-
-			result = ps.executeUpdate();
-
-			booksDelete(con, bookDto.getBooksName());
+				con = DbUtil.getConnection();
+				ps = con.prepareStatement(sql);
+	
+				ps.setString(1, bookDto.getBooksId());
+				ps.setString(2, bookDto.getBooksName());
+				ps.setString(3, bookDto.getBooksWriter());
+				ps.setString(4, bookDto.getBooksPublisher());
+				ps.setString(5, bookDto.getBooksPubDate());
+				ps.setString(6, bookDto.getBooksGenre());
+				ps.setInt(7, bookDto.getBooksPrice());
+				ps.setInt(8, bookDto.getStock());
+	
+				result = ps.executeUpdate();
+	
+				booksDelete(con, bookDto.getBooksName());
+			} else throw new Exception("도서코드가 증복되어 등록할 수 없습니다. ");
 
 		} finally {
 			DbUtil.close(con, ps, null);
@@ -176,6 +182,33 @@ public class BooksDaoImpl implements BooksDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 도서 재고추가
+	 */
+	@Override
+	public int updateBook(String bookId, int stock) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "update books set stock = stock + ? where books_Id = ?";
+		int result = 0;
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, stock);
+			ps.setString(2, bookId);
+
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.close(con, ps, null);
+		}
+		return result;
+	}
+	
 
 	/**
 	 * 도서 삭제

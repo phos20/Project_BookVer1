@@ -28,6 +28,16 @@ public class BooksService {
 			throw new Exception("등록되지 않았습니다.");
 		return result;
 	}
+	
+	/**
+	 * 도서 재고추가
+	 */
+	public int updateBook(String booksId, int bookStock) throws Exception {
+		int result = booksDao.updateBook(booksId, bookStock);
+		if (result == 0)
+			throw new Exception("추가되지 않았습니다.");
+		return result;
+	}
 
 	/**
 	 * 도서 삭제
@@ -64,8 +74,10 @@ public class BooksService {
 	 */
 	public List<BookDto> selectByGenre(String booksGenre) throws Exception {
 		List<BookDto> list = booksDao.SelectByGenre(booksGenre);
-		if (list == null)
+		if (list.size() == 0)
 			throw new Exception("해당하는 장르의 도서가 존재하지 않습니다.");
 		return list;
 	}
+
+	
 }

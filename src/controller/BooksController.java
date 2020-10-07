@@ -43,6 +43,19 @@ public class BooksController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	/**
+	 * 도서 재고추가
+	 */
+	public static void updateBook(String booksId, int bookStock) {
+		try {
+			int result = booksService.updateBook(booksId, bookStock);
+			EndView.messagePrint("추가 완료");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
 
 	/**
 	 * 도서 삭제
@@ -89,5 +102,6 @@ public class BooksController {
 		}
 		return bookDto;
 	}
+
 
 }

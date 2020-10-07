@@ -27,10 +27,15 @@ public interface BooksDao {
 	/**
 	 * 신규 도서 등록
 	 */
-	int insertBook(BookDto bookDto) throws SQLException;
+	int insertBook(BookDto bookDto) throws Exception;
+	
+	/**
+	 * 도서 재고 추가
+	 */
+	int updateBook(String bookId, int stock) throws SQLException;
 
 	/**
-	 * 신규 도서 삭제
+	 * 도서 삭제
 	 */
 	int deleteBook(String bookId) throws SQLException;
 
